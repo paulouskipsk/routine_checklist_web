@@ -13,40 +13,17 @@ class ApiAuthController extends ControllerApi
 {
     public function authenticate(Request $request) {
         try {
-            $validateUser = Validator::make($request->all(), 
-            [
-                'login' => 'required',
-                'password' => 'required'
-            ]);            
-
-            if($validateUser->fails()){
-                return response()->json([
-                    'status' => false,
-                    'message' => 'validation error',
-                    'errors' => $validateUser->errors()
-                ], 401);
-            }
-
-            if(!Auth::attempt($request->only(['login', 'password']))){
-                return response()->json([
-                    'status' => false,
-                    'message' => 'login & Senha não conferem.',
-                ], 401);
-            }
-
+            if(!Auth::attempt($request->only(['login', 'password'])))
+                return $this->response(false, 401, "Login ou senha não conferem");
+            
             $user = User::where('login', $request->login)->first();
-
-            return response()->json([
-                'status' => true,
-                'message' => "Você fez login com o usuário: $user->name, Seja bem vindo.",
-                'token' => $user->createToken("API TOKEN")->plainTextToken
-            ], 200);
-
+            return $this->responseOk("Seja bem vindo, $user->name.", ['token'=>$user->createToken("API TOKEN")->plainTextToken]);
         } catch (\Throwable $th) {
-            return response()->json([
-                'status' => false,
-                'message' => $th->getMessage()
-            ], 500);
+            return $this->responseError("Erro ao efetuar login: "+ $th->getMessage());
         }
+    }
+
+    public function user(Request $request){
+        $user = Auth::user();
     }
 }
