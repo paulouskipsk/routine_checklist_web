@@ -55,6 +55,10 @@ class ChecklistItem extends Model {
         return $this->hasMany(User::class);
     }
 
+    public function unitsNoApplicable(){
+        return $this->belongsToMany(Unity::class, 'pivot_chit_unit_noapplicable', 'chit_id', 'unit_id');
+    }
+
 }
 
 

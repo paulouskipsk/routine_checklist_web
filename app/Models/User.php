@@ -46,6 +46,14 @@ class User extends Authenticatable
     public function checklistsItens(): BelongsTo {
         return $this->belongsTo(ChecklistItem::class);
     }
+
+    public function units(){
+        return $this->belongsToMany(Unity::class, 'pivot_user_unit', 'user_id', 'unit_id');
+    }
+
+    public function usersGroups(){
+        return $this->belongsToMany(UserGroup::class, 'pivot_usgr_user', 'user_id', 'usgr_id');
+    }
 }
 
 // unidades

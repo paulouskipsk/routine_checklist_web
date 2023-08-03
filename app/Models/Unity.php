@@ -9,7 +9,7 @@ use Illuminate\Database\Eloquent\Relations\HasMany;
 class Unity extends Model {
     use HasFactory;
 
-    protected $table = 'unities';
+    protected $table = 'units';
     public $timestamps = true;
 
     public const IDENTIFIER = "unit";
@@ -31,4 +31,14 @@ class Unity extends Model {
     public function address(): HasMany {
         return $this->hasMany(Address::class);
     }
+
+    public function users(){
+        return $this->belongsToMany(User::class, 'pivot_user_unit', 'unit_id', 'user_id');
+    }
+
+    public function checklistsItensNoApplicable(){
+        return $this->belongsToMany(ChecklistItem::class, 'pivot_chit_unit_noapplicable', 'unit_id', 'chit_id');
+    }
+
+    
 }
