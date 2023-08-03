@@ -23,10 +23,12 @@ class Checklist extends Model {
         'status',
         'random',
         'changed_by_user',
+        'chcl_id'
     ];    
     
     protected $casts = [
         'id' => 'integer',
+        'chcl_id'=>'integer',
         'shelflife' => 'integer',
         'random' => 'boolean',
         'generate_time' => 'datetime:H:i',
@@ -43,6 +45,14 @@ class Checklist extends Model {
 
     public function checklistsItens(): BelongsTo {
         return $this->belongsTo(ChecklistItem::class);
+    }
+
+    public function units(){
+        return $this->belongsToMany(Unity::class, 'pivot_chkl_unit', 'chkl_id', 'unit_id');
+    }
+
+    public function checklistsMovs(): BelongsTo {
+        return $this->belongsTo(ChecklistMov::class);
     }
 
 }

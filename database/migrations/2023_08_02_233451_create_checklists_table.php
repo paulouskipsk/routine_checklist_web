@@ -10,9 +10,9 @@ return new class extends Migration {
         Schema::create('checklists', function (Blueprint $table) {
             $table->id();
             $table->integer('changed_by_user')->nullable(false);
-            $table->integer('chcl_id')->nullable(false);
+            $table->integer('chcl_id')->nullable(true);
             $table->String('description', 150)->nullable(false);
-            $table->timestamp('generate_time')->nullable(false);
+            $table->time('generate_time')->nullable(false);
             $table->integer('shelflife')->nullable(false);
             $table->string('frequency', 3)->nullable(false);
             $table->string('frequency_composition', 150)->nullable(false);

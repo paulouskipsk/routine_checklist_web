@@ -27,4 +27,8 @@ class ChklClassification extends Model {
     public function checklists(): BelongsTo {
         return $this->belongsTo(Checklist::class);
     }
+
+    public function checklistsMovs(): BelongsTo {
+        return $this->belongsTo(ChecklistMov::class);
+    }
 }

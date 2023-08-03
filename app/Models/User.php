@@ -54,6 +54,10 @@ class User extends Authenticatable
     public function usersGroups(){
         return $this->belongsToMany(UserGroup::class, 'pivot_usgr_user', 'user_id', 'usgr_id');
     }
+
+    public function checklistsMovs(): BelongsTo {
+        return $this->belongsTo(ChecklistMov::class);
+    }
 }
 
 // unidades
