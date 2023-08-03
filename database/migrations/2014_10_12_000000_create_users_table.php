@@ -9,11 +9,11 @@ return new class extends Migration {
     {
         Schema::create('users', function (Blueprint $table) {
             $table->mediumIncrements('id');
-            $table->string('name', 100);
+            $table->string('name', 100)->nullable(false);
             $table->string('lastname', 200);
             $table->string('email');
-            $table->string('login', 20);
-            $table->string('password', 64);
+            $table->string('login', 20)->nullable(false);
+            $table->string('password', 64)->nullable(false);
             $table->string('status',1)->default('I')->nullable(false);
             $table->boolean('access_admin')->default(false);
             $table->boolean('access_mobile')->default(false);

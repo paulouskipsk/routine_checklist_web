@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 
 class Address extends Model {
     use HasFactory;
@@ -27,5 +28,9 @@ class Address extends Model {
         'id' => 'integer',
         'number' => 'integer',
     ];
+
+    public function units(): BelongsTo {
+        return $this->belongsTo(Unity::class);
+    }
 
 }
