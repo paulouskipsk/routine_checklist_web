@@ -2,20 +2,22 @@
 
 namespace App\Models;
 
+use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
-class ChecklistItem extends Model {
+class ChecklistItemMov extends Model {
+    use HasFactory;
 
-    protected $table = 'checklists_itens';
+    protected $table = 'checklists_itens_movs';
     public $timestamps = true;
 
-    public const IDENTIFIER = "chit";
+    public const IDENTIFIER = "chim";
 
     protected $fillable = [
         'id',
         'description',
+        'observation',
         'sequence',
         'score',
         'status',
@@ -23,12 +25,16 @@ class ChecklistItem extends Model {
         'hour_min',
         'hour_max',
         'shelflife',
+        'end_date',
+        'start_date',
+        'response',
         'required_photo',
-        'quant_photo',
         'contain_action_plan',
-        'chkl_id',
+        'quant_photo',
+        'user_id',
+        'chit_id',
+        'chmv_id',
         'sect_id',
-        'changed_by_user',
     ];
     
     protected $casts = [
@@ -40,30 +46,26 @@ class ChecklistItem extends Model {
         'contain_action_plan' => 'boolean',
         'hour_min' => 'datetime:H:i',
         'hour_max' => 'datetime:H:i',
-        'chkl_id' => 'integer',
+        'chmv_id' => 'integer',
+        'chit_id',
         'sect_id' => 'integer',
-        'changed_by_user' => 'integer',
+        'user_id' => 'integer',
         'quant_photo' => 'integer'
     ];
 
-    public function checklist(): HasMany {
-        return $this->hasMany(Checklist::class);
+    public function checklistMov(): HasMany {
+        return $this->hasMany(ChecklistMov::class);
+    }
+
+    public function checklistItem(): HasMany {
+        return $this->hasMany(ChecklistItem::class);
     }
 
     public function sector(): HasMany {
         return $this->hasMany(Sector::class);
     }
 
-    public function changedByUser(): HasMany {
+    public function user(): HasMany {
         return $this->hasMany(User::class);
     }
-
-    public function unitsNoApplicable(){
-        return $this->belongsToMany(Unity::class, 'pivot_chit_unit_noapplicable', 'chit_id', 'unit_id');
-    }
-
-    public function checklistItemMov(): BelongsTo {
-        return $this->belongsTo(ChecklistItemMov::class);
-    }
-
 }

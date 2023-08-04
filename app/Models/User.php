@@ -58,6 +58,8 @@ class User extends Authenticatable
     public function checklistsMovs(): BelongsTo {
         return $this->belongsTo(ChecklistMov::class);
     }
-}
 
-// unidades
+    public function checklistItemMov(): BelongsTo {
+        return $this->belongsTo(ChecklistItemMov::class);
+    }
+}

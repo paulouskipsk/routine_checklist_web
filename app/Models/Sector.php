@@ -25,4 +25,8 @@ class Sector extends Model {
     public function checklistsItens(): BelongsTo {
         return $this->belongsTo(ChecklistItem::class);
     }
+
+    public function checklistItemMov(): BelongsTo {
+        return $this->belongsTo(ChecklistItemMov::class);
+    }
 }

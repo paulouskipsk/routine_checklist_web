@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class ChecklistMov extends Model {
@@ -60,5 +61,9 @@ class ChecklistMov extends Model {
 
     public function unity(): HasMany {
         return $this->hasMany(Unity::class);
+    }
+
+    public function checklistItemMov(): BelongsTo {
+        return $this->belongsTo(ChecklistItemMov::class);
     }
 }

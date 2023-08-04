@@ -19,10 +19,11 @@ return new class extends Migration {
             $table->integer('shelflife');
             $table->boolean('required_photo')->default(false);
             $table->boolean('contain_action_plan')->default(false);
+            $table->smallInteger('quant_photo')->default(0)->nullable(false);
             $table->integer('chkl_id')->nullable(false);
             $table->integer('sect_id')->nullable(true);
             $table->integer('changed_by_user')->nullable(false);
-
+            
             $table->timestamps();
 
             $table->foreign('chkl_id')->references('id')->on('checklists');
