@@ -9,12 +9,12 @@ enum ItemChklType: string {
     case TEXTUAL = 'T';
     case MULTIMIDIA = 'M';
 
-    public function descricao(): string {
-        return static::getDescricao($this->value);
+    public function description(): string {
+        return static::getDescription($this->value);
     }
 
-    public static function getDescricao(int $tipoTarefa): string {
-        return match ($tipoTarefa) {
+    public static function getDescription(int $value): string {
+        return match ($value) {
             'S' => 'Sim ou Não',
             'A' => 'Avaliativo',
             'T' => 'Textual',
