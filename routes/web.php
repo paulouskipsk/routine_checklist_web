@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Web\AuthController;
+use App\Http\Controllers\Web\ClassificationController;
 use App\Http\Controllers\Web\HomeController;
 use App\Http\Controllers\Web\SectorController;
 use Illuminate\Support\Facades\Route;
@@ -20,6 +21,15 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('editar/{id}', [SectorController::class, 'edit'])->name('sector_edit');
         Route::post('atualizar/{id}', [SectorController::class, 'update'])->name('sector_update');
         Route::delete('delete/{id}', [SectorController::class, 'delete'])->name('sector_delete');
+    });
+
+    Route::group(['prefix' => 'classificacao'], function () {
+        Route::get('listar', [ClassificationController::class, 'index'])->name('classification_list');
+        Route::get('novo', [ClassificationController::class, 'create'])->name('classification_create');
+        Route::post('salvar', [ClassificationController::class, 'store'])->name('classification_store');
+        Route::get('editar/{id}', [ClassificationController::class, 'edit'])->name('classification_edit');
+        Route::post('atualizar/{id}', [ClassificationController::class, 'update'])->name('classification_update');
+        Route::delete('delete/{id}', [ClassificationController::class, 'delete'])->name('classification_delete');
     });
 
     

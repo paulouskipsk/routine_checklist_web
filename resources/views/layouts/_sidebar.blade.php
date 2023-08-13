@@ -49,6 +49,17 @@
                         </li>
 
                         <li class="nav-item">
+                            <a class="nav-link dropdown-indicator" href="{{ route('classification_list') }}">
+                                <div class="d-flex align-items-center">
+                                    <div class="dropdown-indicator-icon">
+                                        <span class="far fa-circle"></span>
+                                    </div>
+                                    <span class="nav-link-text">Classificação</span>
+                                </div>
+                            </a>
+                        </li>
+
+                        <li class="nav-item">
                             <a class="nav-link dropdown-indicator" href="#">
                                 <div class="d-flex align-items-center">
                                     <div class="dropdown-indicator-icon">
