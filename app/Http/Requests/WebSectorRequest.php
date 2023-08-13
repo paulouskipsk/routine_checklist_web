@@ -4,7 +4,7 @@ namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
 
-class WebSectorStoreRequest extends FormRequest {
+class WebSectorRequest extends FormRequest {
 
     public function authorize(): bool {
         return true;

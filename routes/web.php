@@ -13,9 +13,14 @@ Route::group(['middleware' => ['auth']], function () {
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
     Route::get('home', [HomeController::class, 'home'])->name('home');
 
-    Route::get('setor/listar', [SectorController::class, 'index'])->name('sector_list');
-    Route::get('setor/novo', [SectorController::class, 'create'])->name('sector_create');
-    Route::post('setor/salvar', [SectorController::class, 'store'])->name('sector_store');
-    Route::get('setor/editar', [SectorController::class, 'edit'])->name('sector_edit');
-    Route::get('setor/delete', [SectorController::class, 'delete'])->name('sector_delete');
+    Route::group(['prefix' => 'setor'], function () {
+        Route::get('listar', [SectorController::class, 'index'])->name('sector_list');
+        Route::get('novo', [SectorController::class, 'create'])->name('sector_create');
+        Route::post('salvar', [SectorController::class, 'store'])->name('sector_store');
+        Route::get('editar/{id}', [SectorController::class, 'edit'])->name('sector_edit');
+        Route::post('atualizar/{id}', [SectorController::class, 'update'])->name('sector_update');
+        Route::delete('delete/{id}', [SectorController::class, 'delete'])->name('sector_delete');
+    });
+
+    
 });

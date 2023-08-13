@@ -39,6 +39,11 @@ table.dataTable tbody th, table.dataTable tbody td {
 	width: 60px !important;
 }
 
+.w-status{
+	width: 60px !important;
+	text-align: center !important;
+}
+
 .w-id{
 	width: 80px !important;
 }

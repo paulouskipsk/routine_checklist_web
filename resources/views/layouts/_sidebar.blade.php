@@ -9,7 +9,20 @@
         <!-- scrollbar removed-->
         <div class="navbar-vertical-content">
             <ul class="navbar-nav flex-column" id="navbarVerticalNav">
-                
+
+                <div class="nav-item-wrapper">
+                    <a class="nav-link label-1" href="/home">
+                        <div class="d-flex align-items-center">
+                            <span class="nav-link-icon text-primary">
+                                <span data-feather="home">
+                            </span>
+                            <span class="nav-link-text-wrapper">
+                                <span class="nav-link-text">Home</span>
+                            </span>
+                        </div>
+                    </a>
+                </div>
+
                 <div class="nav-item-wrapper"><a class="nav-link dropdown-indicator label-1" href="#multi-level" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="multi-level">
                     <div class="d-flex align-items-center">
                         <div class="dropdown-indicator-icon">

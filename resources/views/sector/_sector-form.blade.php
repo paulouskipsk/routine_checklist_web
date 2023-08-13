@@ -1,11 +1,11 @@
-<form action="{{ $action }}" method="{{ $method }}" role="form">
+<form action="{{ $action }}" method="{{$method}}" role="form">
     @csrf
 
     <div class="row d-flex justify-content-center">
         <div class="col-6">
             <label for="description">Descrição<span class="text-danger">*</span></label> 
             <div class="input-group is-invalid">
-                <input type="text" id="description" class="form-control @error('description') is-invalid @enderror" name="description" value="{{old('description')}}" required>
+                <input type="text" id="description" class="form-control @error('description') is-invalid @enderror" name="description" value="{{old('description') ?? @$sector->description}}" required>
             </div>
             @error('description')<div class="invalid-feedback">{{ $message }}</div>@enderror
         </div>
@@ -16,8 +16,9 @@
             <label for="status">Status<span class="text-danger">*</span></label> 
             <select id="status" class="form-select @error('status') is-invalid @enderror" name="status" required>
                 <option selected disabled>Selecione...</option>
-                <option value="A" {{ old('status') == 'A' ? 'selected': '' }}>Ativo</option>
-                <option value="I" {{ old('status') == 'I' ? 'selected': '' }}>Inativo</option>
+                <option value="A" {{ old('status') == 'A' || @$sector->status == 'A' ? 'selected': '' }}>Ativo</option>
+                <option value="I" {{ old('status') == 'I' || @$sector->status == 'I' ? 'selected': '' }}>Inativo</option>
+
             </select>
             @error('status')<div class="invalid-feedback">{{ $message }}</div>@enderror
         </div>

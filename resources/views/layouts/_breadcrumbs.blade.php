@@ -1,7 +1,12 @@
 <section for="breadcrumbs" th:fragment="breadcrumbs" id="breadcrumb">
     <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
             <ol class="breadcrumb">
-                <li class="breadcrumb-item"><a href="/home">Home</a></li>
+                <li class="breadcrumb-item">
+                    <a href="/home">
+                        <span data-feather="home" class="fs-0 mb-1"></span>                    
+                        Home
+                    </a>
+                </li>
 
                 @if(isset($breadcrumbs))
                     @foreach ($breadcrumbs as $crumb)

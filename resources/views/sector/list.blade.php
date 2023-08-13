@@ -28,23 +28,23 @@
                     @foreach ($sectors as $sector)
                     <tr class="py-1">
                         <td class="py--3 fw-bold align-middle ps-3 name">{{ $sector->id }}</td>
-                        <td class="py--3 align-middle description">{{ $sector->description }}</td>
-                        <td class="py--3 align-middle status">{{ Status::getDescription($sector->status) }}</td>
+                        <td class="py--3 align-middle">{{ $sector->description }}</td>
+                        <td class="py--3 align-middle w-status fw-bold {{$sector->status == 'A' ? 'text-danger ': 'text-success'}}">{{ Status::getDescription($sector->status) }}</td>
                         <td class="py--3 align-middle white-space-nowrap text-end pe-0 w-action">
                             <div class="font-sans-serif btn-reveal-trigger position-static">
                                 <button
                                     class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2"
                                     type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" 
                                     aria-expanded="false" data-bs-reference="parent">
-                                    <span class="fas fa-ellipsis-h fs--2"></span>
+                                    <i class="fa-solid fa-bars fs--2"></i>
                                 </button>
                                 <div class="dropdown-menu dropdown-menu-end py-2">
-                                    <a class="dropdown-item text-primary" href="{{ route('sector_edit') }}">
+                                    <a class="dropdown-item text-primary" href="{{ route('sector_edit', $sector->id ) }}">
                                         <i class="far fa-edit"></i>
                                         Editar
                                     </a>
                                     <div class="dropdown-divider"></div>
-                                    <a class="dropdown-item text-danger" href="{{ route('sector_delete') }}">
+                                    <a class="dropdown-item text-danger" href="{{ route('sector_delete', $sector->id ) }}">
                                         <i class="far fa-trash-alt"></i>
                                         Remove
                                     </a>
