@@ -73,6 +73,7 @@
                     [30, 50, 100, -1],
                     [30, 50, 100, 'All']
                 ],
+                dom: 'Bfrtip',
                 buttons: [
                     'copy', 'excel', 'pdf'
                 ],

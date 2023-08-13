@@ -15,7 +15,7 @@ class SectorController extends ControllerWeb {
     public function index(){
         $breadcrumbs = [['url'=> '/setor/listar','label' => 'Listar Setores','active'=>false]];
         $sectors = Sector::all();
-        return view('sector.list', compact(['breadcrumbs', 'sectors']));
+        return view('registrations.sector.list', compact(['breadcrumbs', 'sectors']));
     }
 
     public function create(){
@@ -23,7 +23,7 @@ class SectorController extends ControllerWeb {
         $breadcrumbs = $this->breadcrumbs;
         $action = '/setor/salvar';
         $method = 'post';
-        return view('sector.new', compact('breadcrumbs', 'action', 'method'));
+        return view('registrations.sector.new', compact('breadcrumbs', 'action', 'method'));
     }
 
     public function store(WebSectorRequest $request){
@@ -50,7 +50,7 @@ class SectorController extends ControllerWeb {
             return back();
         } 
 
-        return view('sector.edit', compact('breadcrumbs', 'action', 'method', 'sector'));
+        return view('registrations.sector.edit', compact('breadcrumbs', 'action', 'method', 'sector'));
     }
 
     public function update(WebSectorRequest $request){

@@ -15,7 +15,7 @@ class ClassificationController extends ControllerWeb {
     public function index(){
         $breadcrumbs = [['url'=> '/classificacao/listar','label' => 'Listar Classificações','active'=>false]];
         $classifications = ChklClassification::all();
-        return view('classification.list', compact(['breadcrumbs', 'classifications']));
+        return view('registrations.classification.list', compact(['breadcrumbs', 'classifications']));
     }
 
     public function create(){
@@ -23,7 +23,7 @@ class ClassificationController extends ControllerWeb {
         $breadcrumbs = $this->breadcrumbs;
         $action = '/classificacao/salvar';
         $method = 'post';
-        return view('classification.new', compact('breadcrumbs', 'action', 'method'));
+        return view('registrations.classification.new', compact('breadcrumbs', 'action', 'method'));
     }
 
     public function store(WebClassificationRequest $request){
@@ -50,7 +50,7 @@ class ClassificationController extends ControllerWeb {
             return back();
         } 
 
-        return view('classification.edit', compact('breadcrumbs', 'action', 'method', 'classification'));
+        return view('registrations.classification.edit', compact('breadcrumbs', 'action', 'method', 'classification'));
     }
 
     public function update(WebClassificationRequest $request){

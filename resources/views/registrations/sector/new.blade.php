@@ -3,6 +3,6 @@
 @section('content')
 
 <h3>Novo Setor</h3>
-@includeIf('sector._sector-form')
+@includeIf('registrations.sector._sector-form')
 
 @endsection

@@ -3,6 +3,6 @@
 @section('content')
 
 <h3>Nova Classificação</h3>
-@includeIf('classification._classification-form')
+@includeIf('registrations.classification._classification-form')
 
 @endsection
