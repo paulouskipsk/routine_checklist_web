@@ -35,6 +35,22 @@ class Checklist extends Model {
         'changed_by_user' => 'integer'
     ];
 
+    public function getFrequencyCompositionAttribute() {
+        if (isset($this->attributes['frequency_composition']) && is_string($this->attributes['frequency_composition'])) {
+            return explode(';', $this->attributes['frequency_composition']);
+        } else {
+            return [];
+        }
+    }
+
+    public function setFrequencyCompositionAttribute($value) {
+        if (is_array($value)) {
+            $this->attributes['frequency_composition'] = implode(';', $value);
+        } else if (is_string($value)) {
+            $this->attributes['frequency_composition'] = $value;
+        }
+    }
+
     public function chklClassification(): HasMany {
         return $this->hasMany(ChklClassification::class);
     }

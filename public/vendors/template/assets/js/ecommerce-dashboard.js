@@ -2101,7 +2101,6 @@
           borderWidth: 1,
           transitionDuration: 0,
           formatter: params => {
-            console.log({ params });
             return `<strong>${window
             .dayjs(params.name)
             .format('DD MMM')}:</strong> ${params.value}`;

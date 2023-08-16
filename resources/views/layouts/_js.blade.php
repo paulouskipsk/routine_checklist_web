@@ -11,8 +11,12 @@
 <script src="{{ asset('vendors/template/vendors/dayjs/dayjs.min.js') }}"></script>
 <script src="{{ asset('vendors/template/assets/js/phoenix.js') }}"></script>
 <script src="{{ asset('vendors/template/vendors/echarts/echarts.min.js') }}"></script>
+<script src="{{ asset('vendors/template/vendors/choices/choices.min.js') }}"></script>
+
 <script src="https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARdVcREeBK44lIWnv5-iPijKqvlSAVwbw&callback=revenueMapInit" async></script>
 <script src="{{ asset('vendors/dataTables/datatables.min.js') }}"></script>
+<script src="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/js/select2.min.js"></script>
+
 
 <script src="{{ asset('js/application.js') }}"></script>

@@ -1,6 +1,7 @@
 <?php
 
 use App\Http\Controllers\Web\AuthController;
+use App\Http\Controllers\Web\ChecklistController;
 use App\Http\Controllers\Web\ClassificationController;
 use App\Http\Controllers\Web\HomeController;
 use App\Http\Controllers\Web\SectorController;
@@ -30,6 +31,15 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('editar/{id}', [ClassificationController::class, 'edit'])->name('classification_edit');
         Route::post('atualizar/{id}', [ClassificationController::class, 'update'])->name('classification_update');
         Route::delete('delete/{id}', [ClassificationController::class, 'delete'])->name('classification_delete');
+    });
+
+    Route::group(['prefix' => 'checklist'], function () {
+        Route::get('listar', [ChecklistController::class, 'index'])->name('checklist_list');
+        Route::get('novo', [ChecklistController::class, 'create'])->name('checklist_create');
+        Route::post('salvar', [ChecklistController::class, 'store'])->name('checklist_store');
+        Route::get('editar/{id}', [ChecklistController::class, 'edit'])->name('checklist_edit');
+        Route::post('atualizar/{id}', [ChecklistController::class, 'update'])->name('checklist_update');
+        Route::delete('delete/{id}', [ChecklistController::class, 'delete'])->name('checklist_delete');
     });
 
     

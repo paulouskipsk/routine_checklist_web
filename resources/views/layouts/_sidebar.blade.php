@@ -60,7 +60,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link dropdown-indicator" href="#">
+                            <a class="nav-link dropdown-indicator" href="{{ route('checklist_list') }}">
                                 <div class="d-flex align-items-center">
                                     <div class="dropdown-indicator-icon">
                                         <span class="far fa-circle"></span>

@@ -15,7 +15,7 @@ return new class extends Migration {
             $table->time('generate_time')->nullable(false);
             $table->integer('shelflife')->nullable(false);
             $table->string('frequency', 3)->nullable(false);
-            $table->string('frequency_composition', 150)->nullable(false);
+            $table->string('frequency_composition', 150)->nullable(true);
             $table->string('status', 1)->nullable(false);
             $table->boolean('random')->nullable(false);
 

@@ -1,5 +1,6 @@
 <?php
 
+use App\Enums\Frequency;
 use App\Enums\Status;
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
@@ -71,7 +72,7 @@ return [
     |
     */
 
-    'timezone' => 'UTC',
+    'timezone' => env('APP_TIMEZONE', 'UTC'),
 
     /*
     |--------------------------------------------------------------------------
@@ -183,8 +184,8 @@ return [
     */
 
     'aliases' => Facade::defaultAliases()->merge([
-        // 'Example' => App\Facades\Example::class,
-        'Status' => Status::class
+        'Status' => Status::class,
+        'Frequency' => Frequency::class,
     ])->toArray(),
 
 ];
