@@ -15,6 +15,18 @@ section {
 	cursor: pointer;
 }
 
+.mh-100{
+	min-height: 100px !important;
+}
+
+.mh-200{
+	min-height: 200px !important;
+}
+
+.mh-300{
+	min-height: 300px !important;
+}
+
 .w-5{
 	width: 5% !important;
 }

@@ -38,8 +38,6 @@ class ChecklistItem extends Model {
         'shelflife' => 'integer',
         'required_photo' => 'boolean',
         'contain_action_plan' => 'boolean',
-        'hour_min' => 'datetime:H:i',
-        'hour_max' => 'datetime:H:i',
         'chkl_id' => 'integer',
         'sect_id' => 'integer',
         'changed_by_user' => 'integer',

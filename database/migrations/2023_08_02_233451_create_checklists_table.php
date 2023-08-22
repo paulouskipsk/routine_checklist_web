@@ -17,7 +17,7 @@ return new class extends Migration {
             $table->string('frequency', 3)->nullable(false);
             $table->string('frequency_composition', 150)->nullable(true);
             $table->string('status', 1)->nullable(false);
-            $table->boolean('random')->nullable(false);
+            $table->string('chkl_type', 1)->nullable(false);
 
             $table->timestamps();
 

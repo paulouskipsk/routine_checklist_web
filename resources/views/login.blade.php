@@ -36,7 +36,7 @@
 	<main>
 		<div class="container-fluid px-0">
 			<div class="container-fluid">
-				<div class="bg-holder bg-auth-card-overlay" style="background-image: url('../vendors/template/assets/img/bg/37.png');">
+				<div class="bg-holder bg-auth-card-overlay" style="background-image: url('../images/37.png');">
 				</div>
 
 				<div class="row flex-center position-relative min-vh-100 g-0 py-5">
@@ -95,12 +95,6 @@
                                                             <label class="form-check-label mb-0" for="basic-checkbox">Lembrar-me</label>
                                                         </div>
                                                     </div>
-                                                    
-                                                    <!-- <div class="col-auto">
-                                                        <a class="fs--1 fw-semi-bold" href="{{ asset('vendors/template/pages/authentication/card/forgot-password.html') }}">
-                                                            Esqueceu a Senha?
-                                                        </a>
-                                                    </div> -->
                                                 </div>
                                                 
                                                 <button type="submit" class="btn btn-primary w-100 mt-1 mb-4">Entrar</button>

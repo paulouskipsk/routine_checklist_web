@@ -2,7 +2,10 @@
 
 namespace App\Enums;
 
+use ArchTech\Enums\Options;
+
 enum ItemChklType: string {
+    use Options;
 
     case SIM_NAO = 'S';
     case AVALIATIVO = 'A';

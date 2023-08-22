@@ -21,7 +21,7 @@ class Checklist extends Model {
         'frequency',
         'frequency_composition',
         'status',
-        'random',
+        'chkl_type',
         'changed_by_user',
         'chcl_id'
     ];    
@@ -30,8 +30,6 @@ class Checklist extends Model {
         'id' => 'integer',
         'chcl_id'=>'integer',
         'shelflife' => 'integer',
-        'random' => 'boolean',
-        'generate_time' => 'datetime:H:i',
         'changed_by_user' => 'integer'
     ];
 

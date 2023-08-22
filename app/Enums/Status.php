@@ -2,7 +2,10 @@
 
 namespace App\Enums;
 
+use ArchTech\Enums\Options;
+
 enum Status: string {
+    use Options;
 
     case ACTIVE = 'A';
     case INACTIVE = 'I';

@@ -3,6 +3,6 @@
 @section('content')
 
 <h3>Editar Checklist</h3>
-@includeIf('registrations.checklist._checklist-form')
+@includeIf('registrations.checklist-item._checklist-item-form')
 
 @endsection

@@ -16,8 +16,8 @@ class WebChecklistRequest extends FormRequest {
             'status' => 'required|string|min:1|max:1',
             'shelflife' => 'required|integer',
             'frequency' => 'required|string|min:1|max:1',
-            'frequency_composition' => 'required|string|min:1|max:150',
-            'randon' => 'required|boolean'
+            'chkl_type' => 'required|string|min:1|max:1',
+            'frequency_composition' => 'string|min:1|max:150',
         ];
     }
 

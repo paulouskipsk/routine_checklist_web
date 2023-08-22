@@ -6,7 +6,7 @@
 <script src="{{ asset('vendors/template/vendors/fontawesome/all.min.js') }}"></script>
 <script src="{{ asset('vendors/template/vendors/lodash/lodash.min.js') }}"></script>
 <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
-<script src="{{ asset('vendors/template/vendors/list.js/list.min.js') }}"></script>
+{{-- <script src="{{ asset('vendors/template/vendors/list.js/list.min.js') }}"></script> --}}
 <script src="{{ asset('vendors/template/vendors/feather-icons/feather.min.js') }}"></script>
 <script src="{{ asset('vendors/template/vendors/dayjs/dayjs.min.js') }}"></script>
 <script src="{{ asset('vendors/template/assets/js/phoenix.js') }}"></script>

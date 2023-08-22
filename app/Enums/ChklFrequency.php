@@ -2,7 +2,10 @@
 
 namespace App\Enums;
 
+use ArchTech\Enums\Options;
+
 enum ChklFrequency: string {
+    use Options;
 
     case DIARIO = 'DIA';
     case SEMANAL = 'SEM';
