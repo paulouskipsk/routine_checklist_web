@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Web;
 
+use App\Http\Requests\WebChecklistRequest;
 use App\Models\Checklist;
 use App\Models\ChklClassification;
 use App\Utils\Functions;
@@ -28,7 +29,7 @@ class ChecklistController extends ControllerWeb {
         return view('registrations.checklist.new', compact('breadcrumbs', 'action', 'method', 'classifications'));
     }
 
-    public function store(Request $request){
+    public function store(WebChecklistRequest $request){
         try {
             $data = $request->all();
             $data['changed_by_user'] = Auth::user()->id;
@@ -38,7 +39,6 @@ class ChecklistController extends ControllerWeb {
         } catch (\Throwable $th) {
             Session::flash('flash-error-msg', "Erro ao salvar o novo Checklist.");
         }
-
         return Redirect::back()->with($request->all());
     }
 
@@ -54,11 +54,10 @@ class ChecklistController extends ControllerWeb {
             Session::flash('flash-error-msg', "Checklist não encontrado na base de dados.");
             return back();
         } 
-
         return view('registrations.checklist.edit', compact('breadcrumbs', 'action', 'method', 'checklist', 'classifications'));
     }
 
-    public function update(Request $request){
+    public function update(WebChecklistRequest $request){
         try {            
             $checklist = Checklist::firstWhere('id', $request->id);
             $checklist->fill($request->all());
@@ -70,7 +69,6 @@ class ChecklistController extends ControllerWeb {
         } catch (\Throwable $th) {
             Session::flash('flash-error-msg', "Erro ao atualizar o Checklist $request->id.");
         }
-
         return Redirect::back()->with($request->all());
     }
 

@@ -36,8 +36,6 @@ class ChecklistItem extends Model {
         'sequence' => 'integer',
         'score' => 'integer',
         'shelflife' => 'integer',
-        'required_photo' => 'boolean',
-        'contain_action_plan' => 'boolean',
         'chkl_id' => 'integer',
         'sect_id' => 'integer',
         'changed_by_user' => 'integer',

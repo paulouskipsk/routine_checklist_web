@@ -2,6 +2,7 @@
 
 namespace App\Http\Controllers\Web;
 
+use App\Http\Requests\WebChecklistItemRequest;
 use App\Models\ChecklistItem;
 use App\Models\Sector;
 use Illuminate\Http\Request;
@@ -34,7 +35,7 @@ class ChecklistItemController extends ControllerWeb {
         return view('registrations.checklist-item.new', compact('breadcrumbs', 'action', 'method', 'sectors', 'chkl_id'));
     }
 
-    public function store(Request $request){
+    public function store(WebChecklistItemRequest $request){
         try {
             $data = $request->all();
             $data['changed_by_user'] = Auth::user()->id;
@@ -63,16 +64,17 @@ class ChecklistItemController extends ControllerWeb {
         return view('registrations.checklist-item.edit', compact('breadcrumbs', 'action', 'method', 'chkl_id', 'chit', 'sectors'));
     }
 
-    public function update(Request $request){
+    public function update(WebChecklistItemRequest $request){
         try {
             $checklistItem = ChecklistItem::firstWhere('id', $request->id);
             $checklistItem->fill($request->all());
+            $checklistItem->changed_by_user = Auth::user()->id;
             $checklistItem->save();
 
-            Session::flash('flash-success-msg', "Checklist atualizado com sucesso.");
+            Session::flash('flash-success-msg', "Pergunta atualizada com sucesso.");
             return redirect("/checklist-item/listar/checklist/$request->chkl_id");
         } catch (\Throwable $th) {
-            Session::flash('flash-error-msg', "Erro ao atualizar o Checklist $request->id.");
+            Session::flash('flash-error-msg', "Erro ao atualizar o Pergunta $request->id.");
         }
 
         return Redirect::back()->with($request->all());

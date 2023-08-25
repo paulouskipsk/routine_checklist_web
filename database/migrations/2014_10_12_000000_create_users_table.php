@@ -15,8 +15,8 @@ return new class extends Migration {
             $table->string('login', 20)->nullable(false);
             $table->string('password', 64)->nullable(false);
             $table->string('status',1)->default('I')->nullable(false);
-            $table->boolean('access_admin')->default(false);
-            $table->boolean('access_mobile')->default(false);
+            $table->string('access_admin',1)->default('N');
+            $table->string('access_mobile',1)->default('N');
             $table->timestamp('email_verified_at')->nullable();
             $table->timestamps();
             $table->rememberToken();

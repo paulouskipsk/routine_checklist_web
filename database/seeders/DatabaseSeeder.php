@@ -11,6 +11,10 @@ class DatabaseSeeder extends Seeder
         $this->call([
             UsersSeeder::class,
             ChklClassificationSeeder::class,
+            SectorsSeeder::class,
+            UnitySeeder::class,
+            ChecklistSeeder::class,
+            ChecklistItemSeeder::class
         ]);
 
     }

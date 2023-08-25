@@ -12,22 +12,21 @@ return new class extends Migration {
             $table->string('description', 150)->nullable(false);
             $table->smallInteger('sequence')->nullable(false);
             $table->smallInteger('score')->nullable(false);
-            $table->time('hour_min', 8);
-            $table->time('hour_max', 8);
-            $table->boolean('required_photo')->default(false)->nullable(false);
-            $table->boolean('contain_action_plan')->default(false)->nullable(false);
+            $table->time('hour_min', 8)->nullable();
+            $table->time('hour_max', 8)->nullable();
+            $table->string('required_photo', 1)->default('N')->nullable(false);
             $table->smallInteger('quant_photo')->default(0)->nullable(false);
             $table->string('status', 1)->nullable(false);;
-            $table->string('observation', 150);
-            $table->string('type', 3);
-            $table->integer('shelflife');
+            $table->string('observation', 150)->nullable();
+            $table->string('type', 3)->nullable();
+            $table->integer('shelflife')->nullable();
             $table->timestamp('end_date')->nullable(false);
             $table->timestamp('start_date')->nullable(false);
-            $table->string('response', 3);
-            $table->integer('user_id');
+            $table->string('response', 3)->nullable();
+            $table->integer('user_id')->nullable();
             $table->integer('chit_id')->nullable(false);
             $table->integer('chmv_id')->nullable(false);
-            $table->integer('sect_id');
+            $table->integer('sect_id')->nullable();
 
             $table->timestamps();
 

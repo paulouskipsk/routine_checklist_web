@@ -3,8 +3,9 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
-class WebChecklistRequest extends FormRequest {
+class WebChecklistItemRequest extends FormRequest {
 
     public function authorize(): bool {
         return true;
@@ -14,10 +15,18 @@ class WebChecklistRequest extends FormRequest {
         return [
             'description' => 'required|string|min:3|max:150',
             'status' => 'required|string|min:1|max:1',
+            'sequence' => 'required|integer',
+            'score' => 'required|integer',
             'shelflife' => 'required|integer',
-            'frequency' => 'required|string|min:1|max:1',
-            'chkl_type' => 'required|string|min:1|max:1',
-            'frequency_composition' => 'string|min:1|max:150',
+            'type' => 'required|string|min:1|max:1',
+            'shelflife' => 'integer',
+            'required_photo' => ['required', Rule::in(['S', 'N'])],
+            'quant_photo' => ['integer', Rule::requiredIf('required_photo' == 'S'), 'min:1'],
+            'contain_action_plan' => 'integer',
+            'chkl_id' => 'integer',
+            'sect_id' => 'integer|nullable',
+            // 'hour_min' => 
+            // 'hour_max' => 
         ];
     }
 
@@ -28,7 +37,7 @@ class WebChecklistRequest extends FormRequest {
             'description.max' => 'Máximo 150 caracteres.',
             'status.required' => 'Campo é obrigatório.',
             'status.min' => 'Permitido apenas 1 caractere.',
-            'status.max' => 'Permitido apenas 1 caractere.',
+            'status.max' => 'Permitido aRequestpenas 1 caractere.',
             'shelflife.*' => 'Tempo de Vida do Checklist é Obrigatório.',
             'frequency.*' => 'Frequencia é Obrigatória',
             'frequency_composition.*' => 'A composição de Frequencia é Obrigatória',

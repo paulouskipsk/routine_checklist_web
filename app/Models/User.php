@@ -35,8 +35,6 @@ class User extends Authenticatable
         'id' => 'integer',
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
-        'is_admin' => 'bool',
-        'is_user_mobile' => 'bool',
     ];
 
     public function checklists(): BelongsTo {

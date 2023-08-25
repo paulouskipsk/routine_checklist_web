@@ -100,13 +100,15 @@
 
                         <div class="col-4 mt-4">
                             <label for="required_photo">Fotos Obrigatoria?<span class="text-danger">*</span></label>
-                            <select id="required_photo" class="form-select @error('required_photo') is-invalid @enderror"
-                                name="required_photo" required>
-                                <option value="false"
-                                    {{ old('required_photo') == 'false' || @$chit->required_photo == 'false' ? 'selected' : '' }}>Não
+                            <select id="required_photo" class="form-select 
+                                    @error('required_photo') is-invalid @enderror"
+                                    name="required_photo" required>
+
+                                <option value="N"
+                                    {{ old('required_photo') == 'N' || @$chit->required_photo == 'N' ? 'selected' : '' }}>Não
                                 </option>
-                                <option value="true"
-                                    {{ old('required_photo') == 'true' || @$chit->required_photo == 'true' ? 'selected' : '' }}>Sim
+                                <option value="S"
+                                    {{ old('required_photo') == 'S' || @$chit->required_photo == 'S' ? 'selected' : '' }}>Sim
                                 </option>
                                 
                             </select>
@@ -120,8 +122,7 @@
                             <label for="quant_photo">Quant. Max. Fotos<span class="text-danger">*</span></label>
                             <div class="input-group is-invalid">
                                 <input type="number" id="quant_photo"
-                                    class="form-control @error('quant_photo') is-invalid @enderror" name="quant_photo"
-                                    value="{{ old('quant_photo') ?? @$chit->quant_photo }}">
+                                    class="form-control @error('quant_photo') is-invalid @enderror" name="quant_photo">
                             </div>
                             @error('quant_photo')
                                 <div class="invalid-feedback">{{ $message }}</div>
@@ -163,7 +164,7 @@
 
                                     @foreach ($sectors as $sector)
                                         <option value="{{ $sector->id }}"
-                                            {{ old('sect_id') == $sector->id || @$sector->sect_id == $sector->id ? 'selected' : '' }}>
+                                            {{ old('sect_id') == $sector->id || @$chit->sect_id == $sector->id ? 'selected' : '' }}>
                                             {{ $sector->description }}</option>
                                     @endforeach
                                 @else
@@ -193,19 +194,25 @@
 
 @section('postscript')
     <script type="text/javascript">
+        let quantPhoto = <?= isset($chit?->quant_photo) ? $chit->quant_photo : 0 ?>;
+
+        function requiredPhoto(){
+            let value = $('#required_photo').val();
+            if(value =='S'){
+                $('#quant_photo').attr("readonly", false);
+                $('#quant_photo').val(quantPhoto);
+            }else{
+                $('#quant_photo').val(1);
+                $('#quant_photo').attr("readonly", true);
+            }
+        }
+
         $(document).ready(function() {
-            $('#quant_photo').prop("disabled", true);
-            $('#quant_photo').val(0);
+            requiredPhoto();
 
             $('#required_photo').on('change', function() {
-                let value = $('#required_photo').val();
-                if(value =='true'){
-                    $('#quant_photo').prop("disabled", false);
-                }else{
-                    $('#quant_photo').prop("disabled", true);
-                    $('#quant_photo').val(0);
-                }         
-            })
+                requiredPhoto();
+            });
         });
     </script>
 @endsection
