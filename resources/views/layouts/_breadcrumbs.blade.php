@@ -1,4 +1,4 @@
-<section for="breadcrumbs" th:fragment="breadcrumbs" id="breadcrumb">
+<section for="breadcrumbs" id="breadcrumb">
     <nav style="--bs-breadcrumb-divider: '>';" aria-label="breadcrumb">
             <ol class="breadcrumb">
                 <li class="breadcrumb-item">

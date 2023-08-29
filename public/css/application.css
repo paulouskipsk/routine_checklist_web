@@ -15,6 +15,19 @@ section {
 	cursor: pointer;
 }
 
+.cursor-pointer{
+	cursor: pointer;
+}
+
+.border-radius-top-none{
+	border-top-left-radius: 0px !important;
+	border-top-right-radius: 0px !important;
+}
+.border-radius-bottom-none{
+	border-bottom-left-radius: 0px !important;
+	border-bottom-right-radius: 0px !important;
+}
+
 .mh-100{
 	min-height: 100px !important;
 }

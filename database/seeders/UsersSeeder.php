@@ -16,7 +16,71 @@ class UsersSeeder extends Seeder
             'lastname' => '',
             'email' => '',
             'login' =>'admin',
-            'password' => '123'
+            'password' => '123',
+            'status' => 'A'
+        ]);
+
+        User::create([
+            'name' => 'Arnaldo',
+            'lastname' => '',
+            'email' => '',
+            'login' =>'arnaldo',
+            'password' => '123',
+            'status' => 'A'
+        ]);
+
+        User::create([
+            'name' => 'super',
+            'lastname' => '',
+            'email' => '',
+            'login' =>'super',
+            'password' => '123',
+            'status' => 'A'
+        ]);
+
+        User::create([
+            'name' => 'everton',
+            'lastname' => '',
+            'email' => '',
+            'login' =>'everton',
+            'password' => '123',
+            'status' => 'A'
+        ]);
+
+        User::create([
+            'name' => 'everaldo',
+            'lastname' => '',
+            'email' => '',
+            'login' =>'everaldo',
+            'password' => '123',
+            'status' => 'A'
+        ]);
+
+        User::create([
+            'name' => 'everson',
+            'lastname' => '',
+            'email' => '',
+            'login' =>'everson',
+            'password' => '123',
+            'status' => 'A'
+        ]);
+
+        User::create([
+            'name' => 'cleverson',
+            'lastname' => '',
+            'email' => '',
+            'login' =>'cleverson',
+            'password' => '123',
+            'status' => 'A'
+        ]);
+
+        User::create([
+            'name' => 'emerson',
+            'lastname' => '',
+            'email' => '',
+            'login' =>'emerson',
+            'password' => '123',
+            'status' => 'A'
         ]);
     }
 }

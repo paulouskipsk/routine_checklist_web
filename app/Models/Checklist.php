@@ -65,11 +65,12 @@ class Checklist extends Model {
         return $this->belongsToMany(Unity::class, 'pivot_chkl_unit', 'chkl_id', 'unit_id');
     }
 
+    public function userGroups(){
+        return $this->belongsToMany(userGroups::class, 'pivot_chkl_usgr', 'chkl_id', 'usgr_id');
+    }
+
     public function checklistsMovs(): BelongsTo {
         return $this->belongsTo(ChecklistMov::class);
     }
 
 }
-
-// 'userGroups',
-// 'companies',

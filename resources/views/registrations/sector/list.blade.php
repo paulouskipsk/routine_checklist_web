@@ -13,7 +13,7 @@
     </div>
 
     <div id="tableExample2">
-        <div class="table-responsive">
+        <div class="table-responsive mh-300">
             <table class="table table-striped table-sm fs--1 mb-0" id="sector-list">
                 <thead class="mt-5">
                     <tr>
@@ -55,12 +55,6 @@
                     @endforeach
                 </tbody>
             </table>
-        </div>
-        <div class="d-flex justify-content-center mt-3">
-            <button class="page-link" data-list-pagination="prev"><span class="fas fa-chevron-left"></span></button>
-            <ul class="mb-0 pagination"></ul>
-            <button class="page-link pe-0" data-list-pagination="next"><span
-                    class="fas fa-chevron-right"></span></button>
         </div>
     </div>
 @endsection

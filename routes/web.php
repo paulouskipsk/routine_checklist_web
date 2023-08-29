@@ -6,6 +6,8 @@ use App\Http\Controllers\Web\ChecklistItemController;
 use App\Http\Controllers\Web\ClassificationController;
 use App\Http\Controllers\Web\HomeController;
 use App\Http\Controllers\Web\SectorController;
+use App\Http\Controllers\Web\UserController;
+use App\Http\Controllers\Web\UserGroupController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [AuthController::class, 'login'])->name('login');
@@ -48,9 +50,21 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('novo/checklist/{chkl_id}', [ChecklistItemController::class, 'create'])->name('checklist_item_create');
         Route::post('salvar/', [ChecklistItemController::class, 'store'])->name('checklist_item_store');
         Route::get('editar/{id}', [ChecklistItemController::class, 'edit'])->name('checklist_item_edit');
-        Route::post('atualizar/{id}', [ChecklistItemController::class, 'update'])->name('checklist_item_update');
+        Route::put('atualizar/{id}', [ChecklistItemController::class, 'update'])->name('checklist_item_update');
         Route::delete('delete/{id}', [ChecklistItemController::class, 'delete'])->name('checklist_item_delete');
     });
 
+    Route::group(['prefix' => 'grupo-usuarios'], function () {
+        Route::get('listar', [UserGroupController::class, 'index'])->name('user_group_list');
+        Route::get('novo', [UserGroupController::class, 'create'])->name('user_group_create');
+        Route::post('salvar', [UserGroupController::class, 'store'])->name('user_group_store');
+        Route::get('editar/{id}', [UserGroupController::class, 'edit'])->name('user_group_edit');
+        Route::put('atualizar/{id}', [UserGroupController::class, 'update'])->name('user_group_update');
+        Route::delete('delete/{id}', [UserGroupController::class, 'delete'])->name('user_group_delete');
+    });
+
+    Route::group(['prefix' => 'usuario'], function () {
+        Route::get('buscar-por-nome', [UserController::class, 'getUsersByName'])->name('user_search_by_name');
+    });
     
 });

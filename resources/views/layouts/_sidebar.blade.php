@@ -69,6 +69,17 @@
                                 </div>
                             </a>
                         </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link dropdown-indicator" href="{{ route('user_group_list') }}">
+                                <div class="d-flex align-items-center">
+                                    <div class="dropdown-indicator-icon">
+                                        <span class="far fa-circle"></span>
+                                    </div>
+                                    <span class="nav-link-text">Grupo Usuários</span>
+                                </div>
+                            </a>
+                        </li>
                     </ul>
                   </div>
                 </div>

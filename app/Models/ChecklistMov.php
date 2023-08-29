@@ -79,4 +79,8 @@ class ChecklistMov extends Model {
     public function checklistItemMov(): BelongsTo {
         return $this->belongsTo(ChecklistItemMov::class);
     }
+
+    public function userGroups(){
+        return $this->belongsToMany(userGroups::class, 'pivot_chmv_usgr', 'chmv_id', 'usgr_id');
+    }
 }
