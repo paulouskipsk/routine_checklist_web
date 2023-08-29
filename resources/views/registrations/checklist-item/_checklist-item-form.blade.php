@@ -11,8 +11,9 @@
                 </div>
             </div>
             <div class="card-body py-5">
-                <form action="{{ $action }}" method="{{ $method }}" role="form">
+                <form action="{{ $action }}" method="POST" role="form">
                     @csrf
+                    @method("$method")
 
                     <input type="hidden" name="chkl_id" value="{{@$chkl_id}}">
 

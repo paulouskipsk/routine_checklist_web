@@ -11,8 +11,9 @@
                 </div>
             </div>
             <div class="card-body py-5">
-                <form action="{{ $action }}" method="{{ $method }}" role="form">
+                <form action="{{ $action }}" method="POST" role="form">
                     @csrf
+                    @method("$method")
 
                     <div class="row d-flex justify-content-center">
                         <div class="col-6">

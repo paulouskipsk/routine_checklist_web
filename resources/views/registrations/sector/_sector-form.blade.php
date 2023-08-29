@@ -1,5 +1,6 @@
-<form action="{{ $action }}" method="{{$method}}" role="form">
+<form action="{{ $action }}" method="POST" role="form">
     @csrf
+    @method("$method")
 
     <div class="row d-flex justify-content-center">
         <div class="col-6">

@@ -23,7 +23,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('novo', [SectorController::class, 'create'])->name('sector_create');
         Route::post('salvar', [SectorController::class, 'store'])->name('sector_store');
         Route::get('editar/{id}', [SectorController::class, 'edit'])->name('sector_edit');
-        Route::post('atualizar/{id}', [SectorController::class, 'update'])->name('sector_update');
+        Route::put('atualizar/{id}', [SectorController::class, 'update'])->name('sector_update');
         Route::delete('delete/{id}', [SectorController::class, 'delete'])->name('sector_delete');
     });
 
@@ -32,7 +32,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('novo', [ClassificationController::class, 'create'])->name('classification_create');
         Route::post('salvar', [ClassificationController::class, 'store'])->name('classification_store');
         Route::get('editar/{id}', [ClassificationController::class, 'edit'])->name('classification_edit');
-        Route::post('atualizar/{id}', [ClassificationController::class, 'update'])->name('classification_update');
+        Route::put('atualizar/{id}', [ClassificationController::class, 'update'])->name('classification_update');
         Route::delete('delete/{id}', [ClassificationController::class, 'delete'])->name('classification_delete');
     });
 
@@ -41,7 +41,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('novo', [ChecklistController::class, 'create'])->name('checklist_create');
         Route::post('salvar', [ChecklistController::class, 'store'])->name('checklist_store');
         Route::get('editar/{id}', [ChecklistController::class, 'edit'])->name('checklist_edit');
-        Route::post('atualizar/{id}', [ChecklistController::class, 'update'])->name('checklist_update');
+        Route::put('atualizar/{id}', [ChecklistController::class, 'update'])->name('checklist_update');
         Route::delete('delete/{id}', [ChecklistController::class, 'delete'])->name('checklist_delete');
     });
 
