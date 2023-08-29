@@ -46,7 +46,7 @@ class ChecklistController extends ControllerWeb {
         $this->breadcrumbs[] = ['url'=> '', 'label' => 'Editar','active'=>false];
         $breadcrumbs = $this->breadcrumbs;
         $action = "/checklist/atualizar/$request->id";
-        $method = 'post';
+        $method = 'put';
         $checklist = Checklist::firstWhere('id',$request->id);
         $classifications = ChklClassification::whereStatus('A')->get();
 

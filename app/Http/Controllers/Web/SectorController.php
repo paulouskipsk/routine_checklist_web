@@ -42,7 +42,7 @@ class SectorController extends ControllerWeb {
         $this->breadcrumbs[] = ['url'=> '', 'label' => 'Editar','active'=>false];
         $breadcrumbs = $this->breadcrumbs;
         $action = "/setor/atualizar/$request->id";
-        $method = 'post';
+        $method = 'put';
         $sector = Sector::firstWhere('id',$request->id);
 
         if(Functions::nullOrEmpty($sector)){

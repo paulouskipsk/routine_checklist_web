@@ -42,7 +42,7 @@ class ClassificationController extends ControllerWeb {
         $this->breadcrumbs[] = ['url'=> '', 'label' => 'Editar','active'=>false];
         $breadcrumbs = $this->breadcrumbs;
         $action = "/classificacao/atualizar/$request->id";
-        $method = 'post';
+        $method = 'put';
         $classification = ChklClassification::firstWhere('id',$request->id);
 
         if(Functions::nullOrEmpty($classification)){

@@ -46,7 +46,7 @@ class UserGroupController extends ControllerWeb {
         $this->breadcrumbs[] = ['url'=> '', 'label' => 'Editar','active'=>false];
         $breadcrumbs = $this->breadcrumbs;
         $action = "/grupo-usuarios/atualizar/$request->id";
-        $method = 'PUT';
+        $method = 'put';
         $userGroup = UserGroup::firstWhere('id',$request->id);
 
         if(Functions::nullOrEmpty($userGroup)){

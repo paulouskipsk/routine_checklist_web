@@ -57,7 +57,7 @@ class ChecklistItemController extends ControllerWeb {
         ];
         $breadcrumbs = $this->breadcrumbs;
         $action = "/checklist-item/atualizar/$request->id";
-        $method = 'post';
+        $method = 'put';
         $sectors = Sector::whereStatus('A')->get();        
         $chkl_id = $chit->chkl_id;
 
