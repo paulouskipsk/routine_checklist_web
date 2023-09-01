@@ -14,12 +14,15 @@ class City extends Model {
 
     protected $fillable = [
         'id',
+        'code',
         'name',
-        'status'
+        'status',
+        'stat_id'
     ];
 
     protected $casts = [
         'id' => 'integer',
+        'code' => 'integer',
     ];
 
     public function state(): HasMany {

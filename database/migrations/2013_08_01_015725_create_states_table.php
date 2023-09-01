@@ -10,7 +10,8 @@ return new class extends Migration {
         Schema::create('states', function (Blueprint $table) {
             $table->id();
             $table->string('name', 30)->nullable(false);
-            $table->string('scronym', 2)->nullable(false);
+            $table->Integer('code')->nullable(false);
+            $table->string('acronym', 2)->nullable(false);
             $table->string('status', 1)->nullable(false);
             $table->timestamps();
         });

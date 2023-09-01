@@ -13,6 +13,7 @@ return new class extends Migration
     {
         Schema::create('cities', function (Blueprint $table) {
             $table->id();
+            $table->integer('code')->nullable(false);
             $table->string('name', 255)->nullable(false);
             $table->string('status',1)->nullable(false);
             $table->integer('stat_id')->nullable(false);

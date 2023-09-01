@@ -14,6 +14,7 @@ class State extends Model {
 
     protected $fillable = [
         'id',
+        'code',
         'name',
         'acronym',
         'status'
@@ -21,6 +22,7 @@ class State extends Model {
 
     protected $casts = [
         'id' => 'integer',
+        'code' => 'integer',
     ];
 
     public function cities(): BelongsTo {
