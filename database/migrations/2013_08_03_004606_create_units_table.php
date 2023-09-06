@@ -11,11 +11,11 @@ return new class extends Migration {
             $table->id();
             $table->string('fantasy_name')->nullable(true);
             $table->string('corporate_name')->nullable(true);
-            $table->string('cnpj', 20)->nullable(true);
-            $table->string('state_registration', 20)->nullable(true);
+            $table->string('cnpj', 20)->nullable(true)->unique();
+            $table->string('state_registration', 20)->nullable(true)->unique();
             $table->string('phone_fixed', 16)->nullable(true);
             $table->string('status', 1);
-            $table->integer('addr_id')->nullable();
+            $table->integer('addr_id')->nullable(false);
             $table->timestamps();
 
             $table->foreign('addr_id')->references('id')->on('adresses');

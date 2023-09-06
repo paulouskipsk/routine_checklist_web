@@ -50,7 +50,7 @@
                                         <div class="d-flex align-items-center justify-content-between position-relative">
                                             <div class="d-flex">
                                                 <div class="avatar avatar-m status-online me-3">
-                                                    <img class="rounded-circle" src="{{ asset('vendors/template/assets/img/team/40x40/30.webp') }}" alt="" />
+                                                    <img class="rounded-circle" src="{{ asset('ima') }}" alt="" />
                                                 </div>
 
                                                 <div class="flex-1 me-sm-3">

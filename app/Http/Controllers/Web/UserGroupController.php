@@ -52,7 +52,7 @@ class UserGroupController extends ControllerWeb {
         if(Functions::nullOrEmpty($userGroup)){
             Session::flash('flash-error-msg', "Grupo de Usuários não encontrado na base de dados.");
             return back();
-        } 
+        }
 
         return view('registrations.user-group.edit', compact('breadcrumbs', 'action', 'method', 'userGroup'));
     }

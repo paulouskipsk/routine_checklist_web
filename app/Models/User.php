@@ -5,6 +5,7 @@ namespace App\Models;
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
 use Laravel\Sanctum\HasApiTokens;
@@ -37,12 +38,12 @@ class User extends Authenticatable
         'password' => 'hashed',
     ];
 
-    public function checklists(): BelongsTo {
-        return $this->belongsTo(Checklist::class);
+    public function checklists(): HasMany {
+        return $this->hasMany(Checklist::class, 'id', 'changed_by_user');
     }
 
-    public function checklistsItens(): BelongsTo {
-        return $this->belongsTo(ChecklistItem::class);
+    public function checklistsItens(): HasMany {
+        return $this->hasMany(ChecklistItem::class, 'id', 'changed_by_user');
     }
 
     public function units(){
@@ -53,11 +54,11 @@ class User extends Authenticatable
         return $this->belongsToMany(UserGroup::class, 'pivot_usgr_user', 'user_id', 'usgr_id');
     }
 
-    public function checklistsMovs(): BelongsTo {
-        return $this->belongsTo(ChecklistMov::class);
+    public function checklistsMovs(): HasMany {
+        return $this->hasMany(ChecklistMov::class, 'id', 'use_id');
     }
 
-    public function checklistItemMov(): BelongsTo {
-        return $this->belongsTo(ChecklistItemMov::class);
+    public function checklistItemMov(): HasMany {
+        return $this->hasMany(ChecklistItemMov::class, 'id', 'use_id');
     }
 }

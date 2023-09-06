@@ -1,11 +1,12 @@
 @extends('layouts.template')
 
 @section('content')
-    <h3 class="mb-3">Listar Perguntas do Checklist</h3>
+    <h3 class="mb-3">Listar Perguntas </h3>
+    <h4 class="text-primary">Checklist: {{" $checklist->id - $checklist->description"}}</h4>
 
     <div class="row justify-content-end">
         <div class="col-2 mb-3 text-end">
-            <a class="btn btn-outline-success" href="{{ route('checklist_item_create', $chkl_id) }}">
+            <a class="btn btn-outline-success" href="{{ route('checklist_item_create', $checklist->id) }}">
                 <i class="fas fa-plus"></i>
                 Nova Pergunta
             </a>
@@ -17,11 +18,13 @@
             <table class="table table-striped table-sm fs--1 mb-0" id="checklist-list">
                 <thead class="mt-5">
                     <tr>
-                        <th class="sort border-top fs-0 ps-3 w-id" data-sort="id">Codigo</th>
-                        <th class="sort border-top fs-0 ps-3 w-id" data-sort="id">Sequência</th>
+                        <th class="sort border-top fs-0 ps-3 w-id" data-sort="id">Cod.</th>
+                        <th class="sort border-top fs-0 ps-3 w-id" data-sort="id">Seq.</th>
+                        <th class="sort border-top fs-0" data-sort="score">Peso</th>
                         <th class="sort border-top fs-0" data-sort="description">Descrição da Pergunta</th>
-                        <th class="sort border-top fs-0" data-sort="status">Criado Em</th>
-                        <th class="sort border-top fs-0" data-sort="status">Ultima Alteração</th>
+                        <th class="sort border-top fs-0" data-sort="score">H Min.</th>
+                        <th class="sort border-top fs-0" data-sort="score">H Max.</th>
+                        <th class="sort border-top fs-0" data-sort="status">Última Alteração</th>
                         <th class="sort border-top fs-0" data-sort="status">Status</th>
                         <th class="sort text-end align-middle fs-0 pe-0 border-top" scope="col">Ações</th>
                     </tr>
@@ -32,8 +35,10 @@
                     <tr class="py-1">
                         <td class="py--3 fw-bold align-middle ps-3 name">{{ $itemChecklist->id }}</td>
                         <td class="py--3 align-middle ps-3 name">{{ $itemChecklist->sequence }}</td>
+                        <td class="py--3 align-middle">{{ $itemChecklist->score }}</td>
                         <td class="py--3 align-middle">{{ $itemChecklist->description }}</td>
-                        <td class="py--3 align-middle">{{ $itemChecklist->created_at }}</td>
+                        <td class="py--3 align-middle">{{ $itemChecklist->hour_min }}</td>
+                        <td class="py--3 align-middle">{{ $itemChecklist->hour_max }}</td>
                         <td class="py--3 align-middle">{{ $itemChecklist->updated_at }}</td>
                         <td class="py--3 align-middle w-status fw-bold {{$itemChecklist->status == 'A' ? 'text-success ': 'text-danger'}}">{{ Status::getDescription($itemChecklist->status) }}</td>
                         <td class="py--3 align-middle white-space-nowrap text-end pe-0 w-action">

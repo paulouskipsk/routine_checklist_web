@@ -5,6 +5,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class ChklClassification extends Model {
     use HasFactory;
@@ -24,11 +25,11 @@ class ChklClassification extends Model {
         'id' => 'integer',
     ];
 
-    public function checklists(): BelongsTo {
-        return $this->belongsTo(Checklist::class);
+    public function checklists(): HasMany {
+        return $this->hasMany(Checklist::class, 'id', 'chkl_id');
     }
 
-    public function checklistsMovs(): BelongsTo {
-        return $this->belongsTo(ChecklistMov::class);
+    public function checklistsMovs(): HasMany {
+        return $this->hasMany(ChecklistMov::class, 'id', 'chim_id');
     }
 }

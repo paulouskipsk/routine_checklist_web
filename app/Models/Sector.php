@@ -3,7 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
+use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class Sector extends Model {
 
@@ -22,11 +22,11 @@ class Sector extends Model {
         'id' => 'integer',
     ];
 
-    public function checklistsItens(): BelongsTo {
-        return $this->belongsTo(ChecklistItem::class);
+    public function checklistsItens(): HasMany {
+        return $this->hasMany(ChecklistItem::class, 'id', 'chit_id');
     }
 
-    public function checklistItemMov(): BelongsTo {
-        return $this->belongsTo(ChecklistItemMov::class);
+    public function checklistItemMov(): HasMany {
+        return $this->hasMany(ChecklistItemMov::class, 'id', 'sect_id');
     }
 }

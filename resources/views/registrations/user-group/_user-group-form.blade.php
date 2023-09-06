@@ -137,7 +137,7 @@
                     table.row.add([
                         user.id, 
                         user.name,  
-                        "<div class='dropdown-item text-danger remove-user cursor-pointer' data-user-id='"+ user.id +"'> <i class='far fa-trash-alt'></i>&nbsp;Remove</div>"
+                        "<div class='dropdown-item text-danger remove-user cursor-pointer' data-user-id='"+ user.id +"'> <i class='far fa-trash-alt'></i>&nbsp;Remover</div>"
                     ]).draw(false);
                 }
             });

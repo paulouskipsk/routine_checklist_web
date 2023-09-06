@@ -21,8 +21,8 @@ class WebChecklistItemRequest extends FormRequest {
             'type' => 'required|string|min:1|max:1',
             'shelflife' => 'integer',
             'required_photo' => ['required', Rule::in(['S', 'N'])],
-            'quant_photo' => ['integer', Rule::requiredIf('required_photo' == 'S'), 'min:1'],
-            'contain_action_plan' => 'integer',
+           'quant_photo' => ['integer', Rule::requiredIf('required_photo' == 'S'), 'min:1'],
+            // 'contain_action_plan' => 'integer',
             'chkl_id' => 'integer',
             'sect_id' => 'integer|nullable',
             // 'hour_min' => 

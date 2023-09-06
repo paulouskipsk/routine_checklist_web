@@ -22,15 +22,16 @@ class Unity extends Model {
         'cnpj',
         'state_registration',
         'phone_fixed',
-        'status'
+        'status',
+        'addr_id'
     ];
     
     protected $casts = [
         'id' => 'integer',
     ];
 
-    public function address(): HasMany {
-        return $this->hasMany(Address::class);
+    public function address(): BelongsTo {
+        return $this->belongsTo(Address::class, 'addr_id', 'id');
     }
 
     public function users(){
@@ -45,8 +46,8 @@ class Unity extends Model {
         return $this->belongsToMany(Checklist::class, 'pivot_chkl_unit', 'unit_id', 'chkl_id');
     }
 
-    public function checklistsMovs(): BelongsTo {
-        return $this->belongsTo(ChecklistMov::class);
+    public function checklistsMovs(): HasMany {
+        return $this->hasMany(ChecklistMov::class, 'id', 'unit_id');
     }
 
     

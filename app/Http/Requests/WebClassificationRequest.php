@@ -3,6 +3,7 @@
 namespace App\Http\Requests;
 
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class WebClassificationRequest extends FormRequest {
 
@@ -12,13 +13,14 @@ class WebClassificationRequest extends FormRequest {
 
     public function rules(): array {
         return [
-            'description' => 'required|string|min:3|max:50',
+            'description' => "required|string|min:3|max:50|unique:chkl_classifications,description,{$this->id}",
             'status' => 'required|string|min:1|max:1',
         ];
     }
 
     public function messages() {
         return [
+            'description.unique' => 'Já existe uma classificação de checklist com esta descrição.',
             'description.required' => 'Campo é obrigatório.',
             'description.min' => 'Mínimo 3 caracteres.',
             'description.max' => 'Máximo 50 caracteres.',

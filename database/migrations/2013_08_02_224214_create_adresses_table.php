@@ -15,7 +15,6 @@ return new class extends Migration {
             $table->string('cep', 12);
             $table->string('neighborhood');
             $table->string('complement', 100);
-            $table->string('status',1)->nullable(false);
             $table->timestamps();
 
             $table->foreign('city_id')->references('id')->on('cities');

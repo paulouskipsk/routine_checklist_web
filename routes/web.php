@@ -3,9 +3,11 @@
 use App\Http\Controllers\Web\AuthController;
 use App\Http\Controllers\Web\ChecklistController;
 use App\Http\Controllers\Web\ChecklistItemController;
+use App\Http\Controllers\Web\CityController;
 use App\Http\Controllers\Web\ClassificationController;
 use App\Http\Controllers\Web\HomeController;
 use App\Http\Controllers\Web\SectorController;
+use App\Http\Controllers\Web\UnityController;
 use App\Http\Controllers\Web\UserController;
 use App\Http\Controllers\Web\UserGroupController;
 use Illuminate\Support\Facades\Route;
@@ -66,5 +68,21 @@ Route::group(['middleware' => ['auth']], function () {
     Route::group(['prefix' => 'usuario'], function () {
         Route::get('buscar-por-nome', [UserController::class, 'getUsersByName'])->name('user_search_by_name');
     });
+
+    Route::group(['prefix' => 'cidade'], function () {
+        Route::get('buscar-por-nome', [CityController::class, 'getCitiesByName'])->name('city_search_by_name');
+    });
+
+    Route::group(['prefix' => 'unidade'], function () {
+        Route::get('listar', [UnityController::class, 'index'])->name('unity_list');
+        Route::get('novo', [UnityController::class, 'create'])->name('unity_create');
+        Route::post('salvar', [UnityController::class, 'store'])->name('unity_store');
+        Route::get('editar/{id}', [UnityController::class, 'edit'])->name('unity_edit');
+        Route::put('atualizar/{id}', [UnityController::class, 'update'])->name('unity_update');
+        Route::delete('delete/{id}', [UnityController::class, 'delete'])->name('unity_delete');
+    });
+
+
+    
     
 });

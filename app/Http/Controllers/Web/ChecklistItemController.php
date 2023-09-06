@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\Http\Requests\WebChecklistItemRequest;
+use App\Models\Checklist;
 use App\Models\ChecklistItem;
 use App\Models\Sector;
 use Illuminate\Http\Request;
@@ -18,8 +19,9 @@ class ChecklistItemController extends ControllerWeb {
         $breadcrumbs = $this->breadcrumbs;
         $itensChecklists = ChecklistItem::whereChklId($request->chkl_id)->orderBy('sequence')->get();
         $chkl_id = $request->chkl_id;
+        $checklist = Checklist::find($request->chkl_id);
 
-        return view('registrations.checklist-item.list', compact(['breadcrumbs', 'itensChecklists', 'chkl_id']));
+        return view('registrations.checklist-item.list', compact(['breadcrumbs', 'itensChecklists', 'checklist']));
     }
 
     public function create(Request $request){

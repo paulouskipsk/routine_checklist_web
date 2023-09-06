@@ -4,6 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class ChecklistItemMov extends Model {
@@ -50,19 +51,20 @@ class ChecklistItemMov extends Model {
         'quant_photo' => 'integer'
     ];
 
-    public function checklistMov(): HasMany {
-        return $this->hasMany(ChecklistMov::class);
+    public function checklistMov(): BelongsTo {
+        return $this->belongsTo(ChecklistMov::class, 'chmv_id', 'id');
     }
 
-    public function checklistItem(): HasMany {
-        return $this->hasMany(ChecklistItem::class);
+    public function checklistItem(): BelongsTo {
+        return $this->belongsTo(ChecklistItem::class, 'chit_id', 'id');
     }
 
-    public function sector(): HasMany {
-        return $this->hasMany(Sector::class);
+    public function sector(): BelongsTo {
+        return $this->belongsTo(Sector::class, 'sect_id', 'id');
     }
 
-    public function user(): HasMany {
-        return $this->hasMany(User::class);
+    public function user(): BelongsTo {
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
+
 }

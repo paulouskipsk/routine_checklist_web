@@ -42,24 +42,24 @@ class ChecklistItem extends Model {
         'quant_photo' => 'integer'
     ];
 
-    public function checklist(): HasMany {
-        return $this->hasMany(Checklist::class);
+    public function checklist(): BelongsTo {
+        return $this->belongsTo(Checklist::class, 'chkl_id', 'id');
     }
 
-    public function sector(): HasMany {
-        return $this->hasMany(Sector::class);
+    public function sector(): BelongsTo {
+        return $this->belongsTo(Sector::class, 'sect_id', 'id');
     }
 
-    public function changedByUser(): HasMany {
-        return $this->hasMany(User::class);
+    public function changedByUser(): BelongsTo {
+        return $this->belongsTo(User::class, 'changed_by_user', 'id');
     }
 
     public function unitsNoApplicable(){
         return $this->belongsToMany(Unity::class, 'pivot_chit_unit_noapplicable', 'chit_id', 'unit_id');
     }
 
-    public function checklistItemMov(): BelongsTo {
-        return $this->belongsTo(ChecklistItemMov::class);
+    public function checklistItemMov(): HasMany {
+        return $this->ChecklistItemMov(ChecklistItemMov::class, 'id', 'chit_id');
     }
 
 }

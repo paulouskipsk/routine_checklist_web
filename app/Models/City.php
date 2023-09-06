@@ -3,6 +3,7 @@
 namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
+use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 
 class City extends Model {
@@ -25,7 +26,11 @@ class City extends Model {
         'code' => 'integer',
     ];
 
-    public function state(): HasMany {
-        return $this->hasMany(State::class);
+    public function state(): BelongsTo {
+        return $this->belongsTo(State::class, 'stat_id', 'id');
+    }
+
+    public function adresses(): HasMany {
+        return $this->hasMany(Address::class, 'id', 'city_id');
     }
 }

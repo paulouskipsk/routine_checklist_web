@@ -49,16 +49,16 @@ class Checklist extends Model {
         }
     }
 
-    public function chklClassification(): HasMany {
-        return $this->hasMany(ChklClassification::class);
+    public function chklClassification(): BelongsTo {
+        return $this->belongsTo(ChklClassification::class, 'chcl_id', 'id');
     }
 
-    public function changedByUser(): HasMany {
-        return $this->hasMany(User::class);
+    public function changedByUser(): BelongsTo {
+        return $this->belongsTo(User::class, 'changed_by_user', 'id');
     }
 
-    public function checklistsItens(): BelongsTo {
-        return $this->belongsTo(ChecklistItem::class);
+    public function checklistsItens(): HasMany {
+        return $this->hasMany(ChecklistItem::class, 'id', 'chit_id');
     }
 
     public function units(){
@@ -69,8 +69,8 @@ class Checklist extends Model {
         return $this->belongsToMany(userGroups::class, 'pivot_chkl_usgr', 'chkl_id', 'usgr_id');
     }
 
-    public function checklistsMovs(): BelongsTo {
-        return $this->belongsTo(ChecklistMov::class);
+    public function checklistsMovs(): HasMany {
+        return $this->hasMany(ChecklistMov::class, 'id', 'chkl_id');
     }
 
 }

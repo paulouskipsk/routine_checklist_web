@@ -15,7 +15,7 @@
                     @csrf
                     @method("$method")
 
-                    <input type="hidden" name="chkl_id" value="{{@$chkl_id}}">
+                    <input type="hidden" name="chkl_id" value="{{$chkl_id}}">
 
                     <div class="row d-flex justify-content-center">
                         <div class="col-8">

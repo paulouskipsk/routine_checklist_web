@@ -60,26 +60,26 @@ class ChecklistMov extends Model {
         }
     }
 
-    public function user(): HasMany {
-        return $this->hasMany(User::class);
+    public function user(): BelongsTo {
+        return $this->belongsTo(User::class, 'user_id', 'id');
     }
 
-    public function checklist(): HasMany {
-        return $this->hasMany(Checklist::class);
+    public function checklist(): BelongsTo {
+        return $this->belongsTo(Checklist::class, 'chkl_id', 'id');
     }
 
-    public function chklClassification(): HasMany {
-        return $this->hasMany(ChklClassification::class);
+    public function chklClassification(): BelongsTo {
+        return $this->belongsTo(ChklClassification::class, 'chcl_id', 'id');
     }
 
-    public function unity(): HasMany {
-        return $this->hasMany(Unity::class);
+    public function unity(): BelongsTo {
+        return $this->belongsTo(Unity::class, 'unit_id', 'id');
     }
 
-    public function checklistItemMov(): BelongsTo {
-        return $this->belongsTo(ChecklistItemMov::class);
+    public function checklistItemMov(): HasMany {
+        return $this->hasMany(ChecklistItemMov::class, 'id', 'chim_id');
     }
-
+    
     public function userGroups(){
         return $this->belongsToMany(userGroups::class, 'pivot_chmv_usgr', 'chmv_id', 'usgr_id');
     }
