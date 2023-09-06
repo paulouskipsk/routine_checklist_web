@@ -27,6 +27,11 @@ section {
 	border-bottom-left-radius: 0px !important;
 	border-bottom-right-radius: 0px !important;
 }
+.icon-menu{
+	height:1.2em !important;
+	margin-right: 10px !important;
+	color:rgb(47, 47, 47);
+}
 
 .mh-100{
 	min-height: 100px !important;

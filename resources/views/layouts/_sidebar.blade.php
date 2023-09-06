@@ -26,10 +26,10 @@
                 <div class="nav-item-wrapper"><a class="nav-link dropdown-indicator label-1" href="#multi-level" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="multi-level">
                     <div class="d-flex align-items-center">
                         <div class="dropdown-indicator-icon">
-                            <span class="fas fa-caret-right"></span>
+                            <span class="fas fa-caret-right icon-menu"></span>
                         </div>
                         <span class="nav-link-icon">
-                            <span data-feather="save">
+                            <span data-feather="save" class="icon-menu">
                         </span>
                         <span class="nav-link-text">Cadastros</span>
                     </div>
@@ -41,7 +41,7 @@
                             <a class="nav-link dropdown-indicator" href="{{ route('sector_list') }}">
                                 <div class="d-flex align-items-center">
                                     <div class="dropdown-indicator-icon">
-                                        <span class="far fa-circle"></span>
+                                        <span class="fas fa-id-card-alt icon-menu"></span>
                                     </div>
                                     <span class="nav-link-text">Setor</span>
                                 </div>
@@ -52,7 +52,7 @@
                             <a class="nav-link dropdown-indicator" href="{{ route('classification_list') }}">
                                 <div class="d-flex align-items-center">
                                     <div class="dropdown-indicator-icon">
-                                        <span class="far fa-circle"></span>
+                                        <span class="fas fa-list-ol icon-menu"></span>
                                     </div>
                                     <span class="nav-link-text">Classificação</span>
                                 </div>
@@ -63,7 +63,7 @@
                             <a class="nav-link dropdown-indicator" href="{{ route('checklist_list') }}">
                                 <div class="d-flex align-items-center">
                                     <div class="dropdown-indicator-icon">
-                                        <span class="far fa-circle"></span>
+                                        <span class="fas fa-tasks icon-menu"></span>
                                     </div>
                                     <span class="nav-link-text">Checklist</span>
                                 </div>
@@ -74,7 +74,7 @@
                             <a class="nav-link dropdown-indicator" href="{{ route('user_group_list') }}">
                                 <div class="d-flex align-items-center">
                                     <div class="dropdown-indicator-icon">
-                                        <span class="far fa-circle"></span>
+                                        <span class="fas fa-users icon-menu"></span>
                                     </div>
                                     <span class="nav-link-text">Grupo Usuários</span>
                                 </div>
@@ -85,7 +85,7 @@
                             <a class="nav-link dropdown-indicator" href="{{ route('unity_list') }}">
                                 <div class="d-flex align-items-center">
                                     <div class="dropdown-indicator-icon">
-                                        <span class="far fa-circle"></span>
+                                        <span class="far fa-building icon-menu"></span>
                                     </div>
                                     <span class="nav-link-text">Unidade</span>
                                 </div>
