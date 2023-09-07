@@ -64,7 +64,7 @@
                     <div class="row d-flex justify-content-center mt-3">
                         
 
-                        <div class="col-3">
+                        <div class="col-2">
                             <label for="shelflife">Shelflife (Em Minutos)<span class="text-danger">*</span></label>
                             <div class="input-group is-invalid">
                                 <input type="number" id="shelflife"
@@ -76,7 +76,7 @@
                             @enderror
                         </div>
 
-                        <div class="col-3">
+                        <div class="col-2">
                             <label for="generate_time">Hora de Geração</label>
                             <div class="input-group is-invalid">
                                 <input type="time" id="generate_time"
@@ -89,7 +89,7 @@
                             @enderror
                         </div>
 
-                        <div class="col-6">
+                        <div class="col-4">
                             <label for="chcl_id">Classificação</label>
                             <select id="chcl_id" class="form-select @error('chcl_id') is-invalid @enderror"
                                 name="chcl_id" data-choices="data-choices" required>
@@ -110,9 +110,7 @@
                                 <div class="invalid-feedback">{{ $message }}</div>
                             @enderror
                         </div>
-                    </div>
 
-                    <div class="row d-flex justify-content-left mt-5">
                         <div class="col-4">
                             <label for="frequency">Frequência<span class="text-danger">*</span></label>
                             <select id="frequency" class="form-select @error('frequency') is-invalid @enderror"
@@ -130,11 +128,36 @@
                         </div>
                     </div>
 
-                    
-
                     <div class="row d-flex justify-content-center">
                         <div class="col-12" id="frequency_composition"></div>
                     </div>
+
+                    <div class="row d-flex justify-content-center mt-5">
+                        <div class="col-12">
+                            <select multiple="multiple" size="{{sizeof($units) < 5 ? 4 : 10}}" name="units[]" id="chkl-units">
+                                @foreach ($units as $unity)
+                                    <option value="{{$unity->id}}" 
+                                        {{ @$checklist->units->contains('id', $unity->id) ? 'selected' : '' }}>
+                                        {{"$unity->id - $unity->fantasy_name"}}
+                                    </option>                            
+                                @endforeach
+                            </select>
+                        </div>                        
+                    </div>
+
+                    <div class="row d-flex justify-content-center mt-5">
+                        <div class="col-12">
+                            <select multiple="multiple" size="{{sizeof($usersGroups) < 5 ? 4 : 10}}" name="usersGroups[]" id="users-groups">
+                                @foreach ($usersGroups as $usersGroup)
+                                    <option value="{{$usersGroup->id}}" 
+                                        {{ old('usersGroups') != null && in_array(strVal($usersGroup->id), old('usersGroups')) || 
+                                        @$checklist->usersGroups->contains('id', $usersGroup->id) ? 'selected' : '' }}>
+                                        {{"$usersGroup->id - $usersGroup->name"}}
+                                    </option>                            
+                                @endforeach
+                            </select>
+                        </div>                        
+                    </div>                    
 
                     <div class="row d-flex justify-content-center mt-5">
                         <div class="col-2">
@@ -209,6 +232,34 @@
             let selectedDays = <?= json_encode(@$checklist->frequency_composition) ?>;
             let frequency = <?= json_encode(@$checklist->frequency) ?>;
             getFrequencies(selectedDays);
+
+
+            var dualListBox = $('#chkl-units').bootstrapDualListbox({
+                nonSelectedListLabel: 'Unidades Ativas',
+                selectedListLabel: 'Unidades Selecionadas',
+                preserveSelectionOnMove: 'moved',
+                moveAllLabel: 'Mover Todas',
+                removeAllLabel: 'Remover Todas',
+                infoText: 'Exibir todos {0}',
+                infoTextEmpty: "Lista vazia",
+                filterTextClear: '<span class="text-primary">Mostrar Tudo</span>',
+                filterPlaceHolder: 'Filtro',
+                infoTextFiltered: '<span class="label label-warning">Filtrando</span> {0} de {1}',
+            });
+
+            var dualListBox = $('#users-groups').bootstrapDualListbox({
+                nonSelectedListLabel: 'Gr. Usuários Ativos',
+                selectedListLabel: 'Gr. Usuários Selecionados',
+                preserveSelectionOnMove: 'moved',
+                moveAllLabel: 'Mover Todos',
+                removeAllLabel: 'Remover Todos',
+                infoText: 'Exibir todos {0}',
+                infoTextEmpty: "Lista vazia",
+                filterTextClear: '<span class="text-primary">Mostrar Tudo</span>',
+                filterPlaceHolder: 'Filtro',
+                infoTextFiltered: '<span class="label label-warning">Filtrando</span> {0} de {1}',
+            });
+
 
             $('#frequency').on('change', function() {
                 data = [];

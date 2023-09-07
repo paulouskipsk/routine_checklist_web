@@ -36,7 +36,9 @@
     <script src="{{ asset('vendors/sweetAlert/sweetalert2.all.min.js') }}"></script>
     <link href="{{ asset('vendors/dataTables/datatables.min.css') }}" rel="stylesheet">
 
-
+    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
+    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.rtl.min.css" />
+    
     <link href="{{ asset('css/application.css') }}" type="text/css" rel="stylesheet">
   
     <script>
@@ -55,9 +57,9 @@
         }
     </script>
 
+<!-- plugin -->
 
-<link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-<link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.rtl.min.css" />
+<link rel="stylesheet" type="text/css" href="https://www.virtuosoft.eu/code/bootstrap-duallistbox/bootstrap-duallistbox/v3.0.2/bootstrap-duallistbox.css">
 
 
 </head>

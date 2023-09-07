@@ -41,7 +41,7 @@
                             <a class="nav-link dropdown-indicator" href="{{ route('sector_list') }}">
                                 <div class="d-flex align-items-center">
                                     <div class="dropdown-indicator-icon">
-                                        <span class="fas fa-id-card-alt icon-menu"></span>
+                                        <span class="far fa-address-card icon-menu"></span>
                                     </div>
                                     <span class="nav-link-text">Setor</span>
                                 </div>
@@ -71,7 +71,7 @@
                         </li>
 
                         <li class="nav-item">
-                            <a class="nav-link dropdown-indicator" href="{{ route('user_group_list') }}">
+                            <a class="nav-link dropdown-indicator" href="{{ route('users_group_list') }}">
                                 <div class="d-flex align-items-center">
                                     <div class="dropdown-indicator-icon">
                                         <span class="fas fa-users icon-menu"></span>

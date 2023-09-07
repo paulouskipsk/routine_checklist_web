@@ -28,7 +28,7 @@
                     
                     @includeIf('layouts._footer')
                 </div>
-                <!-- /Content -->                    
+                <!-- /Content -->    
             </div>
         </main>
         

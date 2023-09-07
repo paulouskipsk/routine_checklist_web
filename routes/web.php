@@ -9,7 +9,7 @@ use App\Http\Controllers\Web\HomeController;
 use App\Http\Controllers\Web\SectorController;
 use App\Http\Controllers\Web\UnityController;
 use App\Http\Controllers\Web\UserController;
-use App\Http\Controllers\Web\UserGroupController;
+use App\Http\Controllers\Web\UsersGroupController;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [AuthController::class, 'login'])->name('login');
@@ -57,12 +57,12 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
     Route::group(['prefix' => 'grupo-usuarios'], function () {
-        Route::get('listar', [UserGroupController::class, 'index'])->name('user_group_list');
-        Route::get('novo', [UserGroupController::class, 'create'])->name('user_group_create');
-        Route::post('salvar', [UserGroupController::class, 'store'])->name('user_group_store');
-        Route::get('editar/{id}', [UserGroupController::class, 'edit'])->name('user_group_edit');
-        Route::put('atualizar/{id}', [UserGroupController::class, 'update'])->name('user_group_update');
-        Route::delete('delete/{id}', [UserGroupController::class, 'delete'])->name('user_group_delete');
+        Route::get('listar', [UsersGroupController::class, 'index'])->name('users_group_list');
+        Route::get('novo', [UsersGroupController::class, 'create'])->name('users_group_create');
+        Route::post('salvar', [UsersGroupController::class, 'store'])->name('users_group_store');
+        Route::get('editar/{id}', [UsersGroupController::class, 'edit'])->name('users_group_edit');
+        Route::put('atualizar/{id}', [UsersGroupController::class, 'update'])->name('users_group_update');
+        Route::delete('delete/{id}', [UsersGroupController::class, 'delete'])->name('users_group_delete');
     });
 
     Route::group(['prefix' => 'usuario'], function () {

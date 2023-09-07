@@ -4,7 +4,7 @@ namespace App\Models;
 
 use Illuminate\Database\Eloquent\Model;
 
-class UserGroup extends Model {
+class UsersGroup extends Model {
 
     protected $table = 'users_groups';
     public $timestamps = true;

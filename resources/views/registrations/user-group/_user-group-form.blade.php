@@ -8,7 +8,7 @@
         <div class="col-6">
             <label for="name">Nome<span class="text-danger">*</span></label> 
             <div class="input-group is-invalid">
-                <input type="text" id="name" class="form-control @error('name') is-invalid @enderror" name="name" value="{{old('name') ?? @$userGroup->name}}" required>
+                <input type="text" id="name" class="form-control @error('name') is-invalid @enderror" name="name" value="{{old('name') ?? @$usersGroup->name}}" required>
             </div>
             @error('name')<div class="invalid-feedback">{{ $message }}</div>@enderror
         </div>
@@ -16,8 +16,8 @@
         <div class="col-3">
             <label for="status">Status<span class="text-danger">*</span></label> 
             <select id="status" class="form-select @error('status') is-invalid @enderror" name="status" required>
-                <option value="A" {{ old('status') == 'A' || @$userGroup->status == 'A' ? 'selected': '' }}>Ativo</option>
-                <option value="I" {{ old('status') == 'I' || @$userGroup->status == 'I' ? 'selected': '' }}>Inativo</option>
+                <option value="A" {{ old('status') == 'A' || @$usersGroup->status == 'A' ? 'selected': '' }}>Ativo</option>
+                <option value="I" {{ old('status') == 'I' || @$usersGroup->status == 'I' ? 'selected': '' }}>Inativo</option>
 
             </select>
             @error('status')<div class="invalid-feedback">{{ $message }}</div>@enderror
@@ -64,7 +64,7 @@
     <script type="text/javascript">
         $(document).ready(() => {
             let usersSelectedsObj = null;
-            var users = <?= json_encode(@$userGroup->users) ?>;
+            var users = <?= json_encode(@$usersGroup->users) ?>;
             loadUsersTable(users);
             loadUsersField(users);
 

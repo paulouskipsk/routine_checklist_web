@@ -2,7 +2,9 @@
 
 namespace App\Http\Requests;
 
+use App\Enums\Frequency;
 use Illuminate\Foundation\Http\FormRequest;
+use Illuminate\Validation\Rule;
 
 class WebChecklistRequest extends FormRequest {
 
@@ -17,7 +19,10 @@ class WebChecklistRequest extends FormRequest {
             'shelflife' => 'required|integer',
             'frequency' => 'required|string|min:1|max:1',
             'chkl_type' => 'required|string|min:1|max:1',
-            'frequency_composition' => 'string|min:1|max:150',
+            'frequency_composition' =>[
+                Rule::requiredIf(in_array($this->frequency, [Frequency::WEEKLY, Frequency::MONTHLY])), 
+                'array'
+            ],
         ];
     }
 
