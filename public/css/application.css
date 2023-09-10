@@ -111,3 +111,67 @@ table.dataTable tbody th, table.dataTable tbody td {
 .form-control option:hover {
 	background: #c0f1f1ed;
 }
+
+
+
+
+
+
+
+
+:root {
+	--white: #ffffff;
+	--red: #b50000;
+}
+
+div#preloader {
+	position: fixed;
+	top: 0;
+	left: 0;
+	right: 0;
+	bottom: 0;
+	background-color: var(--white);
+	z-index: 99999;
+}
+.loader {
+	position: absolute;
+	float: right;
+	top: 50%;
+	left: 50%;
+	margin-top:-50px; 
+	margin-left:-50px;
+	font-size: 18px;
+	font-weight: bold;
+}
+
+
+/**
+ * ==============================================
+ * Dot Carousel
+ * ==============================================
+ */
+ .dot-carousel {
+	position: relative;
+	float: right;
+	left: -9999px;
+	width: 10px;
+	height: 10px;
+	border-radius: 5px;
+	background-color: var(--red);
+	color: var(--red);
+	box-shadow: 9984px 0 0 0 var(--red), 9999px 0 0 0 var(--red), 10014px 0 0 0 var(--red);
+	animation: dot-carousel 1.5s infinite linear;
+	margin: 7px 0px 0px 23px;
+  }
+  
+  @keyframes dot-carousel {
+	0% {
+	  box-shadow: 9984px 0 0 -1px var(--red), 9999px 0 0 1px var(--red), 10014px 0 0 -1px var(--red);
+	}
+	50% {
+	  box-shadow: 10014px 0 0 -1px var(--red), 9984px 0 0 -1px var(--red), 9999px 0 0 1px var(--red);
+	}
+	100% {
+	  box-shadow: 9999px 0 0 1px var(--red), 10014px 0 0 -1px var(--red), 9984px 0 0 -1px var(--red);
+	}
+  }

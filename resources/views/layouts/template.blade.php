@@ -6,6 +6,17 @@
         
         <main class="main" id="top">
             <div class="container-fluid px-0">
+
+                <!--PreLoader-->
+            <div id="preloader">
+                    
+                <div id="status">&nbsp;</div>
+                <div class="loader">
+                        Carregando
+                        <div class="dot-carousel"></div>
+                </div>
+            </div>
+            <!--PreLoader-->
                 
                 <!-- Sidebar -->
                 @includeIf('layouts._sidebar')

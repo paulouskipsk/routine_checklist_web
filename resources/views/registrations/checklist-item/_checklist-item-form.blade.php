@@ -161,7 +161,7 @@
                             <select id="sect_id" class="form-select @error('sect_id') is-invalid @enderror"
                                 name="sect_id" data-choices="data-choices">
                                 @if (count($sectors) > 0)
-                                    <option value="" selected>Selecione...</option>
+                                    <option value="" selected>Não selecionar um Setor.</option>
 
                                     @foreach ($sectors as $sector)
                                         <option value="{{ $sector->id }}"
@@ -180,6 +180,20 @@
 
                     <div class="row d-flex justify-content-center">
                         <div class="col-12" id="frequency_composition"></div>
+                    </div>
+
+                    <div class="row d-flex justify-content-center mt-5">
+                        <div class="col-12">
+                            <select multiple="multiple" size="{{$unitsChkl != null || sizeof($unitsChkl) < 5 ? 4 : 10}}" name="unitsNoApplicable[]" id="units-no-applicable">
+                                @foreach ($unitsChkl as $unityChkl)
+                                    <option value="{{$unityChkl->id}}" 
+                                        {{ old('unitsNoApplicable') != null && in_array(strVal($unityChkl->id), old('unitsNoApplicable')) ||
+                                           @$chit->unitsNoApplicable != null && @$chit->unitsNoApplicable->contains('id', $unityChkl->id) ? 'selected' : '' }}>
+                                        {{"$unityChkl->id - $unityChkl->fantasy_name"}}
+                                    </option>                            
+                                @endforeach
+                            </select>
+                        </div>                        
                     </div>
 
                     <div class="row d-flex justify-content-center mt-5">
@@ -214,6 +228,8 @@
             $('#required_photo').on('change', function() {
                 requiredPhoto();
             });
+
+            initializeDualListBox('#units-no-applicable', 'Unidades do Checklist Ativas', 'Unidades não aplicáveis Selecionadas');
         });
     </script>
 @endsection

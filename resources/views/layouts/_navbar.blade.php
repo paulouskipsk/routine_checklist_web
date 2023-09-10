@@ -28,7 +28,7 @@
             </li>
 
             <!-- NOTIFICATION -->
-            <li class="nav-item dropdown">
+            {{-- <li class="nav-item dropdown">
                 <a class="nav-link" href="#" role="button" data-bs-toggle="dropdown" aria-haspopup="true" aria-expanded="false" data-bs-auto-close="outside">
                     <span data-feather="bell" style="height:20px;width:20px;"></span>
                 </a>
@@ -50,7 +50,7 @@
                                         <div class="d-flex align-items-center justify-content-between position-relative">
                                             <div class="d-flex">
                                                 <div class="avatar avatar-m status-online me-3">
-                                                    <img class="rounded-circle" src="{{ asset('ima') }}" alt="" />
+                                                    <img class="rounded-circle" src="{{ asset('imagens/37.png') }}" alt="" />
                                                 </div>
 
                                                 <div class="flex-1 me-sm-3">
@@ -88,7 +88,7 @@
                         </div>
                     </div>
                 </div>
-            </li>
+            </li> --}}
 
             <!-- MENU USER -->
             <li class="nav-item dropdown">
@@ -105,7 +105,7 @@
                                     {{-- <img class="rounded-circle " src="{{ asset('vendors/template/assets/img/team/72x72/57.webp') }}" alt="" /> --}}
                                     <i class="rounded-circle fas fa-user-circle fs-4 mt-2"></i>
                                 </div>
-                                <h6 class="mt-2 text-black">Jerry Seinfield</h6>
+                                <h6 class="mt-2 text-black">{{Auth::user()->name." ". Auth::user()->lastname}}</h6>
                             </div>
                         </div>
 

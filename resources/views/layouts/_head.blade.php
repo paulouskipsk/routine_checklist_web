@@ -19,14 +19,14 @@
     <script src="{{ asset('vendors/template/assets/js/config.js') }}"></script>
 
     <!-- Stylesheets -->
-    <link rel="preconnect" href="https://fonts.googleapis.com">
+    {{-- <link rel="preconnect" href="https://fonts.googleapis.com">
     <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin="">
-    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap" rel="stylesheet">
+    <link href="https://fonts.googleapis.com/css2?family=Nunito+Sans:wght@300;400;600;700;800;900&amp;display=swap" rel="stylesheet"> --}}
+
+    <link href="{{ asset('fonts/merriweather/merriweather.css') }}" type="text/css" rel="stylesheet">
+
 
     <link href="{{ asset('vendors/template/vendors/simplebar/simplebar.min.css') }}" type="text/css" rel="stylesheet">
-
-    <link href="https://unicons.iconscout.com/release/v4.0.0/css/line.css" type="text/css" rel="stylesheet">
-
     <link href="{{ asset('vendors/template/assets/css/theme-rtl.min.css') }}" type="text/css" rel="stylesheet" id="style-rtl">
     <link href="{{ asset('vendors/template/assets/css/theme.min.css') }}" type="text/css" rel="stylesheet" id="style-default">
     <link href="{{ asset('vendors/template/assets/css/user-rtl.min.css') }}" type="text/css" rel="stylesheet" id="user-style-rtl">
@@ -36,9 +36,10 @@
     <script src="{{ asset('vendors/sweetAlert/sweetalert2.all.min.js') }}"></script>
     <link href="{{ asset('vendors/dataTables/datatables.min.css') }}" rel="stylesheet">
 
-    <link href="https://cdn.jsdelivr.net/npm/select2@4.1.0-rc.0/dist/css/select2.min.css" rel="stylesheet" />
-    <link rel="stylesheet" href="https://cdn.jsdelivr.net/npm/select2-bootstrap-5-theme@1.3.0/dist/select2-bootstrap-5-theme.rtl.min.css" />
-    
+    <link href="{{ asset('vendors/select2/select2.min.css') }}" type="text/css" rel="stylesheet">
+    <link href="{{ asset('vendors/select2/select2-bootstrap-5-theme.css') }}" type="text/css" rel="stylesheet">
+    <link href="{{ asset('vendors/duallistbox/bootstrap-duallistbox.css') }}" type="text/css" rel="stylesheet">    
+
     <link href="{{ asset('css/application.css') }}" type="text/css" rel="stylesheet">
   
     <script>
@@ -56,10 +57,5 @@
             userLinkRTL.setAttribute('disabled', true);
         }
     </script>
-
-<!-- plugin -->
-
-<link rel="stylesheet" type="text/css" href="https://www.virtuosoft.eu/code/bootstrap-duallistbox/bootstrap-duallistbox/v3.0.2/bootstrap-duallistbox.css">
-
 
 </head>

@@ -31,8 +31,9 @@ class ChecklistController extends ControllerWeb {
         $method = 'post';
         $classifications = ChklClassification::whereStatus(Status::ACTIVE)->get();
         $units = Unity::whereStatus(Status::ACTIVE)->get();
+        $usersGroups = UsersGroup::whereStatus(Status::ACTIVE)->get();
 
-        return view('registrations.checklist.new', compact('breadcrumbs', 'action', 'method', 'classifications', 'units'));
+        return view('registrations.checklist.new', compact('breadcrumbs', 'action', 'method', 'classifications', 'units', 'usersGroups'));
     }
 
     public function store(WebChecklistRequest $request){

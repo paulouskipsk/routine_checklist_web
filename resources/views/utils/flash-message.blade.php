@@ -5,7 +5,7 @@
         icon: 'info',
         title: "{{ Session::get('flash-info-msg') }}",
         showConfirmButton: false,
-        timer: 2500,
+        timer: 1800,
         showCloseButton: true
     })
 </script>
@@ -18,7 +18,7 @@
         icon: 'warning',
         title: "{{ Session::get('flash-warning-msg') }}",
         showConfirmButton: false,
-        timer: 2500,
+        timer: 1800,
         showCloseButton: true
     })
 </script>
@@ -31,7 +31,7 @@
         icon: 'error',
         title: "{{ Session::get('flash-error-msg') }}",
         showConfirmButton: false,
-        timer: 2500,
+        timer: 1800,
         showCloseButton: true
     })
 </script>
@@ -44,7 +44,7 @@
         icon: 'success',
         title: "{{ Session::get('flash-success-msg') }}",
         showConfirmButton: false,
-        timer: 2500,
+        timer: 1800,
         showCloseButton: true
     })
 </script>

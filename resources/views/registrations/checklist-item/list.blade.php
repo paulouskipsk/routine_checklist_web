@@ -1,8 +1,8 @@
 @extends('layouts.template')
 
 @section('content')
-    <h3 class="mb-3">Listar Perguntas </h3>
-    <h4 class="text-primary">Checklist: {{" $checklist->id - $checklist->description"}}</h4>
+    <h3 class="mb-3">Listar Perguntas do checklist: {{ $checklist->id }} </h3>
+    <h4 class="text-primary">{{$checklist->description}}</h4>
 
     <div class="row justify-content-end">
         <div class="col-2 mb-3 text-end">

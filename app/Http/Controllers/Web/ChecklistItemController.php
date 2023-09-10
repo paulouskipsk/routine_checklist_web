@@ -34,7 +34,9 @@ class ChecklistItemController extends ControllerWeb {
         $method = 'post';
         $chkl_id = $request->chkl_id;
         $sectors = Sector::whereStatus('A')->get();
-        return view('registrations.checklist-item.new', compact('breadcrumbs', 'action', 'method', 'sectors', 'chkl_id'));
+        $unitsChkl = (Checklist::with('units')->find($request->chkl_id))->units;
+
+        return view('registrations.checklist-item.new', compact('breadcrumbs', 'action', 'method', 'sectors', 'chkl_id', 'unitsChkl'));
     }
 
     public function store(WebChecklistItemRequest $request){
@@ -62,8 +64,9 @@ class ChecklistItemController extends ControllerWeb {
         $method = 'put';
         $sectors = Sector::whereStatus('A')->get();        
         $chkl_id = $chit->chkl_id;
+        $unitsChkl = (Checklist::with('units')->find($chit->chkl_id))->units;
 
-        return view('registrations.checklist-item.edit', compact('breadcrumbs', 'action', 'method', 'chkl_id', 'chit', 'sectors'));
+        return view('registrations.checklist-item.edit', compact('breadcrumbs', 'action', 'method', 'chkl_id', 'chit', 'sectors', 'unitsChkl'));
     }
 
     public function update(WebChecklistItemRequest $request){

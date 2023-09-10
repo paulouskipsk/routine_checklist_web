@@ -137,7 +137,8 @@
                             <select multiple="multiple" size="{{sizeof($units) < 5 ? 4 : 10}}" name="units[]" id="chkl-units">
                                 @foreach ($units as $unity)
                                     <option value="{{$unity->id}}" 
-                                        {{ @$checklist->units->contains('id', $unity->id) ? 'selected' : '' }}>
+                                        {{ old('units') != null && in_array(strVal($unity->id), old('units')) ||
+                                           @$checklist->units != null && @$checklist->units->contains('id', $unity->id) ? 'selected' : '' }}>
                                         {{"$unity->id - $unity->fantasy_name"}}
                                     </option>                            
                                 @endforeach
@@ -151,7 +152,7 @@
                                 @foreach ($usersGroups as $usersGroup)
                                     <option value="{{$usersGroup->id}}" 
                                         {{ old('usersGroups') != null && in_array(strVal($usersGroup->id), old('usersGroups')) || 
-                                        @$checklist->usersGroups->contains('id', $usersGroup->id) ? 'selected' : '' }}>
+                                           @$checklist->usersGroups != null && @$checklist->usersGroups->contains('id', $usersGroup->id) ? 'selected' : '' }}>
                                         {{"$usersGroup->id - $usersGroup->name"}}
                                     </option>                            
                                 @endforeach
@@ -233,33 +234,8 @@
             let frequency = <?= json_encode(@$checklist->frequency) ?>;
             getFrequencies(selectedDays);
 
-
-            var dualListBox = $('#chkl-units').bootstrapDualListbox({
-                nonSelectedListLabel: 'Unidades Ativas',
-                selectedListLabel: 'Unidades Selecionadas',
-                preserveSelectionOnMove: 'moved',
-                moveAllLabel: 'Mover Todas',
-                removeAllLabel: 'Remover Todas',
-                infoText: 'Exibir todos {0}',
-                infoTextEmpty: "Lista vazia",
-                filterTextClear: '<span class="text-primary">Mostrar Tudo</span>',
-                filterPlaceHolder: 'Filtro',
-                infoTextFiltered: '<span class="label label-warning">Filtrando</span> {0} de {1}',
-            });
-
-            var dualListBox = $('#users-groups').bootstrapDualListbox({
-                nonSelectedListLabel: 'Gr. Usuários Ativos',
-                selectedListLabel: 'Gr. Usuários Selecionados',
-                preserveSelectionOnMove: 'moved',
-                moveAllLabel: 'Mover Todos',
-                removeAllLabel: 'Remover Todos',
-                infoText: 'Exibir todos {0}',
-                infoTextEmpty: "Lista vazia",
-                filterTextClear: '<span class="text-primary">Mostrar Tudo</span>',
-                filterPlaceHolder: 'Filtro',
-                infoTextFiltered: '<span class="label label-warning">Filtrando</span> {0} de {1}',
-            });
-
+            initializeDualListBox('#chkl-units', 'Unidades Ativas', 'Unidades Selecionadas');
+            initializeDualListBox('#users-groups','Gr. Usuários Ativos', 'Gr. Usuários Selecionados');
 
             $('#frequency').on('change', function() {
                 data = [];
