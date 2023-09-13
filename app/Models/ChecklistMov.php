@@ -1,11 +1,11 @@
 <?php
 
 namespace App\Models;
-
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+
 
 class ChecklistMov extends Model {
     use HasFactory;
@@ -34,10 +34,7 @@ class ChecklistMov extends Model {
     
     protected $casts = [
         'id' => 'integer',
-        'generate_time' => 'timestamp',
         'shelflife' => 'integer',
-        'start_date' => 'timestamp',
-        'end_date' => 'timestamp',
         'user_id' => 'integer',
         'chkl_id' => 'integer',
         'chcl_id' => 'integer',
@@ -76,11 +73,8 @@ class ChecklistMov extends Model {
         return $this->belongsTo(Unity::class, 'unit_id', 'id');
     }
 
-    public function checklistItemMov(): HasMany {
-        return $this->hasMany(ChecklistItemMov::class, 'id', 'chim_id');
+    public function checklistItensMovs(): HasMany {
+        return $this->hasMany(ChecklistItemMov::class, 'chmv_id', 'id');
     }
-    
-    public function userGroups(){
-        return $this->belongsToMany(userGroups::class, 'pivot_chmv_usgr', 'chmv_id', 'usgr_id');
-    }
+
 }

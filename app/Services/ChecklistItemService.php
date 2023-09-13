@@ -13,7 +13,8 @@ use Exception;
 class ChecklistItemService {
 
     public function initializeChecklistItensMovs(ChecklistMov $checklistMov) {
-        $checklistItens = ChecklistItem::where('chkl_id', $checklistMov->chkl_id)
+        $checklistItens = ChecklistItem::with('unitsNoApplicable')
+                                        ->where('chkl_id', $checklistMov->chkl_id)
                                        ->whereStatus(Status::ACTIVE)
                                        ->get();
 
@@ -21,7 +22,8 @@ class ChecklistItemService {
             throw new Exception("Não existem Perguntas cadastradas para o checklist $checklistMov->chkl_id");
 
         foreach ($checklistItens as $checklistItem) {
-            $chim = $this->initializeChecklistItemMov($checklistMov, $checklistItem);
+            if(isset($checklistItem->unitsNoApplicable) && $checklistItem->unitsNoApplicable->contains('id',$checklistMov->unit_id)) continue;
+            $this->initializeChecklistItemMov($checklistMov, $checklistItem);
         }
     }
 

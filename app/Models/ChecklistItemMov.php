@@ -28,6 +28,7 @@ class ChecklistItemMov extends Model {
         'shelflife',
         'end_date',
         'start_date',
+        'processed',
         'response',
         'required_photo',
         'quant_photo',
@@ -52,7 +53,7 @@ class ChecklistItemMov extends Model {
     ];
 
     public function checklistMov(): BelongsTo {
-        return $this->belongsTo(ChecklistMov::class, 'chmv_id', 'id');
+        return $this->belongsTo(ChecklistMov::class, 'id', 'chmv_id');
     }
 
     public function checklistItem(): BelongsTo {

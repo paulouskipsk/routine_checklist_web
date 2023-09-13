@@ -50,7 +50,7 @@ class ChecklistService {
     }
 
     public function shouldRun(Checklist $checklist, Unity $unity) {
-        if($checklist->status != Status::ACTIVE || $unity->status != Status::ACTIVE) return false;
+        // if($checklist->status != Status::ACTIVE || $unity->status != Status::ACTIVE) return false;
         return true;
     }
 

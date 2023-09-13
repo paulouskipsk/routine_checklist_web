@@ -28,7 +28,6 @@ class RunRoutineCommand extends Command {
     }
 
     private function executeTaskCreate(Carbon $time, ChecklistService $checklistService){
-        echo "teste";
         $checklistService->processGenerateTasksChecklists();
     }
 

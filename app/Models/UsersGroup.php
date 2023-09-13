@@ -29,9 +29,4 @@ class UsersGroup extends Model {
         return $this->belongsToMany(Checklist::class, 'pivot_chkl_usgr', 'usgr_id', 'chkl_id');
     }
 
-    public function checklistMov(){
-        return $this->belongsToMany(ChecklistMov::class, 'pivot_chmv_usgr', 'usgr_id', 'chmv_id');
-    }
-    
-
 }

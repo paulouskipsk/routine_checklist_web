@@ -21,5 +21,24 @@ class Functions
         return empty($object);
     }
 
-
+    public static function inArray($value, Collection|array $array) {
+        if($value instanceof Collection || is_array($value)){
+            if($array instanceof Collection) {
+                foreach ($value as $val) {
+                    if($array->contains($val)) return true;
+                }
+            }else {
+                foreach ($value as $val) {
+                    if(in_array($val, $array)) return true;
+                }
+            }
+        } else {
+            if($array instanceof Collection) {
+                if($array->contains($value)) return true;
+            }else {
+                if(in_array($value, $array)) return true;
+            }
+        }
+        return false;
+    }
 }
