@@ -10,11 +10,11 @@ return new class extends Migration {
             $table->id();
             $table->string('description', 150)->nullable(false);
             $table->time('generate_time')->nullable(false);
-            $table->string('shelflife')->nullable(false);
+            $table->integer('shelflife')->nullable(false);
             $table->string('frequency',3)->nullable(false);
             $table->string('frequency_composition',150)->nullable(false);
             $table->string('status', 1)->nullable(false);
-            $table->string('is_free', 1)->nullable('S');
+            $table->string('is_free', 1)->nullable('S')->nullable(false);
             $table->timestamp('start_date')->nullable(false);
             $table->timestamp('end_date')->nullable(false);
             $table->integer('user_id')->nullable(true);

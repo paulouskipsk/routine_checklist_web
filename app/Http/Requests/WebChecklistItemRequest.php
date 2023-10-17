@@ -20,13 +20,11 @@ class WebChecklistItemRequest extends FormRequest {
             'shelflife' => 'required|integer',
             'type' => 'required|string|min:1|max:1',
             'shelflife' => 'integer',
+            'type_obs' => ['required', Rule::in(['N', 'O', 'R'])],
             'required_photo' => ['required', Rule::in(['S', 'N'])],
-           'quant_photo' => ['integer', Rule::requiredIf('required_photo' == 'S'), 'min:1'],
-            // 'contain_action_plan' => 'integer',
+            'quant_photo' => ['integer', Rule::requiredIf('required_photo' == 'S'), 'min:1'],
             'chkl_id' => 'integer',
             'sect_id' => 'integer|nullable',
-            // 'hour_min' => 
-            // 'hour_max' => 
         ];
     }
 
@@ -43,7 +41,9 @@ class WebChecklistItemRequest extends FormRequest {
             'frequency_composition.*' => 'A composição de Frequencia é Obrigatória',
             'chkl_type.required' => 'Campo é obrigatório.',
             'chkl_type.min' => 'Permitido apenas 1 caractere.',
-            'chkl_type.max' => 'Permitido apenas 1 caractere.',            
+            'chkl_type.max' => 'Permitido apenas 1 caractere.',  
+            'required_photo.required' => 'Informar se a foto deve ser Obrigatória',
+            'type_obs.required' => 'Informar o comportamento da observação'
         ];
     }
 }

@@ -23,6 +23,7 @@ class ChecklistItem extends Model {
         'hour_min',
         'hour_max',
         'shelflife',
+        'type_obs',
         'required_photo',
         'quant_photo',
         'contain_action_plan',

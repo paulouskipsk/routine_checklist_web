@@ -17,7 +17,10 @@ class UsersSeeder extends Seeder
             'email' => '',
             'login' =>'admin',
             'password' => '123',
-            'status' => 'A'
+            'status' => 'A',
+            'access_admin' => 'S',
+            'access_operator' => 'S',
+            'access_mobile' => 'S',
         ]);
 
         User::create([
@@ -26,7 +29,10 @@ class UsersSeeder extends Seeder
             'email' => '',
             'login' =>'arnaldo',
             'password' => '123',
-            'status' => 'A'
+            'status' => 'A',
+            'access_admin' => 'N',
+            'access_operator' => 'N',
+            'access_mobile' => 'N',
         ]);
 
         User::create([
@@ -35,7 +41,10 @@ class UsersSeeder extends Seeder
             'email' => '',
             'login' =>'super',
             'password' => '123',
-            'status' => 'A'
+            'status' => 'A',
+            'access_admin' => 'S',
+            'access_operator' => 'S',
+            'access_mobile' => 'S',
         ]);
 
         User::create([
@@ -44,7 +53,10 @@ class UsersSeeder extends Seeder
             'email' => '',
             'login' =>'everton',
             'password' => '123',
-            'status' => 'A'
+            'status' => 'A',
+            'access_admin' => 'N',
+            'access_operator' => 'N',
+            'access_mobile' => 'N',
         ]);
 
         User::create([
@@ -53,7 +65,10 @@ class UsersSeeder extends Seeder
             'email' => '',
             'login' =>'everaldo',
             'password' => '123',
-            'status' => 'A'
+            'status' => 'A',
+            'access_admin' => 'N',
+            'access_operator' => 'N',
+            'access_mobile' => 'N',
         ]);
 
         User::create([
@@ -62,7 +77,10 @@ class UsersSeeder extends Seeder
             'email' => '',
             'login' =>'everson',
             'password' => '123',
-            'status' => 'A'
+            'status' => 'A',
+            'access_admin' => 'S',
+            'access_operator' => 'S',
+            'access_mobile' => 'S',
         ]);
 
         User::create([
@@ -71,7 +89,10 @@ class UsersSeeder extends Seeder
             'email' => '',
             'login' =>'cleverson',
             'password' => '123',
-            'status' => 'A'
+            'status' => 'A',
+            'access_admin' => 'N',
+            'access_operator' => 'N',
+            'access_mobile' => 'N',
         ]);
 
         User::create([
@@ -80,7 +101,10 @@ class UsersSeeder extends Seeder
             'email' => '',
             'login' =>'emerson',
             'password' => '123',
-            'status' => 'A'
+            'status' => 'A',
+            'access_admin' => 'N',
+            'access_operator' => 'N',
+            'access_mobile' => 'N',
         ]);
     }
 }

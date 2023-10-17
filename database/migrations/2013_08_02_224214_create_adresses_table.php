@@ -11,14 +11,16 @@ return new class extends Migration {
             $table->id();
             $table->integer('city_id')->nullable(false);
             $table->string('street_name')->nullable(false);
-            $table->integer('number');
-            $table->string('cep', 12);
-            $table->string('neighborhood');
-            $table->string('complement', 100);
+            $table->integer('number')->nullable(false);
+            $table->string('cep', 12)->nullable(false);
+            $table->string('neighborhood')->nullable(false);
+            $table->string('complement', 100)->nullable(true);
             $table->timestamps();
 
             $table->foreign('city_id')->references('id')->on('cities');
             $table->index('cep');
+            $table->index('city_id');
+            $table->index('neighborhood');
         });
     }
 

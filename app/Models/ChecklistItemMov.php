@@ -18,11 +18,10 @@ class ChecklistItemMov extends Model {
     protected $fillable = [
         'id',
         'description',
-        'observation',
         'sequence',
         'score',
         'status',
-        'type',
+        'type',//A/S
         'hour_min',
         'hour_max',
         'shelflife',
@@ -30,6 +29,9 @@ class ChecklistItemMov extends Model {
         'start_date',
         'processed',
         'response',
+        'type_obs',//R=>required/O=>optional/N=>none
+        'required_obs',
+        'observation',
         'required_photo',
         'quant_photo',
         'user_id',

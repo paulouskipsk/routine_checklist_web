@@ -24,6 +24,7 @@ class User extends Authenticatable
         'password',
         'status',
         'access_admin',
+        'access_operator',
         'access_mobile'
     ];
 
