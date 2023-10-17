@@ -17,7 +17,8 @@ return new class extends Migration {
             $table->time('hour_min')->default(null);
             $table->time('hour_max')->default(null);
             $table->bigInteger('shelflife');
-            $table->string('required_photo', 1)->default(false);
+            $table->string('type_obs', 1)->default('N')->nullable(false);
+            $table->string('required_photo', 1)->default('N');
             $table->smallInteger('quant_photo')->default(0)->nullable(false);
             $table->integer('chkl_id')->nullable(false);
             $table->integer('sect_id')->nullable(true);

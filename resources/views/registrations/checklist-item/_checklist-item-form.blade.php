@@ -130,6 +130,28 @@
                             @enderror
                         </div>
 
+                        <div class="col-3 mt-4">
+                            <label for="type_obs">Tipo de Observação<span class="text-danger">*</span></label>
+                            <select id="type_obs" class="form-select 
+                                    @error('type_obs') is-invalid @enderror"
+                                    name="type_obs" required>
+
+                                <option value="R"
+                                    {{ old('type_obs') == 'R' || @$chit->type_obs == 'R' ? 'selected' : '' }}>Obrigatória
+                                </option>
+                                <option value="O"
+                                    {{ old('type_obs') == 'O' || @$chit->type_obs == 'O' ? 'selected' : '' }}>Opcional
+                                </option>
+                                <option value="N"
+                                    {{ old('type_obs') == 'N' || @$chit->type_obs == 'N' ? 'selected' : '' }}>Não disponível
+                                </option>
+                                
+                            </select>
+                            @error('type_obs')
+                                <div class="invalid-feedback">{{ $message }}</div>
+                            @enderror
+                        </div>
+
                         <div class="col-2 mt-4">
                             <label for="hour_min">Hora min.</label>
                             <div class="input-group is-invalid">
@@ -156,7 +178,7 @@
                             @enderror
                         </div>
 
-                        <div class="col-6 mt-4">
+                        <div class="col-5 mt-4">
                             <label for="sect_id">Setor</label>
                             <select id="sect_id" class="form-select @error('sect_id') is-invalid @enderror"
                                 name="sect_id" data-choices="data-choices">
@@ -182,7 +204,7 @@
                         <div class="col-12" id="frequency_composition"></div>
                     </div>
 
-                    <div class="row d-flex justify-content-center mt-5">
+                    <div class="row d-flex justify-content-center m-0 p-0 mt-4">
                         <div class="col-12">
                             <select multiple="multiple" size="{{$unitsChkl != null || sizeof($unitsChkl) < 5 ? 4 : 10}}" name="unitsNoApplicable[]" id="units-no-applicable">
                                 @foreach ($unitsChkl as $unityChkl)

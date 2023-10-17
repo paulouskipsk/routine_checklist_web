@@ -9,21 +9,22 @@ return new class extends Migration {
     public function up(): void{
         Schema::create('checklists_itens_movs', function (Blueprint $table) {
             $table->id();
-            $table->string('description', 150)->nullable(false);
+            $table->string('description', 200)->nullable(false);
             $table->smallInteger('sequence')->nullable(false);
             $table->smallInteger('score')->nullable(false);
             $table->time('hour_min', 8)->nullable();
             $table->time('hour_max', 8)->nullable();
-            $table->string('required_photo', 1)->default('N')->nullable(false);
-            $table->smallInteger('quant_photo')->default(0)->nullable(false);
             $table->string('status', 1)->nullable(false);
-            $table->string('observation', 150)->nullable();
             $table->string('type', 3)->nullable();
             $table->integer('shelflife')->nullable();
             $table->timestamp('end_date')->nullable(false);
             $table->timestamp('start_date')->nullable(false);
             $table->string('processed', 1)->default('N')->nullable(false);
             $table->string('response', 3)->nullable();
+            $table->string('type_obs', 1)->default('N')->nullable(false);
+            $table->string('observation', 150)->nullable();
+            $table->string('required_photo', 1)->default('N')->nullable(false);
+            $table->smallInteger('quant_photo')->default(0)->nullable(false);
             $table->integer('user_id')->nullable();
             $table->integer('chit_id')->nullable(false);
             $table->integer('chmv_id')->nullable(false);
