@@ -1,6 +1,16 @@
 $(document).ready(function() {
     $('#preloader').delay(150).fadeOut();
 
+    $(window).on('resize', function(){
+        if(chartPie != null && chartPie != undefined){
+            chartPie.resize();
+        }
+
+        if(chartBar != null && chartBar != undefined){
+            chartBar.resize();
+        }
+    });
+
 });
 
 function initializeDualListBox(selector, nonSelectedListLabel, selectedListLabel){

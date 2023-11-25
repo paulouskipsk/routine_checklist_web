@@ -32,6 +32,7 @@
     <link href="{{ asset('vendors/template/assets/css/user-rtl.min.css') }}" type="text/css" rel="stylesheet" id="user-style-rtl">
     <link href="{{ asset('vendors/template/assets/css/user.min.css') }}" type="text/css" rel="stylesheet" id="user-style-default">
     <link href="{{ asset('vendors/template/vendors/choices/choices.min.css') }}" type="text/css" rel="stylesheet">
+    <link href="{{ asset('vendors/template/vendors/flatpickr/flatpickr.min.css') }}" type="text/css" rel="stylesheet">
 
     <script src="{{ asset('vendors/sweetAlert/sweetalert2.all.min.js') }}"></script>
     <link href="{{ asset('vendors/dataTables/datatables.min.css') }}" rel="stylesheet">
@@ -57,5 +58,8 @@
             userLinkRTL.setAttribute('disabled', true);
         }
     </script>
+
+
+<script src="https://cdn.jsdelivr.net/npm/echarts@5.4.3/dist/echarts.min.js"></script>
 
 </head>

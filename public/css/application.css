@@ -1,4 +1,5 @@
 
+
 /*Alterações do Template*/
 section {
 	padding: 0px !important;
@@ -80,7 +81,9 @@ table.dataTable tbody th, table.dataTable tbody td {
 
 
 
-
+.select2 {
+    width: 100% !important;
+}
 
 
 .moveall,
@@ -114,14 +117,43 @@ table.dataTable tbody th, table.dataTable tbody td {
 
 
 
-
-
-
-
-
 :root {
 	--white: #ffffff;
 	--red: #b50000;
+}
+
+#container-img-home{
+	opacity: 0.1; 
+	position: absolute;
+	bottom: 0px !important; 
+	right:0px !important;	
+	margin: 0px calc(50% - 15.875rem) !important;
+	height: 80% !important;
+
+
+	/*
+	
+	bottom: 0px !important; 
+	height: var(--img-height) !important;
+	float: none;
+
+	display: flex;
+
+	align-items: self-end	;
+	*/
+
+}
+
+#img-home{
+	height: 100% !important;
+}
+
+.lightgray{
+	color: lightgray !important;
+}
+
+.border-lightgray{
+	border-color: lightgray !important;
 }
 
 div#preloader {

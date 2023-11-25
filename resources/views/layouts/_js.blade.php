@@ -12,6 +12,7 @@
 <script src="{{ asset('vendors/template/assets/js/phoenix.js') }}"></script>
 <script src="{{ asset('vendors/template/vendors/echarts/echarts.min.js') }}"></script>
 <script src="{{ asset('vendors/template/vendors/choices/choices.min.js') }}"></script>
+<script src="{{ asset('vendors/template/vendors/flatpickr/flatpickr.min.css') }}"></script>
 
 <script src="https://unpkg.com/@googlemaps/markerclusterer/dist/index.min.js"></script>
 <script src="https://maps.googleapis.com/maps/api/js?key=AIzaSyARdVcREeBK44lIWnv5-iPijKqvlSAVwbw&callback=revenueMapInit" async></script>

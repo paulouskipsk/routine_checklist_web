@@ -15,7 +15,7 @@ class ChecklistItemController extends ControllerWeb {
     private $breadcrumbs = [['url'=> '/checklist/listar','label' => 'Listar Checklists','active'=>true]];
 
     public function index(Request $request){
-        $this->breadcrumbs[] = ['url'=> "/checklist-item/listar/checklist/$request->chkl_id",'label' => 'Listar Itens do Checklist','active'=>false];
+        $this->breadcrumbs[] = ['url'=> "/checklist-item/listar/checklist/$request->chkl_id",'label' => 'Listar Pergunta do Checklist','active'=>false];
         $breadcrumbs = $this->breadcrumbs;
         $itensChecklists = ChecklistItem::whereChklId($request->chkl_id)->orderBy('sequence')->get();
         $chkl_id = $request->chkl_id;
@@ -26,7 +26,7 @@ class ChecklistItemController extends ControllerWeb {
 
     public function create(Request $request){
         $this->breadcrumbs = [
-            ['url'=> "/checklist-item/listar/checklist/$request->chkl_id",'label' => 'Listar Itens do Checklist','active'=>true],
+            ['url'=> "/checklist-item/listar/checklist/$request->chkl_id",'label' => 'Listar Perguntas do Checklist','active'=>true],
             ['url'=> '', 'label' => 'Novo','active'=>false]
         ];
         $breadcrumbs = $this->breadcrumbs;
@@ -56,7 +56,7 @@ class ChecklistItemController extends ControllerWeb {
     public function edit(Request $request){
         $chit = ChecklistItem::firstWhere('id',$request->id);
         $this->breadcrumbs = [
-            ['url'=> "/checklist-item/listar/checklist/$chit->chkl_id",'label' => 'Listar Itens do Checklist','active'=>true],
+            ['url'=> "/checklist-item/listar/checklist/$chit->chkl_id",'label' => 'Listar Perguntas do Checklist','active'=>true],
             ['url'=> '', 'label' => 'Editar','active'=>false]
         ];
         $breadcrumbs = $this->breadcrumbs;

@@ -10,11 +10,9 @@ use Illuminate\Support\Facades\Request;
 class ChecklistControllerApi extends ControllerApi {
 
     public function getChecklistsByUser(Request $request){
-        // $response
-        // $user = Auth::user();
-        // $checklists = Checklist::with('usersGroups',)
-        //                         ->whereStatus(Status::ACTIVE)
-        //                        ->get();
+        $checklists = Checklist::whereStatus(Status::ACTIVE)
+                               ->get();
+            return $this->responseOk("ok", ['checklists' => $checklists]);
     }
 
 

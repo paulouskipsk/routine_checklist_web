@@ -79,15 +79,8 @@
         </div>
     </div>
 
-
-
-
     <div class="text-primary mt-5">Endereço</div>
     <hr />
-
-
-
-
 
     <div class="row d-flex justify-content-center mt-4">
         <div class="col-5">

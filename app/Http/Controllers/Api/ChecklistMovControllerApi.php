@@ -16,7 +16,7 @@ class ChecklistMovControllerApi extends ControllerApi {
         try {
             $user = Auth::user();
             $checklistsMovs = ChecklistMov::with('checklist.usersGroups')
-                                          ->whereUnitId($request->unity_id)
+                                         // ->whereUnitId($request->unity_id)
                                           ->whereStatus(Status::ACTIVE)
                                           ->where('end_date', '>', Carbon::now()->format('Y-m-d H:i:s'))
                                           ->get();
