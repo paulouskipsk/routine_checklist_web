@@ -23,7 +23,21 @@ class ApiAuthController extends ControllerApi
         }
     }
 
-    public function user(Request $request){
-        $user = Auth::user();
+    public function user(){
+        try {
+            $user = Auth::user();
+            return $this->responseOk("Usuário autenticado recuperado com sucesso.", ['user' => $user]);
+        } catch (\Throwable $th) {
+            return $this->responseError("Erro ao recuperar usuário autenticado");
+        }
+    }
+
+    public function logout(Request $request){
+        try {
+            Auth::logout();
+            return $this->responseOk("Usuário deslogado com sucesso.");
+        } catch (\Throwable $th) {
+            return $this->responseError("Erro ao deslogar usuário autenticado");
+        }
     }
 }

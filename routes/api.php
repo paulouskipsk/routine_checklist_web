@@ -13,11 +13,11 @@ Route::group(['prefix' => 'checklistmov'], function () {
 
 
 Route::group(['prefix' => 'auth'], function () {
-    Route::post('authenticate', [ApiAuthController::class, 'authenticate']);
+    Route::post('authenticate', [ApiAuthController::class, 'authenticate'])->name('authenticate');
     
     Route::group(['middleware' => 'auth:sanctum'], function () {
-        Route::get('logout', 'Api\ApiAuthenticationController@logout')->name('logout');
-        Route::get('user', 'Api\ApiAuthenticationController@user')->name('user-authenticated');
+        Route::get('logout/{user_id}', [ApiAuthController::class, 'logout'])->name('logout');
+        Route::get('user', [ApiAuthController::class, 'user'])->name('user-authenticated');
     });
 });
 
