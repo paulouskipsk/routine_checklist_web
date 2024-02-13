@@ -38,6 +38,7 @@ class ChecklistItemMov extends Model {
         'chit_id',
         'chmv_id',
         'sect_id',
+        'photos'
     ];
     
     protected $casts = [
@@ -51,7 +52,8 @@ class ChecklistItemMov extends Model {
         'chit_id'=> 'integer',
         'sect_id' => 'integer',
         'user_id' => 'integer',
-        'quant_photo' => 'integer'
+        'quant_photo' => 'integer',
+        'photos' => 'array',
     ];
 
     public function checklistMov(): BelongsTo {

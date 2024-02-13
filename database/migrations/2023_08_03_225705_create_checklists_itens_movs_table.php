@@ -29,6 +29,7 @@ return new class extends Migration {
             $table->integer('chit_id')->nullable(false);
             $table->integer('chmv_id')->nullable(false);
             $table->integer('sect_id')->nullable();
+            $table->json('photos')->nullable();
 
             $table->timestamps();
 
