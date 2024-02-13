@@ -39,6 +39,7 @@ class ChecklistItemService {
         $chim->quant_photo = $checklistItem->quant_photo;
         $chim->sect_id = $checklistItem->sect_id;
         $chim->chit_id = $checklistItem->id;
+        $chim->type_obs = $checklistItem->type_obs;
         $chim->chmv_id = $checklistMov->id;
 
         $chim->hour_min = Functions::nullOrEmpty($checklistItem->hour_min) ? '00:00': $checklistItem->hour_min;
