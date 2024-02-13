@@ -14,6 +14,7 @@ return new class extends Migration {
             $table->string('frequency',3)->nullable(false);
             $table->string('frequency_composition',150)->nullable(false);
             $table->string('status', 1)->nullable(false);
+            $table->string('processed', 1)->nullable(false);
             $table->string('is_free', 1)->nullable('S')->nullable(false);
             $table->timestamp('start_date')->nullable(false);
             $table->timestamp('end_date')->nullable(false);

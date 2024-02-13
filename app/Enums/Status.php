@@ -12,6 +12,7 @@ enum Status: string {
     case CANCELED = 'c';
     case BLOCKED = 'B';
     case NORMAL = 'N';
+    case CLOSED = 'F';
 
     public function description(): string {
         return static::getDescription($this->value);
@@ -23,7 +24,8 @@ enum Status: string {
             'I' => 'Inativo',
             'C' => 'Cancelado',
             'B' => 'Bloqueado',
-            'N' => 'Normal'
+            'N' => 'Normal',
+            'F' => 'Fechado'
         };
     }
 }

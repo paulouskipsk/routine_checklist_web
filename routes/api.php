@@ -17,22 +17,18 @@ Route::group(['prefix' => 'auth'], function () {
     });
 });
 
+Route::get('/checklistmov/with-itens/{id}', [ChecklistMovControllerApi::class, 'getChecklistMovByIdWithItens']);
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
 
     Route::group(['prefix' => 'checklistmov'], function () {
         Route::get('/by-user', [ChecklistMovControllerApi::class, 'getChecklistsMovByUser']);
+        
+        
     });
 
     Route::group(['prefix' => 'checklistitemmov'], function () {
         Route::get('/by-checklistmov', [ChecklistItemMovControllerApi::class, 'getChecklistsItensMovs']);
-    });
-
-    Route::group(['prefix' => 'checklistmov'], function () {
-        Route::get('/by-user', [ChecklistMovControllerApi::class, 'getChecklistsMovByUser']);
-    });
-    
-    Route::group(['prefix' => 'checklistitemmov'], function () {
         Route::put('/{chim_id}', [ChecklistItemMovControllerApi::class, 'responseChecklistItemMov'])->name('update_response');
     });
 });

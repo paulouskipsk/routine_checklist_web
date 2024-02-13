@@ -76,6 +76,7 @@ class ChecklistService {
         $checklistMov->chkl_id = $checklist->id;
         $checklistMov->unit_id = $unity->id;
         $checklistMov->is_free = 'S';
+        $checklistMov->processed = 'N';
 
         return $checklistMov;
     }

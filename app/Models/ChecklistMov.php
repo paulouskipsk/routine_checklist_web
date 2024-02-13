@@ -23,6 +23,7 @@ class ChecklistMov extends Model {
         'frequency',
         'frequency_composition',
         'status',
+        'processed',
         'is_free',
         'start_date',
         'end_date',

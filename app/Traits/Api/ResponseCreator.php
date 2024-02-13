@@ -16,7 +16,7 @@ trait ResponseCreator
     {
         return response()->json([
             "status" => $status,
-            "status-code" => $statusCode,
+            "status_code" => $statusCode,
             "message" => $message,
             "payload" => $payload,
             "errors" => $erros
@@ -25,7 +25,7 @@ trait ResponseCreator
 
     /**
      * Método específico para retorno de Response padrão no sistema quando a requisição é sucesso.
-     * as informações: status = true, status-code = 200, errors = [], são enviados com os valores pré definidos.
+     * as informações: status = true, status_code = 200, errors = [], são enviados com os valores pré definidos.
      * @param string $message Mensagem de será exibida para o usuário.
      * @param array $payload Carga útil que será enviado na requisição com as informações requeridas (array associativo).
      * @return Json formatado com response padrão para o sistema.
@@ -34,7 +34,7 @@ trait ResponseCreator
     {
         return response()->json([
             "status" => true,
-            "status-code" => 200,
+            "status_code" => 200,
             "message" => $message,
             "payload" => $payload,
             "errors" => []
@@ -43,7 +43,7 @@ trait ResponseCreator
 
      /**
      * Método específico para retorno de Response padrão no sistema quando a requisição é falha.
-     * as informações: status = false, status-code = 400, payload = [] são enviados com valores pré definidos.
+     * as informações: status = false, status_code = 400, payload = [] são enviados com valores pré definidos.
      * @param string $message Mensagem de será exibida para o usuário.
      * @param array $payload Carga útil que será enviado na requisição com as informações requeridas (array associativo).
      * @return Json formatado com response padrão para o sistema.
@@ -52,7 +52,7 @@ trait ResponseCreator
     {
         return response()->json([
             "status" => false,
-            "status-code" => 400,
+            "status_code" => 400,
             "message" => $message,
             "payload" => $payload,
             "errors" => empty($erros) ? [$message] : $erros

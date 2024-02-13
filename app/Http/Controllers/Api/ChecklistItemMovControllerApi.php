@@ -5,6 +5,8 @@ namespace App\Http\Controllers\Api;
 use App\Enums\Status;
 use App\Models\ChecklistItem;
 use App\Models\ChecklistItemMov;
+use App\Services\ChecklistItemMovService;
+use App\Services\ChecklistMovService;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
 use Illuminate\Http\Request;
@@ -29,27 +31,22 @@ class ChecklistItemMovControllerApi extends ControllerApi {
 
     public function responseChecklistItemMov(Request $request){
         try {
+            $serv = new ChecklistItemMovService();
+            $checklistItemMov = $serv->answerQuestion($request, Auth::user());
 
-            // $errors = new Collection();
-            // if(empty($request->observation)) $errors[] = "Campo 'observation' não informado.";
-            // if(empty($request->response)) $errors[] = "Campo 'response' não informado.";
-            // if(empty($request->photos)) $errors[] = "Campo 'photos' não informado.";
-            // if(empty($request->id)) $errors[] = "Campo 'id' não informado.";
-
-            // if(!empty($errors)) throw new Exception($errors);
-
-            $checklistItemMov = checklistItemMov::find($request->id);
-            $checklistItemMov->observation = $request->observation;
-            $checklistItemMov->response = $request->response;
-            $checklistItemMov->photos = $request->photos;
-            $checklistItemMov->user_id = Auth::user()->id;
-            $checklistItemMov->save();
-
-            $checklistItemMov->load('sector');
+            $itensPendentes = ChecklistItemMov::where('chmv_id', $checklistItemMov->chmv_id)
+                                                ->where('processed', 'N')
+                                                ->where('status', 'A')
+                                                ->count();
+            if($itensPendentes == 0){
+                $checklistMovServ = new ChecklistMovService();
+                $checklistMovServ->closeChecklistMov($checklistItemMov->checklistMov);
+                return $this->response(true, 201, "Todas as perguntas foram respondidas, Checklist finalizado, Parabéns!");
+            }
 
             return $this->responseOk("Resposta $request->id, gravada com sucesso.", ['checklistItemMov'=> $checklistItemMov]);
         } catch (\Throwable $th) {
-            return $this->responseError("Erro ao gravar resposta da pergunta $request->id.", json_decode($th->getMessage()));
+            return $this->responseError("Erro ao gravar resposta da pergunta $request->id.". $th->getMessage());
         }
     }
 

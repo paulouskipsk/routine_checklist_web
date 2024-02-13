@@ -57,7 +57,7 @@ class ChecklistItemMov extends Model {
     ];
 
     public function checklistMov(): BelongsTo {
-        return $this->belongsTo(ChecklistMov::class, 'id', 'chmv_id');
+        return $this->belongsTo(ChecklistMov::class, 'chmv_id', 'id');
     }
 
     public function checklistItem(): BelongsTo {
