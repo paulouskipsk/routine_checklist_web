@@ -50,6 +50,8 @@ Route::group(['middleware' => ['auth']], function () {
     Route::group(['prefix' => 'checklist-item'], function () {
         Route::get('listar/checklist/{chkl_id}', [ChecklistItemController::class, 'index'])->name('checklist_item_list');
         Route::get('novo/checklist/{chkl_id}', [ChecklistItemController::class, 'create'])->name('checklist_item_create');
+        Route::get('gerar/checklist/{chkl_id}', [ChecklistItemController::class, 'generate'])->name('checklist_generate');
+
         Route::post('salvar/', [ChecklistItemController::class, 'store'])->name('checklist_item_store');
         Route::get('editar/{id}', [ChecklistItemController::class, 'edit'])->name('checklist_item_edit');
         Route::put('atualizar/{id}', [ChecklistItemController::class, 'update'])->name('checklist_item_update');

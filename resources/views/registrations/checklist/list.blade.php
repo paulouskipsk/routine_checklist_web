@@ -50,6 +50,10 @@
                                     <i class="far fa-edit"></i>
                                     Editar Perguntas
                                 </a>
+                                <a class="dropdown-item text-secondary" href="{{ route('checklist_generate', $checklist->id ) }}">
+                                    <i class="fas fa-cog"></i>
+                                    Gerar Tarefa
+                                </a>
                                 <div class="dropdown-divider"></div>
                                 <a class="dropdown-item text-danger" href="{{ route('checklist_delete', $checklist->id ) }}">
                                     <i class="far fa-trash-alt"></i>

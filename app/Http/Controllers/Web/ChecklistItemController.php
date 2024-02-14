@@ -6,6 +6,8 @@ use App\Http\Requests\WebChecklistItemRequest;
 use App\Models\Checklist;
 use App\Models\ChecklistItem;
 use App\Models\Sector;
+use App\Services\ChecklistMovService;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
@@ -37,6 +39,35 @@ class ChecklistItemController extends ControllerWeb {
         $unitsChkl = (Checklist::with('units')->find($request->chkl_id))->units;
 
         return view('registrations.checklist-item.new', compact('breadcrumbs', 'action', 'method', 'sectors', 'chkl_id', 'unitsChkl'));
+    }
+
+    public function generate(Request $request){
+        // $this->breadcrumbs = [
+        //     ['url'=> "/checklist-item/listar/checklist/$request->chkl_id",'label' => 'Listar Perguntas do Checklist','active'=>true],
+        //     ['url'=> '', 'label' => 'Novo','active'=>false]
+        // ];
+        // $breadcrumbs = $this->breadcrumbs;
+        // $action = "/checklist-item/salvar";
+        // $method = 'post';
+        // $chkl_id = $request->chkl_id;
+        // $sectors = Sector::whereStatus('A')->get();
+        // $unitsChkl = (Checklist::with('units')->find($request->chkl_id))->units;
+
+        // return view('registrations.checklist-item.new', compact('breadcrumbs', 'action', 'method', 'sectors', 'chkl_id', 'unitsChkl'));
+
+        try {
+            $serv = new ChecklistMovService();
+            $checklist = Checklist::find($request->chkl_id);
+            if(!$checklist) throw new Exception("Checklist '$request->chkl_id' Não encontrado");
+            $serv->generateChecklistMov($checklist);
+
+            Session::flash('flash-success-msg', "Tarefas para o checklist $request->chkl_id, geradas com sucesso.");
+        } catch (\Throwable $th) {
+            Session::flash('flash-error-msg', "Não foi possível gerar as tarefas para o checklist $request->chkl_id.". $th->getMessage());
+            //throw $th;
+        }finally{
+            return Redirect::back();
+        }        
     }
 
     public function store(WebChecklistItemRequest $request){

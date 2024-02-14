@@ -27,14 +27,14 @@ class ChecklistMovControllerApi extends ControllerApi {
                 if(Functions::inArray($user->usersGroups, $checklistMov->checklist->usersGroups)){
                     $checklistMov->total_questions = ChecklistItemMov::whereChmvId($checklistMov->id)->count();
                     $checklistMov->total_answered = ChecklistItemMov::whereChmvId($checklistMov->id)->whereProcessed('S')->count();
-                    $checklistMov->percentage_processed = ($checklistMov->total_answered / $checklistMov->total_questions ) * 100;
+                    $checklistMov->percentage_processed = $checklistMov->total_answered == 0 ? 0 : ($checklistMov->total_answered / $checklistMov->total_questions ) * 100;
                     array_push($response, $checklistMov);
                 }
             }
 
             return $this->responseOk("Tarefas de Checklist Pesquisados com sucesso.", ['checklistsMovs'=> $response]);
         } catch (\Throwable $th) {
-            return $this->responseError("Erro ao Buscar Tarefas de Checklist"+ $th->getMessage());
+            return $this->responseError("Erro ao Buscar Tarefas de Checklist". $th->getMessage());
         }
     }
 
