@@ -25,12 +25,13 @@ class User extends Authenticatable
         'status',
         'access_admin',
         'access_operator',
-        'access_mobile'
+        'access_mobile',
     ];
 
     protected $hidden = [
         'password',
         'remember_token',
+        'unity_logged'
     ];
 
     protected $casts = [

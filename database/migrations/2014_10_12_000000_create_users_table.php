@@ -19,8 +19,11 @@ return new class extends Migration {
             $table->string('access_mobile',1)->default('N')->nullable(false);
             $table->string('access_operator',1)->default('N')->nullable(false);
             $table->timestamp('email_verified_at')->nullable();
+            $table->integer('unity_logged')->nullable(true);
             $table->timestamps();
             $table->rememberToken();
+
+            $table->foreign('unity_logged')->references('id')->on('units');
 
             $table->index('login');
             $table->index('name');

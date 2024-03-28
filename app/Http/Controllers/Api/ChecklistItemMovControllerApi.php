@@ -44,6 +44,7 @@ class ChecklistItemMovControllerApi extends ControllerApi {
                 return $this->response(true, 201, "Todas as perguntas foram respondidas, Checklist finalizado, Parabéns!");
             }
 
+            $checklistItemMov->load('sector');
             return $this->responseOk("Resposta $request->id, gravada com sucesso.", ['checklistItemMov'=> $checklistItemMov]);
         } catch (\Throwable $th) {
             return $this->responseError("Erro ao gravar resposta da pergunta $request->id.". $th->getMessage());

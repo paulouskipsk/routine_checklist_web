@@ -3,7 +3,9 @@
 namespace App\Http\Controllers\Api;
 
 use App\Http\Controllers\Api\ControllerApi;
+use App\Models\Unity;
 use App\Models\User;
+use App\Utils\Functions;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -17,9 +19,28 @@ class ApiAuthController extends ControllerApi
                 return $this->response(false, 401, "Login ou senha não conferem");
             
             $user = User::where('login', $request->login)->first();
-            return $this->responseOk("Seja bem vindo, $user->name.", ['token'=>$user->createToken("API TOKEN")->plainTextToken]);
+            $unity = Unity::find($request->unity);
+
+            if(!$user->units->contains($unity))
+                throw new Exception("Usuário não tem acesso a esta unidade!");
+            $user->unity_logged = $unity->id;
+            $user->save();
+
+            return $this->responseOk("Seja bem vindo, $user->name.", ['token'=>$user->createToken("API TOKEN")->plainTextToken, 'unity'=>$unity, 'user'=>$user]);
         } catch (\Throwable $th) {
             return $this->responseError("Erro ao efetuar login: "+ $th->getMessage());
+        }
+    }
+
+    public function getUserDataByCredentials(Request $request){
+        try {
+            if(!Auth::attempt($request->only(['login', 'password'])))
+                return $this->response(false, 401, "Login ou senha não conferem");
+            
+            $user = User::where('login', $request->login)->first();
+            return $this->responseOk("Usuário recuperado com sucesso", ['user'=>$user, 'units'=>$user->units]);
+        } catch (\Throwable $th) {
+            return $this->responseError("Erro ao efetuar buscar usuário com login e senha. Erro; "+ $th->getMessage());
         }
     }
 
