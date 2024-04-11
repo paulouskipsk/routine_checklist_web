@@ -10,6 +10,7 @@ use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
+use Throwable;
 
 class ApiAuthController extends ControllerApi
 {
@@ -27,8 +28,13 @@ class ApiAuthController extends ControllerApi
             $user->save();
 
             return $this->responseOk("Seja bem vindo, $user->name.", ['token'=>$user->createToken("API TOKEN")->plainTextToken, 'unity'=>$unity, 'user'=>$user]);
-        } catch (\Throwable $th) {
-            return $this->responseError("Erro ao efetuar login: "+ $th->getMessage());
+        } catch (Throwable $th) {
+            return $this->responseError("Erro ao efetuar login: ". $th->getMessage(), [
+                'message'=>$th->getMessage(),
+                'file'=>$th->getFile(),
+                'line'=>$th->getLine(),
+                'stack'=>$th->getTraceAsString()
+            ]);
         }
     }
 
