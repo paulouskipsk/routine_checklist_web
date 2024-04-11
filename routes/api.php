@@ -18,13 +18,15 @@ Route::group(['prefix' => 'auth'], function () {
     });
 });
 
-Route::get('/checklistmov/with-itens/{id}', [ChecklistMovControllerApi::class, 'getChecklistMovByIdWithItens']);
 
 Route::group(['middleware' => 'auth:sanctum'], function () {
-
+    
     Route::group(['prefix' => 'checklistmov'], function () {
+        Route::get('/with-itens/{id}', [ChecklistMovControllerApi::class, 'getChecklistMovByIdWithItens']);
         Route::get('/by-user', [ChecklistMovControllerApi::class, 'getChecklistsMovByUser']);
-        
+        Route::put('/associate-checklistmov', [ChecklistMovControllerApi::class, 'associateChecklistMov']);
+        Route::put('/disassociate-checklistmov', [ChecklistMovControllerApi::class, 'disassociateChecklistMov']);
+
         
     });
 

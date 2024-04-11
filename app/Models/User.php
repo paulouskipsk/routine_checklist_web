@@ -52,6 +52,10 @@ class User extends Authenticatable
         return $this->belongsToMany(Unity::class, 'pivot_user_unit', 'user_id', 'unit_id');
     }
 
+    public function unityLogged(){
+        return $this->hasOne(Unity::class,'id', 'unity_logged');
+    }
+
     public function usersGroups(){
         return $this->belongsToMany(UsersGroup::class, 'pivot_usgr_user', 'user_id', 'usgr_id');
     }

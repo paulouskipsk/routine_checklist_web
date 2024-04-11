@@ -7,6 +7,7 @@ use App\Models\ChecklistItemMov;
 use App\Models\ChecklistMov;
 use App\Utils\Functions;
 use Carbon\Carbon;
+use Exception;
 use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
@@ -16,23 +17,46 @@ class ChecklistMovControllerApi extends ControllerApi {
     public function getChecklistsMovByUser(Request $request){
         try {
             $user = Auth::user();
-            $checklistsMovs = ChecklistMov::with('checklist.usersGroups')
-                                         // ->whereUnitId($request->unity_id)
+            $unity = $user->unityLogged;
+            //Buscar Tarefas livres executáveis
+            $freeChecklistsMovsData = ChecklistMov::with('checklist.usersGroups')
+                                          ->whereUnitId($unity->id)
                                           ->whereStatus(Status::ACTIVE)
+                                          ->whereIs_free("S")
+                                          ->whereProcessed('N')
+                                          ->where('end_date', '>', Carbon::now()->format('Y-m-d H:i:s'))
+                                          ->get();
+            //Buscar Tarefas do usuário executáveis
+            $userChecklistsMovsData = ChecklistMov::with('checklist.usersGroups')
+                                          ->whereUnitId($unity->id)
+                                          ->whereStatus(Status::ACTIVE)
+                                          ->whereIs_free("N")
+                                          ->whereUserId($user->id)
+                                          ->whereProcessed('N')
                                           ->where('end_date', '>', Carbon::now()->format('Y-m-d H:i:s'))
                                           ->get();
             
-            $response = [];
-            foreach ($checklistsMovs as $checklistMov) {
+            $freeChecklistsMovs = [];
+            foreach ($freeChecklistsMovsData as $checklistMov) {
                 if(Functions::inArray($user->usersGroups, $checklistMov->checklist->usersGroups)){
                     $checklistMov->total_questions = ChecklistItemMov::whereChmvId($checklistMov->id)->count();
                     $checklistMov->total_answered = ChecklistItemMov::whereChmvId($checklistMov->id)->whereProcessed('S')->count();
                     $checklistMov->percentage_processed = $checklistMov->total_answered == 0 ? 0 : ($checklistMov->total_answered / $checklistMov->total_questions ) * 100;
-                    array_push($response, $checklistMov);
+                    array_push($freeChecklistsMovs, $checklistMov);
                 }
             }
 
-            return $this->responseOk("Tarefas de Checklist Pesquisados com sucesso.", ['checklistsMovs'=> $response]);
+            $userChecklistsMovs = [];
+            foreach ($userChecklistsMovsData as $checklistMov) {
+                if(Functions::inArray($user->usersGroups, $checklistMov->checklist->usersGroups)){
+                    $checklistMov->total_questions = ChecklistItemMov::whereChmvId($checklistMov->id)->count();
+                    $checklistMov->total_answered = ChecklistItemMov::whereChmvId($checklistMov->id)->whereProcessed('S')->count();
+                    $checklistMov->percentage_processed = $checklistMov->total_answered == 0 ? 0 : ($checklistMov->total_answered / $checklistMov->total_questions ) * 100;
+                    array_push($userChecklistsMovs, $checklistMov);
+                }
+            }
+
+            return $this->responseOk("Tarefas de Checklist Pesquisados com sucesso.", ['freeChecklistsMovs'=> $freeChecklistsMovs, 'userChecklistsMovs'=>$userChecklistsMovs]);
         } catch (\Throwable $th) {
             return $this->responseError("Erro ao Buscar Tarefas de Checklist". $th->getMessage());
         }
@@ -50,6 +74,33 @@ class ChecklistMovControllerApi extends ControllerApi {
             return $this->responseOk("Tarefa de Checklist Pesquisado com sucesso.", ['checklistMov'=> $checklistMov]);
         } catch (\Throwable $th) {
             return $this->responseError("Erro ao Buscar Tarefa de Checklist". $th->getMessage());
+        }
+    }
+
+    public function associateChecklistMov(Request $request){
+        try {           
+            $checklistMov = ChecklistMov::find($request->checklistMovId);
+            if(!$checklistMov) throw new Exception("ChecklistMov não encontrado com o código '$request->checklistMovId'");
+            $user = Auth::user();
+            $checklistMov->user_id = $user->id;
+            $checklistMov->is_free = 'N';
+            $checklistMov->save();
+            return $this->responseOk("Checklist Associado ao usuário '$user->name'  com sucesso.", ['checklistMov'=>$checklistMov]);
+        } catch (\Throwable $th) {
+            return $this->responseError($th->getMessage());
+        }
+    }
+
+    public function disassociateChecklistMov(Request $request){
+        try {           
+            $checklistMov = ChecklistMov::find($request->checklistMovId);
+            if(!$checklistMov) throw new Exception("ChecklistMov não encontrado com o código '$request->checklistMovId'");
+            $checklistMov->user_id = null;
+            $checklistMov->is_free = 'S';
+            $checklistMov->save();
+            return $this->responseOk("Checklist liberado com sucesso.", ['checklistMov'=>$checklistMov->refresh()]);
+        } catch (\Throwable $th) {
+            return $this->responseError($th->getMessage());
         }
     }
 
