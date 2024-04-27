@@ -7,6 +7,7 @@ use App\Models\Checklist;
 use App\Models\ChecklistItem;
 use App\Models\ChecklistItemMov;
 use App\Models\ChecklistMov;
+use Illuminate\Support\Collection;
 
 class ChecklistMovService {
 
@@ -20,14 +21,16 @@ class ChecklistMovService {
         }
     }
 
-    public function generateChecklistMov(Checklist $checklist){
+    public function generateChecklistMov(Checklist $checklist, Collection $units){
         try {
             $checklistService = new ChecklistService();
             $checklistItemService = new ChecklistItemService();
-            foreach ($checklist->units as $unity) {
-                $checklistMov = $checklistService->InitializeChecklistMov($checklist, $unity);
-                $checklistMov->save();
-                $checklistItemService->initializeChecklistItensMovs($checklistMov);
+            foreach ($units as $unity) {
+                if($checklist->units->contains($unity)){
+                    $checklistMov = $checklistService->InitializeChecklistMov($checklist, $unity);
+                    $checklistMov->save();
+                    $checklistItemService->initializeChecklistItensMovs($checklistMov);
+                }
             }            
         } catch (\Throwable $th) {
             throw $th;

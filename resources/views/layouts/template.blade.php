@@ -12,7 +12,7 @@
                     
                 <div id="status">&nbsp;</div>
                 <div class="loader">
-                        Carregando
+                        <span id="text-preloader">Carregando</span>
                         <div class="dot-carousel"></div>
                 </div>
             </div>

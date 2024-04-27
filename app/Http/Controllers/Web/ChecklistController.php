@@ -7,21 +7,31 @@ use App\Http\Requests\WebChecklistRequest;
 use App\Models\Checklist;
 use App\Models\ChklClassification;
 use App\Models\Unity;
-use App\Models\UserGroup;
 use App\Models\UsersGroup;
 use App\Utils\Functions;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
+use App\Services\ChecklistMovService;
+use App\Traits\Api\ResponseCreator;
+use Exception;
+use Illuminate\Support\Facades\DB;
 
 class ChecklistController extends ControllerWeb {
+    use ResponseCreator;
     private $breadcrumbs = [['url'=> '/checklist/listar','label' => 'Listar Checklists','active'=>true]];
 
     public function index(){
         $breadcrumbs = [['url'=> '/checklist/listar','label' => 'Listar Checklists','active'=>false]];
         $checklists = Checklist::all();
-        return view('registrations.checklist.list', compact(['breadcrumbs', 'checklists']));
+        $units = [];
+        foreach (Unity::whereStatus(Status::ACTIVE)->get() as $unity) {
+            $units[$unity->id] = $unity;
+        }
+        $units = collect($units);
+        Unity::whereStatus(Status::ACTIVE)->get();
+        return view('registrations.checklist.list', compact(['breadcrumbs', 'checklists', 'units']));
     }
 
     public function create(){
@@ -84,6 +94,24 @@ class ChecklistController extends ControllerWeb {
             Session::flash('flash-error-msg', "Erro ao atualizar o Checklist $request->id.");
         }
         return Redirect::back()->with($request->all());
+    }
+
+    public function generateTasks(Request $request){
+        try {
+            DB::beginTransaction();
+            $units = Unity::find($request->units);
+            $checklist = Checklist::find($request->checklistId);
+
+            $serv = new ChecklistMovService();
+            if(!$checklist) throw new Exception("Checklist '$request->chkl_id' Não encontrado");
+            $serv->generateChecklistMov($checklist, $units);
+            DB::commit();
+
+            return $this->responseOk("Tarefas para o checklist $checklist->id, geradas com sucesso.");
+        } catch (\Throwable $th) {
+            DB::rollBack();
+            return $this->responseError("Não foi possível gerar as tarefas para o checklist $request->chkl_id.". $th->getMessage());
+        }      
     }
 
 }
