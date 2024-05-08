@@ -13,7 +13,7 @@ return new class extends Migration {
             $table->string('lastname', 200)->nullable(true);
             $table->string('email')->nullable(true);
             $table->string('login', 20)->nullable(false);
-            $table->string('password', 64)->nullable(false);
+            $table->string('password', 64)->nullable(true);
             $table->string('status',1)->default('I')->nullable(false);
             $table->string('access_admin',1)->default('N')->nullable(false);
             $table->string('access_mobile',1)->default('N')->nullable(false);

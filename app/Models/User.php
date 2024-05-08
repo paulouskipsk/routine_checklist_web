@@ -4,7 +4,6 @@ namespace App\Models;
 
 // use Illuminate\Contracts\Auth\MustVerifyEmail;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
-use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
@@ -39,6 +38,30 @@ class User extends Authenticatable
         'email_verified_at' => 'datetime',
         'password' => 'hashed',
     ];
+
+    public function setAccessAdminAttribute($value) {
+        if ($value == 'on' || $value == 'S') {
+            $this->attributes['access_admin'] = 'S';
+        } else if (is_string($value)) {
+            $this->attributes['access_admin'] = 'N';
+        }
+    }
+
+    public function setAccessOperatorAttribute($value) {
+        if ($value == 'on' || $value == 'S') {
+            $this->attributes['access_operator'] = 'S';
+        } else if (is_string($value)) {
+            $this->attributes['access_operator'] = 'N';
+        }
+    }
+
+    public function setAccessMobileAttribute($value) {
+        if ($value == 'on' || $value == 'S') {
+            $this->attributes['access_mobile'] = 'S';
+        } else if (is_string($value)) {
+            $this->attributes['access_mobile'] = 'N';
+        }
+    }
 
     public function checklists(): HasMany {
         return $this->hasMany(Checklist::class, 'id', 'changed_by_user');

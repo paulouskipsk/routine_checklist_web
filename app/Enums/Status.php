@@ -9,10 +9,11 @@ enum Status: string {
 
     case ACTIVE = 'A';
     case INACTIVE = 'I';
-    case CANCELED = 'c';
+    case CANCELED = 'C';
     case BLOCKED = 'B';
     case NORMAL = 'N';
     case CLOSED = 'F';
+    case CLOSED_BY_SYSTEM = 'S';
 
     public function description(): string {
         return static::getDescription($this->value);
