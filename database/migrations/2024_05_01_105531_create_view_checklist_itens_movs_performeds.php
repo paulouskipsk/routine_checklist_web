@@ -51,7 +51,7 @@ return new class extends Migration {
             .' from checklists_movs chmv '
             .'      left join checklists_itens_movs chim on chim.chmv_id = chmv.id '
             .'      left join sectors sect on sect.id = chim.sect_id  '
-            .'      left join checklists_itens chit on chit.id = chim_chit_id ';
+            .'      left join checklists_itens chit on chit.id = chim.chit_id ';
             
         DB::statement("CREATE OR REPLACE VIEW view_checklist_itens_movs_performeds AS $SQL");
     }
