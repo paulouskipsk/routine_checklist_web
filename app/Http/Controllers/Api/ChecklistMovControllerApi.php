@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Api;
 use App\Enums\Status;
 use App\Models\ChecklistItemMov;
 use App\Models\ChecklistMov;
+use App\Services\ChecklistMovService;
 use App\Utils\Functions;
 use Carbon\Carbon;
 use Exception;
@@ -101,6 +102,28 @@ class ChecklistMovControllerApi extends ControllerApi {
             return $this->responseOk("Checklist liberado com sucesso.", ['checklistMov'=>$checklistMov->refresh()]);
         } catch (\Throwable $th) {
             return $this->responseError($th->getMessage());
+        }
+    }
+
+    public function finishChecklist(Request $request) {
+        try {
+            $checklistMov = ChecklistMov::find($request->checklist_id);
+            $this->checklistIsValidForFinish($checklistMov);
+            $checklistMovService = new ChecklistMovService();
+            $checklistMovService->closeChecklistMov($checklistMov);
+            return $this->responseOk("Checklist Finalizado com sucesso.");
+        } catch (\Throwable $th) {
+            return $this->responseError("Erro ao finalizar checklist. Erro : " . $th->getMessage());
+        }
+    }
+
+    private function checklistIsValidForFinish(ChecklistMov $checklistMov) {
+        if(Functions::nullOrEmpty($checklistMov)) throw new Exception("Checklist não encontrado com o código informado.");
+        if($checklistMov->status <> Status::ACTIVE){
+            if($checklistMov->status == Status::CLOSED) 
+                throw new Exception("Checklist com código '$checklistMov->id' já está finalizado.");
+            elseif($checklistMov->status == Status::CLOSED_BY_SYSTEM) 
+                throw new Exception("Checklist com código '$checklistMov->id' já está expirado, e foi finalizado pelo sistema.");
         }
     }
 
