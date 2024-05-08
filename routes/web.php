@@ -68,6 +68,13 @@ Route::group(['middleware' => ['auth']], function () {
     });
 
     Route::group(['prefix' => 'usuario'], function () {
+        Route::get('listar', [UserController::class, 'index'])->name('user_list');
+        Route::get('novo', [UserController::class, 'create'])->name('user_create');
+        Route::post('salvar', [UserController::class, 'store'])->name('user_store');
+        Route::get('editar/{id}', [UserController::class, 'edit'])->name('user_edit');
+        Route::put('atualizar/{id}', [UserController::class, 'update'])->name('user_update');
+        Route::delete('delete/{id}', [UserController::class, 'delete'])->name('user_delete');
+
         Route::get('buscar-por-nome', [UserController::class, 'getUsersByName'])->name('user_search_by_name');
     });
 

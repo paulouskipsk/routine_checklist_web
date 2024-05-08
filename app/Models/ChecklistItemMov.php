@@ -28,7 +28,7 @@ class ChecklistItemMov extends Model {
         'end_date',
         'start_date',
         'processed',
-        'response',
+        'response',//N/Y/B/G/E
         'type_obs',//R=>required/O=>optional/N=>none
         'required_obs',
         'observation',

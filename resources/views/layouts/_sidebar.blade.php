@@ -10,6 +10,7 @@
         <div class="navbar-vertical-content">
             <ul class="navbar-nav flex-column" id="navbarVerticalNav">
 
+                {{-- MENU HOME --}}
                 <div class="nav-item-wrapper">
                     <a class="nav-link label-1" href="/home">
                         <div class="d-flex align-items-center">
@@ -23,6 +24,7 @@
                     </a>
                 </div>
 
+                {{-- MENU CADASTROS --}}
                 <div class="nav-item-wrapper"><a class="nav-link dropdown-indicator label-1" href="#multi-level" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="multi-level">
                     <div class="d-flex align-items-center">
                         <div class="dropdown-indicator-icon">
@@ -91,9 +93,57 @@
                                 </div>
                             </a>
                         </li>
+
+                        <li class="nav-item">
+                            <a class="nav-link dropdown-indicator" href="{{ route('user_list') }}">
+                                <div class="d-flex align-items-center">
+                                    <div class="dropdown-indicator-icon">
+                                        <span class="far fa-user icon-menu"></span>
+                                    </div>
+                                    <span class="nav-link-text">Usuário</span>
+                                </div>
+                            </a>
+                        </li>
                     </ul>
                   </div>
                 </div>
+
+                {{-- MENU RELATÓRIOS --}}
+                <div class="nav-item-wrapper"><a class="nav-link dropdown-indicator label-1" href="#multi-level1" role="button" data-bs-toggle="collapse" aria-expanded="false" aria-controls="multi-level">
+                    <div class="d-flex align-items-center">
+                        <div class="dropdown-indicator-icon">
+                            <span class="fas fa-caret-right icon-menu"></span>
+                        </div>
+                        <span class="nav-link-icon">
+                            <i class="far fa-file-alt icon-menu"></i>
+                            {{-- <span data-feather="save" class="icon-menu"> --}}
+                        </span>
+                        <span class="nav-link-text">Relatórios</span>
+                    </div>
+                  </a>
+                  <div class="parent-wrapper label-1">
+                    <ul class="nav collapse parent" data-bs-parent="#navbarVerticalCollapse" id="multi-level1">
+                        <li class="collapsed-nav-item-title d-none">Relatórios</li>
+
+                        <li class="nav-item">
+                            <a class="nav-link dropdown-indicator" href="{{ route('sector_list') }}">
+                                <div class="d-flex align-items-center">
+                                    <div class="dropdown-indicator-icon">
+                                        <span class="far fa-address-card icon-menu"></span>
+                                    </div>
+                                    <span class="nav-link-text">Setor</span>
+                                </div>
+                            </a>
+                        </li>
+
+                    </ul>
+                  </div>
+                </div>
+
+
+
+
+                
 
             </ul>
         </div>

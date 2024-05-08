@@ -1,5 +1,4 @@
 
-
 /*Alterações do Template*/
 section {
 	padding: 0px !important;
@@ -196,14 +195,43 @@ div#preloader {
 	margin: 7px 0px 0px 23px;
   }
   
-  @keyframes dot-carousel {
+@keyframes dot-carousel {
 	0% {
-	  box-shadow: 9984px 0 0 -1px var(--red), 9999px 0 0 1px var(--red), 10014px 0 0 -1px var(--red);
+		box-shadow: 9984px 0 0 -1px var(--red), 9999px 0 0 1px var(--red), 10014px 0 0 -1px var(--red);
 	}
 	50% {
-	  box-shadow: 10014px 0 0 -1px var(--red), 9984px 0 0 -1px var(--red), 9999px 0 0 1px var(--red);
+		box-shadow: 10014px 0 0 -1px var(--red), 9984px 0 0 -1px var(--red), 9999px 0 0 1px var(--red);
 	}
 	100% {
-	  box-shadow: 9999px 0 0 1px var(--red), 10014px 0 0 -1px var(--red), 9984px 0 0 -1px var(--red);
+		box-shadow: 9999px 0 0 1px var(--red), 10014px 0 0 -1px var(--red), 9984px 0 0 -1px var(--red);
 	}
-  }
+}
+
+.select2-selection__choice{
+	height: 18px !important;
+	font-size: 12px !important;
+	padding: 1px !important;
+	margin-top: 3px !important;
+	margin-left: 4px !important;
+}
+
+.select2-selection__choice__remove{
+	width: 0.45rem !important;
+	margin-right: 3px !important;
+	margin-left: 2px !important;
+}
+/* 
+.select2-selection__choice{
+	height: 18px !important;
+	font-size: 12px !important;
+	padding: 1px !important;
+	margin-top: 3px !important;
+} */
+
+.select2-container .select2-selection, 
+.select2-selection__rendered, 
+.select2-selection__arrow {
+	height: 38px !important;
+	line-height: 38px !important;
+	border-radius: 6px !important;
+}

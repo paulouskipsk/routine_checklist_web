@@ -25,7 +25,6 @@
 
     <link href="{{ asset('fonts/merriweather/merriweather.css') }}" type="text/css" rel="stylesheet">
 
-
     <link href="{{ asset('vendors/template/vendors/simplebar/simplebar.min.css') }}" type="text/css" rel="stylesheet">
     <link href="{{ asset('vendors/template/assets/css/theme-rtl.min.css') }}" type="text/css" rel="stylesheet" id="style-rtl">
     <link href="{{ asset('vendors/template/assets/css/theme.min.css') }}" type="text/css" rel="stylesheet" id="style-default">
@@ -40,6 +39,7 @@
     <link href="{{ asset('vendors/select2/select2.min.css') }}" type="text/css" rel="stylesheet">
     <link href="{{ asset('vendors/select2/select2-bootstrap-5-theme.css') }}" type="text/css" rel="stylesheet">
     <link href="{{ asset('vendors/duallistbox/bootstrap-duallistbox.css') }}" type="text/css" rel="stylesheet">    
+
 
     <link href="{{ asset('css/application.css') }}" type="text/css" rel="stylesheet">
   
