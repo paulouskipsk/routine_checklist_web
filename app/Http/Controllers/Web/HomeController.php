@@ -27,7 +27,8 @@ class HomeController extends ControllerWeb {
         $unitsSelecteds = Functions::nullOrEmpty($request->units) ? $units : Unity::find($request->units);
         $unitsSelecteds = $unitsSelecteds->pluck('id');
 
-        $reportFinished = ChecklistMov::where('end_date', '>=', $startDate)
+        $reportFinished = ChecklistMov::where('start_date', '>=', $startDate)
+                                      ->where('end_date', '<=', $endDate)
                                       ->where('processed','S')
                                       ->whereIn('unit_id', $unitsSelecteds)
                                       ->get();
@@ -36,7 +37,8 @@ class HomeController extends ControllerWeb {
 //==========================================================================================================
         $sql = DB::table('checklists_movs')
                     ->select(DB::raw('count(id) as occurrences'), 'status', 'unit_id')
-                    ->where('end_date', '>=', $startDate)
+                    ->where('start_date', '>=', $startDate)
+                    ->where('end_date', '<=', $endDate)
                     ->whereIn('unit_id', $unitsSelecteds)
                     ->groupBy('unit_id', 'status')
                     ->get();

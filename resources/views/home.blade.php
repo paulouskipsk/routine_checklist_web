@@ -159,96 +159,99 @@
             selectAll()
         });
 
-        Object.keys(reports.checklistByUnityAndStatus).forEach((unitId) => {
-            let values = reports.checklistByUnityAndStatus[unitId];
-            dataSource.push({
-                'resultados': ('000'+unitId).slice(-3),
-                'Em Execução': values.active, 
-                'Perdidos/Parciais': values.incomplete, 
-                'Processados': values.completed
-            }) 
-        });
+        function generateBarChart(){
+            Object.keys(reports.checklistByUnityAndStatus).forEach((unitId) => {
+                let values = reports.checklistByUnityAndStatus[unitId];
+                dataSource.push({
+                    'resultados': ('000'+unitId).slice(-3),
+                    'Em Execução': values.active, 
+                    'Perdidos/Parciais': values.incomplete, 
+                    'Processados': values.completed
+                }) 
+            });
 
-        let chartBar = echarts.init(document.getElementById('chart_bar'));
-        let option = {
-            width: 'auto',
-            height: 'auto',
-            title: {
-                text: 'Execução dos checklists por empresa',
-                left: 'center',
-                textStyle: {
-                    fontSize: 18,
-                    color: '#3874ff',
+            let chartBar = echarts.init(document.getElementById('chart_bar'));
+            
+            let option = {
+                width: 'auto',
+                height: 'auto',
+                title: {
+                    text: 'Execução dos checklists por empresa',
+                    left: 'center',
+                    textStyle: {
+                        fontSize: 18,
+                        color: '#3874ff',
+                    },
                 },
-            },
-            color: ["#45a1d6", "#eb4034", "#18d61b"],
-            legend: {
-                bottom: '0%',
-                padding: 0,
-                itemWidth : 10,
-                itemHeight: 10
-            },
-            grid: {
-                top: '25%',
-            },
-            toolbox: {
-                show: true,
-                orient: 'vertical',
-                top: '30%',
-                left: '91%',
-                itemGap : 15,
-                itemSize: 20,
-                showTitle: true,
-                feature: {
-                    mark: { show: true },
-                    magicType: {
-                        show: true,
-                        type: ['line', 'bar', 'stack'],
-                        title:{
-                            stack: "Agrupar Dados",
-                            tiled: 'Desagrupar Dados',
-                            bar: "Gráfico em Colunas",
-                            line : "Gráfico em Linhas",
-                            saveAsImage: { show: true }
+                color: ["#45a1d6", "#eb4034", "#18d61b"],
+                legend: {
+                    bottom: '0%',
+                    padding: 0,
+                    itemWidth : 10,
+                    itemHeight: 10
+                },
+                grid: {
+                    top: '25%',
+                },
+                toolbox: {
+                    show: true,
+                    orient: 'vertical',
+                    top: '30%',
+                    left: '91%',
+                    itemGap : 15,
+                    itemSize: 20,
+                    showTitle: true,
+                    feature: {
+                        mark: { show: true },
+                        magicType: {
+                            show: true,
+                            type: ['line', 'bar', 'stack'],
+                            title:{
+                                stack: "Agrupar Dados",
+                                tiled: 'Desagrupar Dados',
+                                bar: "Gráfico em Colunas",
+                                line : "Gráfico em Linhas",
+                                saveAsImage: { show: true }
+                            },
                         },
-                    },
-                    saveAsImage: {
-                        title: 'Salvar Gráfico como Imagem'  
-                    },
-                    restore: { 
-                        show: true,
-                        title: 'Restaurar'
-                    },
-                }
-            },
-            tooltip: {},
-            dataset: {
-                dimensions: ['resultados', 'Em Execução', 'Perdidos/Parciais', 'Processados'],
-                source: dataSource
-            },
-            xAxis: { 
-                type: 'category' , 
-                name: 'Empresas',
-                nameLocation: 'middle',
-                nameTextStyle: {
-                    fontSize: 15,
-                    verticalAlign: "top",
-                    lineHeight: 30,
-                }
-            },
-            yAxis: {
-                name: 'Quant. \nChecklists',
-                maxInterval: 10,
-                nameTextStyle: {
-                    fontSize: 15,
-                    align: 'left',
-                }
-            },
-            series: [{ type: 'bar' }, { type: 'bar' }, { type: 'bar' }]
-        };
-        chartBar.setOption(option);
-
-        $(document).ready(function() {
+                        saveAsImage: {
+                            title: 'Salvar Gráfico como Imagem'  
+                        },
+                        restore: { 
+                            show: true,
+                            title: 'Restaurar'
+                        },
+                    }
+                },
+                tooltip: {},
+                dataset: {
+                    dimensions: ['resultados', 'Em Execução', 'Perdidos/Parciais', 'Processados'],
+                    source: dataSource
+                },
+                xAxis: { 
+                    type: 'category' , 
+                    name: 'Empresas',
+                    nameLocation: 'middle',
+                    nameTextStyle: {
+                        fontSize: 15,
+                        verticalAlign: "top",
+                        lineHeight: 30,
+                    }
+                },
+                yAxis: {
+                    name: 'Quant. \nChecklists',
+                    maxInterval: 10,
+                    nameTextStyle: {
+                        fontSize: 15,
+                        align: 'left',
+                    }
+                },
+                series: [{ type: 'bar' }, { type: 'bar' }, { type: 'bar' }]
+            };
+            chartBar.setOption(option);
+        }
+        
+        function generateSelect2Units(){
             $('#units').select2( {
                 theme: "bootstrap-5",
                 width: $( this ).data( 'width' ) ? $( this ).data( 'width' ) : $( this ).hasClass( 'w-100' ) ? '100%' : 'style',
@@ -259,8 +262,12 @@
             });
 
             $('#units').val(unitsSelecteds).trigger("change");
-            $("#my-dropdown").maximizeSelect2Height().trigger("change");
+        }
 
+        $(document).ready(function() {
+            generateSelect2Units()
+            
+            if(Object.keys(reports.checklistByUnityAndStatus).length > 0) generateBarChart();
         });
 
     </script>
