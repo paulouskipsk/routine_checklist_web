@@ -2,6 +2,7 @@
 
 use App\Enums\Frequency;
 use App\Enums\Status;
+use App\Utils\Functions;
 use Illuminate\Support\Facades\Facade;
 use Illuminate\Support\ServiceProvider;
 
@@ -187,6 +188,7 @@ return [
     'aliases' => Facade::defaultAliases()->merge([
         'Status' => Status::class,
         'Frequency' => Frequency::class,
+        'Functions' => Functions::class,
     ])->toArray(),
 
 ];

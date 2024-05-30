@@ -50,5 +50,9 @@ class Unity extends Model {
         return $this->hasMany(ChecklistMov::class, 'id', 'unit_id');
     }
 
+    public function formatCode(){
+        return str_pad($this->id , 3 , '0' , STR_PAD_LEFT);
+    }
+
     
 }

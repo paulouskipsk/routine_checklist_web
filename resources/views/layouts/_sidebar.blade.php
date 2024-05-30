@@ -115,23 +115,22 @@
                             <span class="fas fa-caret-right icon-menu"></span>
                         </div>
                         <span class="nav-link-icon">
-                            <i class="far fa-file-alt icon-menu"></i>
-                            {{-- <span data-feather="save" class="icon-menu"> --}}
+                            <i class="fas fa-cogs icon-menu"></i>
                         </span>
-                        <span class="nav-link-text">Relatórios</span>
+                        <span class="nav-link-text">Gerenciar</span>
                     </div>
                   </a>
                   <div class="parent-wrapper label-1">
                     <ul class="nav collapse parent" data-bs-parent="#navbarVerticalCollapse" id="multi-level1">
-                        <li class="collapsed-nav-item-title d-none">Relatórios</li>
+                        <li class="collapsed-nav-item-title d-none">Gerenciar</li>
 
                         <li class="nav-item">
-                            <a class="nav-link dropdown-indicator" href="{{ route('sector_list') }}">
+                            <a class="nav-link dropdown-indicator" href="{{ route('manage_tasks') }}">
                                 <div class="d-flex align-items-center">
                                     <div class="dropdown-indicator-icon">
-                                        <span class="far fa-address-card icon-menu"></span>
+                                        <span class="fas fa-play icon-menu fs--3"></span>
                                     </div>
-                                    <span class="nav-link-text">Setor</span>
+                                    <span class="nav-link-text">Tarefas</span>
                                 </div>
                             </a>
                         </li>

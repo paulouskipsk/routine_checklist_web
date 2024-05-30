@@ -35,7 +35,7 @@
                 <select class="form-select" name="units[]" data-placeholder="Choose anything" multiple id="units">
                     @foreach ($units as $unity)
                         <option value="{{$unity->id}}" id="optionUnity{{$unity->id}}">
-                            {{str_pad($unity->id , 3 , '0' , STR_PAD_LEFT)}}
+                            {{$unity->formatCode()}}
                         </option>
                     @endforeach
                 </select>

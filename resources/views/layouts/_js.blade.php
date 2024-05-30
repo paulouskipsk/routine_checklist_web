@@ -1,11 +1,11 @@
 <script src="https://code.jquery.com/jquery-3.7.0.min.js"></script>
 <script src="{{ asset('vendors/template/vendors/popper/popper.min.js') }}"></script>
-<script src="{{ asset('vendors/template/vendors/bootstrap/bootstrap.min.js') }}"></script>
 <script src="{{ asset('vendors/template/vendors/anchorjs/anchor.min.js') }}"></script>
 <script src="{{ asset('vendors/template/vendors/is/is.min.js') }}"></script>
 <script src="{{ asset('vendors/template/vendors/fontawesome/all.min.js') }}"></script>
 <script src="{{ asset('vendors/template/vendors/lodash/lodash.min.js') }}"></script>
 <script src="https://polyfill.io/v3/polyfill.min.js?features=window.scroll"></script>
+<script src="{{ asset('vendors/template/vendors/bootstrap/bootstrap.min.js') }}"></script>
 {{-- <script src="{{ asset('vendors/template/vendors/list.js/list.min.js') }}"></script> --}}
 <script src="{{ asset('vendors/template/vendors/feather-icons/feather.min.js') }}"></script>
 <script src="{{ asset('vendors/template/vendors/dayjs/dayjs.min.js') }}"></script>

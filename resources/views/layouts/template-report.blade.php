@@ -1,16 +1,13 @@
 <!DOCTYPE html>
 <html>
-    <head>
-        @includeIf('layouts._head')	
-        @yield('poststyle')
-    </head>
+    @includeIf('layouts._head')	
     <body>
         @includeIf('utils.flash-message')
         
         <main class="main" id="top">
             <div class="container-fluid px-0">
 
-                <!--PreLoader-->
+            <!--PreLoader-->
             <div id="preloader">
                     
                 <div id="status">&nbsp;</div>
@@ -22,25 +19,25 @@
             <!--PreLoader-->
                 
                 <!-- Sidebar -->
-                @includeIf('layouts._sidebar')
+                {{-- @includeIf('layouts._sidebar') --}}
                 <!-- /Sidebar -->
                 
                 <!-- Navbar top -->
-                @includeIf('layouts._navbar')
+                @includeIf('layouts._navbar-report')
                 <!-- /Navbar top -->
             
                 <!-- Content -->
                 <div class="content">
 
                     <!-- Breadcrumbs -->
-                    @includeIf('layouts._breadcrumbs')
+                    {{-- @includeIf('layouts._breadcrumbs') --}}
                     <!-- /Breadcrumbs -->
                     
                     <div class="pb-5">
                     @yield('content')
                     </div>
                     
-                    @includeIf('layouts._footer')
+                    {{-- @includeIf('layouts._footer') --}}
                 </div>
                 <!-- /Content -->    
             </div>

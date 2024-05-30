@@ -1,5 +1,10 @@
 $(document).ready(function() {
     $('#preloader').delay(150).fadeOut();
+    // $('[data-bs-toggle="tooltip"]').tooltip();
+
+    // $(function () {
+    //     $('[data-toggle="tooltip"]').tooltip()
+    //   })
 
     // $(window).on('resize', function(){
     //     if(chartPie != null && chartPie != undefined){

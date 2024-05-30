@@ -28,6 +28,7 @@ class ChecklistItemMov extends Model {
         'end_date',
         'start_date',
         'processed',
+        'processed_in',
         'response',//N/Y/B/G/E
         'type_obs',//R=>required/O=>optional/N=>none
         'required_obs',
@@ -46,8 +47,9 @@ class ChecklistItemMov extends Model {
         'sequence' => 'integer',
         'score' => 'integer',
         'shelflife' => 'integer',
-        'hour_min' => 'datetime:H:i',
-        'hour_max' => 'datetime:H:i',
+        'hour_min' => 'datetime',
+        'hour_max' => 'datetime',
+        'processed_in' => 'datetime',
         'chmv_id' => 'integer',
         'chit_id'=> 'integer',
         'sect_id' => 'integer',

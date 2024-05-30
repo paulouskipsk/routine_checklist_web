@@ -20,6 +20,7 @@ return new class extends Migration {
             $table->timestamp('end_date')->nullable(false);
             $table->timestamp('start_date')->nullable(false);
             $table->string('processed', 1)->default('N')->nullable(false);
+            $table->timestamp('processed_in')->nullable(true);
             $table->string('response', 3)->nullable();
             $table->string('type_obs', 1)->default('N')->nullable(false);
             $table->string('observation', 150)->nullable();
@@ -37,8 +38,6 @@ return new class extends Migration {
             $table->foreign('sect_id')->references('id')->on('sectors');
             $table->foreign('chit_id')->references('id')->on('checklists_itens');
             $table->foreign('chmv_id')->references('id')->on('checklists_movs');
-
-
         });
     }
 

@@ -5,6 +5,15 @@ section {
 	margin: 0px !important;
 }
 
+.text-gray{
+	color: rgb(128, 127, 127);
+}
+
+.text-light-gray{
+	color: rgb(197, 197, 197);
+}
+
+
 #breadcrumb{
 	margin-top: -25px !important;
 }
@@ -234,4 +243,47 @@ div#preloader {
 	height: 38px !important;
 	line-height: 38px !important;
 	border-radius: 6px !important;
+}
+
+.w-150{
+	width: 150px !important;
+}
+
+.w-200{
+	width: 200px !important;
+}
+
+.p--1{
+	padding: -5px !important;
+}
+
+.p--2{
+	padding: -10px !important;
+}
+
+.p--3{
+	padding: -15px !important;
+}
+
+.alert-soft-primary{
+	background-color: rgb(218, 242, 255) !important;
+}
+
+.rotate-180{
+	transform: rotateY(180deg) !important;
+}
+
+#report-checklistmov {
+	min-width: 1100px !important;
+	max-width: 1600px !important;
+	margin:auto !important;
+}
+
+.bg-primary-subtle{
+	background-color: #cfe2ff !important;
+	color: rgb(213, 213, 255) !important;
+}
+
+.cursor-pointer{
+	cursor: pointer !important;
 }

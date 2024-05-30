@@ -26,7 +26,9 @@ enum Status: string {
             'C' => 'Cancelado',
             'B' => 'Bloqueado',
             'N' => 'Normal',
-            'F' => 'Fechado'
+            'F' => 'Fechado',
+            'S' => 'Expirado',
+            default => 'Status Desconhecido',
         };
     }
 }

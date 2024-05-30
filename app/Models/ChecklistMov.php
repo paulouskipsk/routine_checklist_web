@@ -24,6 +24,7 @@ class ChecklistMov extends Model {
         'frequency_composition',
         'status',
         'processed',
+        'processed_in',
         'is_free',
         'start_date',
         'end_date',
@@ -35,6 +36,7 @@ class ChecklistMov extends Model {
     
     protected $casts = [
         'id' => 'integer',
+        'processed_in' => 'datetime',
         'shelflife' => 'integer',
         'user_id' => 'integer',
         'chkl_id' => 'integer',

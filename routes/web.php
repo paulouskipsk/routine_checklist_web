@@ -10,6 +10,9 @@ use App\Http\Controllers\Web\SectorController;
 use App\Http\Controllers\Web\UnityController;
 use App\Http\Controllers\Web\UserController;
 use App\Http\Controllers\Web\UsersGroupController;
+use App\Http\Controllers\Web\ManageController;
+
+use Illuminate\Database\Capsule\Manager;
 use Illuminate\Support\Facades\Route;
 
 Route::get('/', [AuthController::class, 'login'])->name('login');
@@ -44,7 +47,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('salvar', [ChecklistController::class, 'store'])->name('checklist_store');
         Route::get('editar/{id}', [ChecklistController::class, 'edit'])->name('checklist_edit');
         Route::put('atualizar/{id}', [ChecklistController::class, 'update'])->name('checklist_update');
-        Route::delete('delete/{id}', [ChecklistController::class, 'delete'])->name('checklist_delete');
         Route::post('gerar-tarefa', [ChecklistController::class, 'generateTasks'])->name('checklist_generate');
     });
 
@@ -91,7 +93,17 @@ Route::group(['middleware' => ['auth']], function () {
         Route::delete('delete/{id}', [UnityController::class, 'delete'])->name('unity_delete');
     });
 
+    Route::group(['prefix' => 'gerenciar'], function () {
+        Route::get('tarefas/listar', [ManageController::class, 'index'])->name('manage_tasks');
+        Route::get('fechar-tarefa/{id}', [ManageController::class, 'close'])->name('close_task');
+        Route::get('reabrir-tarefa/{id}', [ManageController::class, 'reopen'])->name('reopen_task');
+        Route::get('visualizar-tarefa/{id}', [ManageController::class, 'view'])->name('view_task');
+        Route::get('cancelar-tarefa/{id}', [ManageController::class, 'cancel'])->name('cancel_task');
 
-    
+        Route::get('get-report-task/{id}', [ManageController::class, 'getPdf'])->name('report_task');
+    });
+
+
+
     
 });
