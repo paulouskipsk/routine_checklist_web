@@ -29,7 +29,7 @@
                                 <div class="col-12 mb-3">
                                     <div class="card border border-300">
                                         <div class="card-body">
-                                            <h4 class="card-title text-primary"> Gerais </h4>
+                                            <h4 class="card-title text-primary"> Geral </h4>
                                             <hr class="text-400">
 
                                             <div class="row border-bottom border-200 py-1">
@@ -399,6 +399,7 @@
         $(document).ready(function() {
             (document.getElementById('btn-back')).addEventListener('click', () => { history.back(); });
             (document.getElementById('btn-pdf')).addEventListener('click', () => { 
+                // window.open("{{route('report_task', $checklistMov->id)}}", '_self');
                 window.open("{{route('report_task', $checklistMov->id)}}");
             });
 

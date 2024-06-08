@@ -11,11 +11,9 @@ use Illuminate\Support\Facades\Date;
 use PhpParser\Node\Expr\Cast\Array_;
 use PhpParser\Node\Expr\Cast\Double;
 
-class Functions
-{
+class Functions {
 
-    public static function getTimeInMillis(): string
-    {
+    public static function getTimeInMillis(): string{
         list($msec, $sec) = explode(' ', microtime());
         return $sec . substr($msec, 2, 3);
     }
@@ -112,6 +110,14 @@ class Functions
             $price = $price instanceof double ? $price : doubleval($price);
             $price = number_format($price, $precision, ',', '');
             return $price;
+        } catch (\Throwable $th) {
+            throw $th;
+        }
+    }
+
+    public static function formatPadLeft(int $number, int $digits): string {
+        try {
+            return str_pad($number , $digits , '0' , STR_PAD_LEFT);
         } catch (\Throwable $th) {
             throw $th;
         }

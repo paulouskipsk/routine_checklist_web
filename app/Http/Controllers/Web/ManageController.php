@@ -2,22 +2,20 @@
 
 namespace App\Http\Controllers\Web;
 
-use App\Enums\Status;
-use App\Models\ChecklistItemMov;
 use App\Models\ChecklistMov;
 use App\Models\Unity;
-use App\Models\Views\ViewChecklistItensMovsPerformeds;
 use App\Services\ChecklistMovService;
 use App\Utils\Functions;
+use Barryvdh\DomPDF\Facade\Pdf;
 use Carbon\Carbon;
+use Dompdf\Dompdf;
 use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Collection;
 use Illuminate\Support\Facades\App;
+use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
 class ManageController extends ControllerWeb {
-    private $breadcrumbs = [['url'=> '/gerenciar/tarefas','label' => 'Gerenciar Tarefas','active'=>true]];
     private $checklistMovServ;
 
     public function __construct(ChecklistMovService $checklistMovService) {
@@ -85,31 +83,34 @@ class ManageController extends ControllerWeb {
             if(Functions::nullOrEmpty($checklistMov))  throw new Exception("Tarefa $request->id não encontrada");
             $checklistMov->load('checklistItensMovs');
             $report = $checklistMovService->calculateScore([$checklistMov]);
-            return view('reports_views.view-movement', compact(['checklistMov', 'report']));
+            return view('reports-views.view-movement', compact(['checklistMov', 'report']));
         } catch (\Throwable $th) {
             Session::flash('flash-error-msg', " Erro ao Abrir relatório da Tarefa '$request->id'. " . $th->getMessage());
             return back();
         }
     }
 
-    // public function getPdf(Request $request){
-    //     try {
-    //         $checklistMovService = new ChecklistMovService();
-    //         $checklistMov = ChecklistMov::find($request->id);
-    //         if(Functions::nullOrEmpty($checklistMov))  throw new Exception("Tarefa $request->id não encontrada");
-    //         $checklistMov->load('checklistItensMovs');
-    //         $report = $checklistMovService->calculateScore([$checklistMov]);
+    public function getPdf(Request $request){
+        try {
+            $checklistMov = ChecklistMov::find($request->id);
+            if(Functions::nullOrEmpty($checklistMov))  throw new Exception("Tarefa $request->id não encontrada");
 
-    //         $pdf = Pdf::loadView('reports.declaracao-rcm', compact('titleReport','unidade', 'usuario', 'config','fornecedor', 'tarefa', 'notasProdutos'));
-    //         $filePath = "$this->tmp/file_tmp_".Functions::getTimeInMillis().'.pdf';
-    //         Storage::put($filePath, $pdf->download()->getOriginalContent());
-    //         $report = Storage::path($filePath);           
+            $titleFile = "Relatório de Movimento Tarefa $checklistMov->id";
+            $titleReport = "Relatório de Movimento de Checklist";
+            $unity = $checklistMov->unity;
+            $user = Auth::user();
+            $checklistMovService = new ChecklistMovService();
 
-    //         return back();
-    //     } catch (\Throwable $th) {
-    //         Session::flash('flash-error-msg', " Erro ao Gerar o relatório da Tarefa '$request->id'. " . $th->getMessage());
-    //         return back();
-    //     }
-    // }
+            $checklistMov->load('checklistItensMovs');
+            $report = $checklistMovService->calculateScore([$checklistMov]);
+
+            $pdf = Pdf::loadView('reports-pdf.view-movement', compact('titleReport', 'unity', 'user', 'checklistMov', 'report'));
+            return $pdf->stream();
+            // return $pdf->download("$titleFile.pdf");
+        } catch (\Throwable $th) {
+            Session::flash('flash-error-msg', " Erro ao Gerar o relatório da Tarefa '$request->id'. " . $th->getMessage());
+            return back();
+        }
+    }
 
 }

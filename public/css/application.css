@@ -10,7 +10,7 @@ section {
 }
 
 .text-light-gray{
-	color: rgb(197, 197, 197);
+	color: #c5c5c5  #d1d0d0d5;
 }
 
 
@@ -215,7 +215,9 @@ div#preloader {
 		box-shadow: 9999px 0 0 1px var(--red), 10014px 0 0 -1px var(--red), 9984px 0 0 -1px var(--red);
 	}
 }
-
+.index-max{
+	z-index: 999 !important;
+}
 .select2-selection__choice{
 	height: 18px !important;
 	font-size: 12px !important;

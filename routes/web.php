@@ -48,6 +48,8 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('editar/{id}', [ChecklistController::class, 'edit'])->name('checklist_edit');
         Route::put('atualizar/{id}', [ChecklistController::class, 'update'])->name('checklist_update');
         Route::post('gerar-tarefa', [ChecklistController::class, 'generateTasks'])->name('checklist_generate');
+        Route::get('delete/{id}', [ChecklistController::class, 'edit'])->name('checklist_delete');
+
     });
 
     Route::group(['prefix' => 'checklist-item'], function () {

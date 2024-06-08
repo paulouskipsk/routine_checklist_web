@@ -15,6 +15,9 @@ class FinishChecklistsRoutine extends Command {
 
     public function handle() {
         try {
+            //Finaliza tarefas expiradas a cada 10 minutos
+            if(Carbon::now()->minute() % 10 != 0) return;
+
             Log::info("ROTINA AUTOMATICA: Finalizando automaticamente os checklists expirados pelo shelflife.");
             $checklistMovServ = new ChecklistMovService();
             $checklists = ChecklistMov::where('end_date', '<', Carbon::now())

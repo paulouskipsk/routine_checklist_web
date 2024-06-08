@@ -1,415 +1,273 @@
-@extends('layouts.template-report')
+@extends('reports-pdf.layouts.portrait')
 
 @section('content')
-    <div id="report-checklistmov" class="card border border-300 my-1" data-component-card="data-component-card">
-        <div class="card-header p-4 border-bottom border-300 bg-primary-subtle">
-            <div class="row g-3">
-                <div class="col-12 col-md">
-                    <h4 class="text-900 mb-0" id="horizontal">
-                        {{$checklistMov->id . ' - ' . $checklistMov->description }}
-                    </h4>
-                </div>
+
+<p class="alert alert-primary px-1 py-1 bold mt-5 fs-15">Estatísticas e Pontuações</p>
+
+
+<div class="bold fs-13 mb-0 text-primary">GERAL</div>
+<hr class="mt-0"/>
+<table>
+    <tbody>
+      <tr><td>
+          <span class="bold fs-12">Tarefa: </span>
+          <span class="mr-1 italic fs-12">{{"$checklistMov->id - $checklistMov->description"}}</span>
+      </td></tr>
+
+      <tr><td>
+          <span class="bold fs-12">Unidade: </span>
+          <span class="mr-3 italic fs-12"> {{Functions::formatPadLeft($unity->id, 3) ." - $unity->corporate_name"}}</span>
+          <span class="bold fs-12"> CNPJ: </span>
+          <span class="mr-3 italic fs-12"> {{$unity->cnpj}}</span>
+          <span class="bold fs-12"> Cidade: </span>
+          <span class="mr-1 italic fs-12"> {{$unity->address->city->name}}</span>
+        </td></tr>
+
+        <tr><td>
+          <span class="bold fs-12">Último usuário vinculado à tarefa: </span>
+          <span class="mr-5 italic fs-12">{{$checklistMov->user ? $checklistMov->user->id .' - '. $checklistMov->user->name : ''}}</span>
+      
+          <span class="bold fs-12">Status Tarefa: </span>
+          <span class="italic fs-12 text-{{$checklistMov->status == 'A' ? 'primary' : 
+            ($checklistMov->status == 'F' ? 'success' : 
+            ($checklistMov->status == 'S' ? 'danger' : 'warning'))
+            }}">
+            {{$checklistMov->status == 'A' ? 'Em Execução' : 
+            ($checklistMov->status == 'F' ? 'Concluída' : 
+            ($checklistMov->status == 'S' ? 'Expirado' : 'Cancelado'))
+            }}
+        </span>
+        </td></tr>
+
+        <tr><td>
+          <span class="bold fs-12">DT Início: </span>
+          <span class="mr-3 italic fs-12">{{Functions::FormatDate($checklistMov->start_date, 'd/m/Y H:i')}}</span>
+
+          <span class="bold fs-12">DT Limite: </span>
+          <span class="mr-3 italic fs-12">{{Functions::FormatDate($checklistMov->end_date, 'd/m/Y H:i')}}</span>
+
+          <span class="bold fs-12">Processada em: </span>
+          <span class="mr-3 italic fs-12">{{Functions::FormatDate($checklistMov->processed_in, 'd/m/Y H:i')}}</span>
+        </td></tr>
+
+        <tr><td>
+          <span class="bold fs-12">Tot Questões da Tarefa: </span>
+          <span class="mr-1 italic fs-12">{{$report['totals']['questionsTotals']}}</span>
+
+          <span class="bold fs-12">Tot. Não Respondidas: </span>
+          <span class="mr-1 italic fs-12">{{$report['totals']['questionsLost']}}</span>
+
+          <span class="bold fs-12">Tot. Respondidas: </span>
+          <span class="mr-1 italic fs-12">{{$report['totals']['questionsExecuted']}}</span>
+      </td></tr>
+
+      <tr><td>
+        <span class="bold fs-12">Pontuação geral da Tarefa: </span>
+        <span class="mr-1 italic fs-12">{{$report['totals']['scoreTotal']}}</span>
+
+        <span class="bold fs-12">Pontuação Executada: </span>
+        <span class="mr-1 italic fs-12">{{$report['totals']['scoreRun']}}</span>
+
+        <span class="bold fs-12">Percentual Atingido: </span>
+        <span class="mr-1 italic fs-12">{{$report['percentages']['percentScoreRun'].'%'}}</span>
+      </td></tr>
+
+      <tr> 
+        <td>
+
+          <table>
+            <thead">
+              <tr>
+                <th class="bold fs-12 text-primary text-left w-15 ">
+                  Contadores por tipos de resposta 
+                  &nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;&nbsp;
+                </th>
+                <th class="bold fs-12 text-primary text-left">Resposta</th>
+                <th class="bold fs-12 text-primary text-left">Porcentagem</th>
+              </tr>
+            </thead>
+            <tbody>
+              <tr>
+                <td></td>
+                <td>
+                  <span class="bold fs-12">Sim:</span>
+                  <span class="mr-1 italic fs-12">{{$report['totals']['questionsY']}}</span>
+                  <br/>
+                  <span class="bold fs-12">Não:</span>
+                  <span class="mr-1 italic fs-12">{{$report['totals']['questionsN']}}</span>
+                  <br/>
+                  <span class="bold fs-12">Ruim:</span>
+                  <span class="mr-1 italic fs-12">{{$report['totals']['questionsB']}}</span>
+                  <br/>
+                  <span class="bold fs-12">Bom:</span>
+                  <span class="mr-1 italic fs-12">{{$report['totals']['questionsG']}}</span>
+                  <br/>
+                  <span class="bold fs-12">Excelente:</span>
+                  <span class="mr-1 italic fs-12">{{$report['totals']['questionsE']}}</span>
             </div>
-        </div>
-        <div class="card-body p-3">
 
-            <div class="accordion" id="accordionPanelsStayOpenExample">
-                <div class="accordion-item">
-                    <h2 class="accordion-header ">
-                        <button class="accordion-button" type="button" data-bs-toggle="collapse"
-                            data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true"
-                            aria-controls="panelsStayOpen-collapseOne">
-                            <h4 class="text-left text-primary p-1 text-uppercase"> Estatísticas e Pontuações</h4>
-                        </button>
-                    </h2>
-                    <div id="panelsStayOpen-collapseOne" class="accordion-collapse collapse show">
-                        {{-- RESULTADO GERAL --}}
-                        <div id="result-general" class="accordion-body">
-                            <div class="mx-20">                
-                                <div class="col-12 mb-3">
-                                    <div class="card border border-300">
-                                        <div class="card-body">
-                                            <h4 class="card-title text-primary"> Gerais </h4>
-                                            <hr class="text-400">
+                </td>
+                <td>
+                  <span class="bold fs-12">Sim: </span>
+                  <span class="mr-1 italic fs-12">{{$report['percentages']['percentQuestionsY']}}'%'</span>
+                  <br/>
 
-                                            <div class="row border-bottom border-200 py-1">
-                                                <div class="col-auto fs-0">
-                                                    <span class="fw-bold mr-3">Unidade: </span> 
-                                                    <span class="fst-italic mr-3">
-                                                        {{$checklistMov->unity->formatCode() .' - '. $checklistMov->unity->corporate_name}}
-                                                    </span>
-                                                </div>
-                                                <div class="col-auto fs-0">
-                                                    <span class="fw-bold">CNPJ: </span> 
-                                                    <span class="fst-italic">
-                                                        {{$checklistMov->unity->cnpj}}
-                                                    </span>
-                                                </div>
-                                                <div class="col-auto fs-0">
-                                                    <span class="fw-bold">Cidade: </span> 
-                                                    <span class="fst-italic">
-                                                        {{$checklistMov->unity->address->city->name}}
-                                                    </span>
-                                                </div>
-                                            </div>
+                  <span class="bold fs-12">Não: </span>
+                  <span class="mr-1 italic fs-12">{{$report['percentages']['percentQuestionsN']}}'%'</span>
+                  <br/>
 
-                                            <div class="row border-bottom border-200 py-1">
-                                                <div class="col-12 fs-0">
-                                                    <span class="fw-bold mr-2">Último usuário vinculado à tarefa: </span> 
-                                                    <span class="fst-italic">{{$checklistMov->user ? $checklistMov->user->id . ' - ' . $checklistMov->user->name : 'Não Associado'}}</span>
-                                                </div>
-                                            </div>
+                  <span class="bold fs-12">Ruim: </span>
+                  <span class="mr-1 italic fs-12">{{$report['percentages']['percentQuestionsB']}}'%'</span>
+                  <br/>
 
-                                            <div class="row border-bottom border-200 py-1">
-                                                <div class="col-auto fs-0">
-                                                    <span class="fw-bold mr-2">Status Tarefa: </span> 
-                                                    <span class="fst-italic text-{{$checklistMov->status == 'F' ? 'success' : 
-                                                         ($checklistMov->status == 'S' ? 'danger' : 
-                                                         ($checklistMov->status == 'C' ? 'warning' : 'info'))}}">
+                  <span class="bold fs-12">Bom: </span>
+                  <span class="mr-1 italic fs-12">{{$report['percentages']['percentQuestionsG']}}'%'</span>
+                  <br/>
 
-                                                        {{$checklistMov->status == 'F' ? 'Concluída' : 
-                                                         ($checklistMov->status == 'S' ? 'Expirada' : 
-                                                         ($checklistMov->status == 'C' ? 'Cancelada' : 'Em Andamento'))}}
-                                                    </span>
-                                                </div>
+                  <span class="bold fs-12">Excelente: </span>
+                  <span class="mr-1 italic fs-12">{{$report['percentages']['percentQuestionsE']}}'%'</span>
+                  <br/>
+                </td>
+              </tr>
+            </tbody>
+          </table>
+        </td>
+      </tr>
+    </tbody>
+  </table>
 
-                                                <div class="col-auto fs-0">
-                                                    <span class="fw-bold mr-2">Tarefa liberada: </span> 
-                                                    <span class="fst-italic">{{Functions::formatDate($checklistMov->start_date, 'd/m/Y H:i')}}</span>
-                                                </div>  
-                                                <div class="col-auto fs-0">
-                                                    <span class="fw-bold mr-2">Data Limite: </span> 
-                                                    <span class="fst-italic">{{Functions::formatDate($checklistMov->end_date, 'd/m/Y H:i')}}</span>
-                                                </div>  
-                                                <div class="col-auto fs-0">
-                                                    <span class="fw-bold mr-2">Data Processamento: </span> 
-                                                    <span class="fst-italic">{{Functions::formatDate($checklistMov->processed_in, 'd/m/Y H:i') ?? 'Não Processada'}}</span>
-                                                </div>
-                                            </div>
 
-                                            <div class="row border-bottom border-200 py-1">
-                                                <div class="col-4 fs-0">
-                                                    <span class="fw-bold mr-2">Total de Questões da Tarefa: </span> 
-                                                    <span class="fst-italic">{{$report['totals']['questionsTotals']}}</span>
-                                                </div>
-                                                <div class="col-4 fs-0">
-                                                    <span class="fw-bold mr-2">Total de Questões Não Respondidas: </span> 
-                                                    <span class="fst-italic">{{$report['totals']['questionsLost']}}</span>
-                                                </div>
-                                                <div class="col-4 fs-0">
-                                                    <span class="fw-bold mr-2">Total de Questões Respondidas: </span> 
-                                                    <span class="fst-italic">{{$report['totals']['questionsExecuted']}}</span>
-                                                </div>  
-                                            </div>
+    <div class="bold fs-13 mt-3 text-primary">POR ÁREA</div>
+    {{-- RESULTADO POR SETOR --}}
+    <table class="table table-striped table-condensed">
+        <thead>
+            <tr class="py-0 fs-10 text-dark bold">
+                <th>Descrição do Setor</th>
+                <th>Tot. <br/> Questões</th>
+                <th>Tot. Quest.<br/>Afirmativa(s)</th>
+                <th>% Resp.<br/>Afirmativa(s)</th>
+                <th>Tot. Quest.<br/>Negativa(s)</th>
+                <th>% Resp.<br/>Negativa(s)</th>
+                <th>Tot. Pontos <br/> Gerado</th>
+                <th>Tot. Pontos <br/> Executado</th>
+                <th>% Pontos<br/>Executado</th>
+            </tr>
+        </thead>
 
-                                            <div class="row border-bottom border-200 py-1">
-                                                <div class="col-4 fs-0">
-                                                    <span class="fw-bold mr-2">Pontuação Geral da Tarefa: </span> 
-                                                    <span class="fst-italic">{{$report['totals']['scoreTotal']}}</span>
-                                                </div>
-                                                <div class="col-4 fs-0">
-                                                    <span class="fw-bold mr-2">Pontuação Executada: </span> 
-                                                    <span class="fst-italic">{{$report['totals']['scoreRun']}}</span>
-                                                </div>
-                                                <div class="col-4 fs-0">
-                                                    <span class="fw-bold mr-2">Percentual Atingido: </span> 
-                                                    <span class="fst-italic">{{$report['percentages']['percentScoreRun']}} %</span>
-                                                </div>  
-                                            </div>
+        <tbody class="fs-10">
+            @foreach ( $report['totalsSectors'] as $sectorId => $totalSector)
+            <tr>
+                <td class="py-1"> {{$report['sectors'][$sectorId]->description}}</td>
+                <td class="py-1"> {{$totalSector['questionsTotals']}} </td>
+                <td class="py-1"> {{$totalSector['questionsAfirmatives']}} </td>
+                <td class="py-1">{{$report['percentagesSectors'][$sectorId]['percentQuestionsAfirmatives']}}%</td>
+                <td class="py-1"> {{$totalSector['questionsNegatives']}} </td>
+                <td class="py-1">{{$report['percentagesSectors'][$sectorId]['percentQuestionsNegatives']}}%</td>
+                <td class="py-1">{{$totalSector['scoreTotal']}}</td>
+                <td class="py-1">{{$totalSector['scoreRun']}}</td>
+                <td class="py-1">{{$report['percentagesSectors'][$sectorId] ['percentScoreRun']}}%</td>
+            </tr>
+            @endforeach
+        </tbody>
+        <tfoot>
+            <tr class="bold fs-10">
+                <td> TOTAIS </td>
+                <td> {{$report['totals']['questionsTotals']}} </td>
+                <td> {{$report['totals']['questionsAfirmatives']}} </td>
+                <td> {{$report['percentages']['percentQuestionsAfirmatives']}}% </td>
+                <td> {{$report['totals']['questionsNegatives']}} </td>
+                <td> {{$report['percentages']['percentQuestionsNegatives']}}% </td>
+                <td> {{$report['totals']['scoreTotal']}} </td>
+                <td> {{$report['totals']['scoreRun']}} </td>
+                <td> {{$report['percentages']['percentScoreRun']}}% </td>
+            </tr>
+        </tfoot>
+    </table>
 
-                                            <div class="row border-bottom border-200 py-1">
-                                                <div class="col-4 fs-0 bg-soft">
-                                                    <span class="fw-bold mr-2 text-primary">Contadores por tipos de resposta: </span> 
-                                                </div>    
-                                                <div class="col-4 fs-0 bg-soft">
-                                                    <span class="fw-bold mr-2 text-primary">Resposta </span> 
-                                                </div>
-                                                <div class="col-4 fs-0 bg-soft">
-                                                    <span class="fw-bold mr-2 text-primary">Porcentagem </span>
-                                                </div>                                                                                  
-                                            </div>
+    <div style="page-break-after: always"></div>
 
-                                            <div class="row py-1">
-                                                <div class="col-4"></div>
+    {{-- PERGUNTAS --}}
+    <p class="alert alert-primary px-1 py-1 bold fs-15">Perguntas X Respostas</p>
 
-                                                <div class="col-4 fs-0">                                                    
-                                                    <p class="my-1">
-                                                        <span class="fw-bold">Sim:</span>
-                                                        <span class="fst-italic">{{$report['totals']['questionsY']}}</span>
-                                                    <p class="my-1">
-                                                        <span class="fw-bold">Não:</span>
-                                                        <span class="fst-italic">{{$report['totals']['questionsN']}}</span>
-                                                    <p class="my-1">
-                                                        <span class="fw-bold">Ruim:</span>
-                                                        <span class="fst-italic">{{$report['totals']['questionsB']}}</span>
-                                                    <p class="my-1">
-                                                        <span class="fw-bold">Bom:</span>
-                                                        <span class="fst-italic">{{$report['totals']['questionsG']}}</span>
-                                                    <p class="my-1">
-                                                        <span class="fw-bold">Excelente:</span>
-                                                        <span class="fst-italic">{{$report['totals']['questionsE']}}</span>
-                                                </div>
-                                                <div class="col-auto fs-0">
-                                                    <p class="my-1">
-                                                        <span class="fw-bold">Sim:</span>
-                                                        <span class="fst-italic">{{$report['percentages']['percentQuestionsY']}}%</span>
-                                                    <p class="my-1">
-                                                        <span class="fw-bold">Não:</span>
-                                                        <span class="fst-italic">{{$report['percentages']['percentQuestionsN']}}%</span>
-                                                    <p class="my-1">
-                                                        <span class="fw-bold">Ruim:</span>
-                                                        <span class="fst-italic">{{$report['percentages']['percentQuestionsB']}}%</span>
-                                                    <p class="my-1">
-                                                        <span class="fw-bold">Bom:</span>
-                                                        <span class="fst-italic">{{$report['percentages']['percentQuestionsG']}}%</span>
-                                                    <p class="my-1">
-                                                        <span class="fw-bold">Excelente:</span>
-                                                        <span class="fst-italic">{{$report['percentages']['percentQuestionsE']}}%</span>
-                                                </div>                                                                                         
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
+    @foreach ($checklistMov->checklistItensMovs as $checklistItemMov)                        
+
+    <div class="border-1 mt-2">
+        <table class="table table-condensed">
+            <tbody class="fs-10">
+                <tr colspan="2" class="alert alert-secondary bold text-uppercase">
+                    <td class="py-0">
+                        <span class="mr-1 italic">{{$checklistItemMov->id .' - '.$checklistItemMov->description}}</span>
+                    </td>
+                    <td class="py-0"></td>
+                </tr>
+                <tr>
+                    <td class="py-0">
+                        <span class="bold">Processada:</span>
+                        <span class="mr-1 italic">{{$checklistItemMov->processed == 'S' ? 'Sim' : 'Não'}}</span>
+                    </td>
+                    <td class="py-0">
+                        <span class="bold">Setor:</span>
+                        <span class="mr-1 italic">{{$checklistItemMov->sector?->description ?? 'Não Informado'}}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="py-0">
+                        <span class="bold">Pontos da pergunta:</span>
+                        <span class="mr-1 italic">{{$checklistItemMov->score}}</span>
+                    </td>
+                    <td class="py-0">
+                        <span class="bold">Pontuação Executada:</span>
+                        <span class="mr-1 italic">{{Functions::getScoreExecution($checklistItemMov)}}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="py-0">
+                        <span class="bold">Usuário:</span>
+                        <span class="mr-1 italic">
+                            {{$checklistItemMov->user ? ($checklistItemMov->user->id .' - '.$checklistItemMov->user->name) : 'Não Vinculado'}}
+                        </span>
+                    </td>
+                    <td class="py-0">
+                        <span class="bold">Data/Hora Resposta:</span>
+                        <span class="mr-1 italic">{{$checklistItemMov->processed_in ? $checklistItemMov->processed_in->format('d/m/Y H:i') : 'Não Informado'}}</span>
+                    </td>
+                </tr>
+                <tr>
+                    <td class="py-0">
+                        <span class="bold">Tipo Pergunta:</span>
+                        <span class="mr-1 italic">{{$checklistItemMov->type == 'S' ? 'Sim/Não' : 'Avaliativa'}}</span>
+                    </td>
+                    <td class="py-0">
+                        <span class="bold">Resposta:</span>
+                        <span class="mr-1 italic">{{Functions::getResponseText($checklistItemMov->response)}}</span>
+                    </td>
+                </tr>
+
+                <tr colspan="2">
+                    <td class="py-0">
+                        <span class="bold">Observações:</span>
+                        <span class="mr-1 italic">{{$checklistItemMov->observation ?? 'Não Informado'}}</span>
+                    </td>
+                    <td class="py-0"></td>
+                </tr>
+                <tr colspan="2">
+                    <td class="py-0">
+                        <span class="bold">Fotos:</span>
+
+                        @if ($checklistItemMov->photos)
+                        <div class="text-left m-1 pt-1">                                                           
+                        @foreach ($checklistItemMov->photos as $index => $photo)                                                            
+                            <img src="data:image/jpeg;base64,{{$photo}}" class="img-thumbnail pt-1 img-200">
+                        @endforeach
                         </div>
-
-                        {{-- RESULTADO POR SETOR --}}
-                        <div id="result-sector" class="accordion-body">
-                            <div class="mx-20">                
-                                <div class="col-12 mb-3">
-                                    <div class="card border border-300">
-                                        <div class="card-body">
-                                            <h4 class="card-title text-primary"> Por Área </h4>
-                                            <hr class="text-400">
-
-                                            <table class="table">
-                                                <thead>
-                                                    <tr class="py-0">
-                                                        <th>Cod.<br/> Setor</th>
-                                                        <th>Descrição do Setor</th>
-                                                        <th>Tot. <br/> Questões</th>
-                                                        <th>Tot. Quest.<br/>Afirmativa(s)</th>
-                                                        <th>% Resp.<br/>Afirmativa(s)</th>
-                                                        <th>Tot. Quest.<br/>Negativa(s)</th>
-                                                        <th>% Resp.<br/>Negativa(s)</th>
-                                                        <th>Tot. Pontos <br/> Gerado</th>
-                                                        <th>Tot. Pontos <br/> Executado</th>
-                                                        <th>% Pontos<br/>Executado</th>
-                                                    </tr>
-                                                </thead>
-                            
-                                                <tbody>
-                                                    @foreach ( $report['totalsSectors'] as $sectorId => $totalSector)
-                                                    <tr>
-                                                        <td class="py-1"> {{$sectorId}} </td>
-                                                        <td class="py-1"> {{$report['sectors'][$sectorId]->description}}</td>
-                                                        <td class="py-1"> {{$totalSector['questionsTotals']}} </td>
-                                                        <td class="py-1"> {{$totalSector['questionsAfirmatives']}} </td>
-                                                        <td class="py-1">{{$report['percentagesSectors'][$sectorId]['percentQuestionsAfirmatives']}}%</td>
-                                                        <td class="py-1"> {{$totalSector['questionsNegatives']}} </td>
-                                                        <td class="py-1">{{$report['percentagesSectors'][$sectorId]['percentQuestionsNegatives']}}%</td>
-                                                        <td class="py-1">{{$totalSector['scoreTotal']}}</td>
-                                                        <td class="py-1">{{$totalSector['scoreRun']}}</td>
-                                                        <td class="py-1">{{$report['percentagesSectors'][$sectorId] ['percentScoreRun']}}%</td>
-                                                    </tr>
-                                                    @endforeach
-                                                </tbody>
-                                                <tfoot>
-                                                    <tr class="fw-bold">
-                                                        <td colspan="2"> TOTAIS </td>
-                                                        <td> {{$report['totals']['questionsTotals']}} </td>
-                                                        <td> {{$report['totals']['questionsAfirmatives']}} </td>
-                                                        <td> {{$report['percentages']['percentQuestionsAfirmatives']}}% </td>
-                                                        <td> {{$report['totals']['questionsNegatives']}} </td>
-                                                        <td> {{$report['percentages']['percentQuestionsNegatives']}}% </td>
-                                                        <td> {{$report['totals']['scoreTotal']}} </td>
-                                                        <td> {{$report['totals']['scoreRun']}} </td>
-                                                        <td> {{$report['percentages']['percentScoreRun']}}% </td>
-                                                    </tr>
-                                                </tfoot>
-                                            </table>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-
-                {{-- PERGUNTAS E RESPOSTAS --}}
-                <div class="accordion-item border-0">
-                    <h2 class="accordion-header">
-                        <button class="accordion-button collapsed"
-                                type="button" 
-                                data-bs-toggle="collapse"
-                                data-bs-target="#questions" 
-                                aria-expanded="true"
-                                aria-controls="questions">
-                            <h4 class="text-left text-primary p-1 text-uppercase"> Perguntas e Respostas</h4>                            
-                        </button>
-                    </h2>
-
-                    @foreach ($checklistMov->checklistItensMovs as $checklistItemMov)                        
-                    <div id="questions" class="accordion-collapse collapse show">
-                        <div class="accordion-body">                            
-                            <div class="card border border-300 border-rounded-0">
-                                <div class="card-body p-0">
-                                                                       
-                                    <div class="accordion">
-                                        <div class="accordion-item border-0 p-0 rounded-top">
-                                            <h2 class="accordion-header mb-0 alert py-0 alert-soft-primary rounded-bottom-0">
-                                                <button class="accordion-button" 
-                                                        type="button" 
-                                                        data-bs-toggle="collapse" 
-                                                        data-bs-target="#target-{{$checklistItemMov->id}}" 
-                                                        aria-expanded="true" 
-                                                        aria-controls="target-{{$checklistItemMov->id}}">
-                                                    <span class="text-info">{{$checklistItemMov->sequence .' - '.  $checklistItemMov->description }}</span>
-                                                </button>
-                                            </h2>
-
-                                            <div class="accordion-collapse collapse show border-top border-300" id="target-{{$checklistItemMov->id}}">
-                                                <div class="accordion-body p-3">
-
-                                                    <div class="row border-bottom border-200 py-1">
-                                                        <div class="col-6 fs-0">
-                                                            <span class="fw-bold">Processada: </span> 
-                                                            <span class="fst-italic">{{$checklistItemMov->processed == 'S' ? 'Sim' : 'Não'}}</span>
-                                                        </div>
-                                                        
-                                                        <div class="col-6 fs-0">
-                                                            <span class="fw-bold">Setor: </span>
-                                                            <span class="fst-italic">{{$checklistItemMov->sector?->description ?? 'Não Informado'}}</span>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="row border-bottom border-200 py-1">
-                                                        <div class="col-6 fs-0">
-                                                            <span class="fw-bold">Pontos da pergunta: </span>
-                                                            <span class="fst-italic">{{$checklistItemMov->score}}</span>
-                                                        </div>
-
-                                                        <div class="col-6 fs-0">
-                                                            <span class="fw-bold">Pontuação Executada: </span> 
-                                                            <span class="fst-italic">
-                                                                {{Functions::getScoreExecution($checklistItemMov)}}
-                                                            </span>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="row border-bottom border-200 py-1">
-                                                        <div class="col-6 fs-0">
-                                                            <span class="fw-bold">Usuário: </span> 
-                                                            <span class="fst-italic">{{$checklistItemMov->user ? ($checklistItemMov->user->id .' - '.$checklistItemMov->user->name) : 'Não Vinculado'}}</span>
-                                                        </div>
-                                                        <div class="col-6 fs-0">
-                                                            <span class="fw-bold">Data/Hora Resposta: </span>
-                                                            <span class="fst-italic">{{$checklistItemMov->processed_in ? $checklistItemMov->processed_in->format('d/m/Y H:i') : 'Não Informado'}}</span>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="row border-bottom border-200 py-1">
-                                                        <div class="col-6 fs-0">
-                                                            <span class="fw-bold">Tipo Pergunta: </span> 
-                                                            <span class="fst-italic">{{$checklistItemMov->type == 'S' ? 'Sim/Não' : 'Avaliativa'}}</span>
-                                                        </div>
-
-                                                        <div class="col-6 fs-0">
-                                                            <span class="fw-bold">Resposta:</span>
-                                                            <span class="fst-italic">{{Functions::getResponseText($checklistItemMov->response)}}</span>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="row border-bottom border-200 py-1">
-                                                        <div class="col-12 fs-0">
-                                                            <span class="fw-bold">Observações: </span> 
-                                                            <span class="fst-italic">{{$checklistItemMov->observation ?? 'Não Informado'}}</span>
-                                                        </div>
-                                                    </div>
-
-                                                    <div class="row border-bottom border-0 py-1">
-                                                        <div class="col-12 fs-0">
-                                                            <span class="fw-bold">Fotos: </span> 
-                                                            @if ($checklistItemMov->photos)
-                                                            <div class="text-left m-1 pt-1">                                                           
-                                                                @foreach ($checklistItemMov->photos as $index => $photo)                                                            
-                                                                <div class="w-200 float-start px-1 pb-2">
-                                                                    <img 
-                                                                    src="data:image/jpeg;base64,{{$photo}}" 
-                                                                    class="img-thumbnail rounded border border-300 w-100 pt-1 checklistItemMovPhoto cursor-pointer" 
-                                                                    data-bs-toggle="modal" 
-                                                                    data-bs-target="#photoShowModal"
-                                                                    data-bs-title="{{$checklistItemMov->description . ' ( Foto '.  str_pad($index+1, 2 , '0' , STR_PAD_LEFT) .' )'}}">
-                                                                </div>
-                                                                @endforeach
-                                                            </div>
-                                                            @else
-                                                            <span class="fst-italic">Não Informado</span>
-                                                            @endif
-                                                        </div>
-                                                    </div>                                                    
-                                                </div>                    
-                                            </div>
-                                        </div>
-                                    </div>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                    @endforeach
-
-                </div>
-            </div>
-        </div>
+                        @else
+                        <span class="mr-1 italic">Não Informado</span>
+                        @endif
+                    </td>
+                    <td class="py-0"></td>
+                </tr>
+            </tbody>
+        </table>
     </div>
-
-<!-- Modal -->
-<div class="modal fade" id="photoShowModal" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-fullscreen">
-      <div class="modal-content ">
-        <div class="modal-header alert alert-soft-primary text-primary py-3 px-5 border border-bottom-400">
-          <h1 class="modal-title fs-1 text-primary fw-bold" id="staticBackdropLabel">
-            <span id="photoModalTitle"></span>
-          </h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body ">
-
-            <div class="row content-justify-center">
-                <div class="col-12 text-center">
-                    <div id="photoModalDiv">
-                        <img id="imgModal">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
-@endsection
-
-@section('postscript')
-    <script type="text/javascript">
-
-        $(document).ready(function() {
-            (document.getElementById('btn-back')).addEventListener('click', () => { history.back(); });
-            (document.getElementById('btn-pdf')).addEventListener('click', () => { 
-                window.open("{{route('report_task', $checklistMov->id)}}");
-            });
-
-            const photoShowModal = document.getElementById('photoShowModal');
-            photoShowModal.addEventListener('show.bs.modal', event => {
-                const img = event.relatedTarget;
-                const image = img.getAttribute('src');
-                $("#imgModal").attr("src", image);
-                $("#photoModalTitle").text(img.getAttribute('data-bs-title'));
-            });
-
-        });
-    </script>
+    @endforeach
 @endsection
