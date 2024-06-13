@@ -2,6 +2,7 @@
 
 namespace App\Services;
 
+use App\Enums\Frequency;
 use App\Enums\Status;
 use App\Models\Checklist;
 use App\Models\ChecklistMov;
@@ -50,8 +51,19 @@ class ChecklistService {
     }
 
     public function shouldRun(Checklist $checklist, Unity $unity) {
-        // if($checklist->status != Status::ACTIVE || $unity->status != Status::ACTIVE) return false;
-        return true;
+        if($checklist->status != Status::ACTIVE->value || $unity->status != Status::ACTIVE->value) return false;
+
+        $now = Carbon::now()->setSeconds(0)->setMicroseconds(0);
+        $hourSinc = Carbon::parse($checklist->generate_time);
+
+        if(!$now->equalTo($hourSinc)) return false;
+        return match ($checklist->frequency) {
+            Frequency::DAILY->value => true,
+            Frequency::FORTNIGHTLY->value => $now->day == 1 || $now->day == 15,
+            Frequency::WEEKLY->value => in_array($now->dayOfWeek, $checklist->frequency_composition),
+            Frequency::MONTHLY->value => in_array($now->day, $checklist->frequency_composition),
+            default => false
+        };
     }
 
     public function InitializeChecklistMov(Checklist $checklist, Unity $unity) {

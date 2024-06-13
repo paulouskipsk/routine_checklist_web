@@ -16,9 +16,8 @@ class ChecklistMovService {
     public function finishExpiredTasks(Carbon $time){
         try {
              //Finaliza tarefas expiradas a cada 10 minutos
-             if($time->minute() % 10 != 0) return;
+            if($time->minute % 10 != 0) return;
 
-            Log::info("ROTINA AUTOMATICA: Finalizando automaticamente os checklists expirados pelo shelflife.");
             $checklists = ChecklistMov::where('end_date', '<=', $time)
                                       ->where('status', Status::ACTIVE)
                                       ->get();
@@ -26,7 +25,6 @@ class ChecklistMovService {
             foreach ($checklists as $chechlist) {
                 $this->closeChecklistMov($chechlist, true);
             }
-            Log::info("ROTINA AUTOMATICA: Finalizado automaticamente: ". $checklists->count(). " checklists expirados pelo shelflife.");
         } catch (\Throwable $th) {
             Log::error("ROTINA AUTOMATICA: Erro ao finalizar os Checklists Expirados pelo shelflife. Erro: ". $th->getMessage(). ", Arquivo: ".$th->getFile(). ', Linha: '.$th->getLine() );
         }
