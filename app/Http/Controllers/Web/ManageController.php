@@ -26,16 +26,17 @@ class ManageController extends ControllerWeb {
         $breadcrumbs = [['url'=> '/gerenciar/tarefas','label' => 'Gerenciar Tarefas','active'=>false]];
 
         $startDate = Functions::nullOrEmpty($request->start_date) ? Carbon::now()->startOfMonth() :  Carbon::createFromFormat('d/m/Y', $request->start_date);
+        $startDate->setHour(0)->setMinute(0)->setSecond(0);
         $endDate = Functions::nullOrEmpty($request->end_date) ? Carbon::now()->endOfMonth() : Carbon::createFromFormat('d/m/Y', $request->end_date);
+        $endDate->setHour(23)->setMinute(59)->setSecond(59);
         $units = Unity::all();
         $unitsSelecteds = Functions::nullOrEmpty($request->units) ? $units : Unity::find($request->units);
         $unitsSelecteds = $unitsSelecteds->pluck('id');
 
         $checklists = ChecklistMov::where('start_date', '>=', $startDate)
-                                      ->where('end_date', '<=', $endDate)
-                                    //   ->where('processed','S')
-                                      ->whereIn('unit_id', $unitsSelecteds)
-                                      ->get();
+                                  ->where('end_date', '<=', $endDate)
+                                  ->whereIn('unit_id', $unitsSelecteds)
+                                  ->get();
         
         return view('manage.tasks.list', compact(['breadcrumbs', 'checklists', 'startDate', 'endDate', 'units', 'unitsSelecteds']));
     }

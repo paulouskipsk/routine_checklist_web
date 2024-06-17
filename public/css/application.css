@@ -13,6 +13,10 @@ section {
 	color: #c5c5c5  #d1d0d0d5;
 }
 
+.card-home{
+	border: 1px solid #e7e5e55e !important;
+}
+
 
 #breadcrumb{
 	margin-top: -25px !important;

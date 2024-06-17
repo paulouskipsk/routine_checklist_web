@@ -54,7 +54,7 @@
         <h5 class="text-primary text-center">Resumo de execução dos checklists finalizados</h5>
 
         <div class="row mb-6 mt-3">
-            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2 m-0 p-2 text-center border border-1">
+            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2 m-0 p-2 text-center border border-1 card-home">
                 <i class="fa-regular fa-star text-info fs-3 lh-1"></i>
                 <h1 class="fs-3 pt-3">{{$reports['finishedTotals']['totals']['scoreTotal']}}</h1>
                 <p class="fs--1 mb-0">Pontuação Processada</p>
@@ -66,57 +66,88 @@
                 </p>
             </div>
   
-            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2 m-0 p-2 text-center border border-1">
+            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2 m-0 p-2 text-center border border-1 card-home">
                 <i class="fa-solid fa-star text-primary fs-3 lh-1"></i>
                 <h1 class="fs-3 pt-3">{{$reports['finishedTotals']['totals']['scoreRun']}}</h1>
                 <p class="fs--1 mb-0">Pontuação Alcançada</p>
 
                 <div class="progress mt-1 b-0" style="height:5px;">
-                    <div class="progress-bar bg-{{$reports['finishedTotals']['percentages']['percentScoreRun'] < 70 ? 'danger' : 'success'}}" role="progressbar" style="width: 70%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div role="progressbar" 
+                         aria-valuemax="100"     
+                         aria-valuenow="25" 
+                         aria-valuemin="0" 
+                         style="width: {{$reports['finishedTotals']['percentages']['percentScoreRun']}}%" 
+                         class="progress-bar bg-{{$reports['finishedTotals']['percentages']['percentScoreRun'] < 70 ? 'danger' : 'success'}}">
+                    </div>
                 </div>
                 {{$reports['finishedTotals']['percentages']['percentScoreRun']}}%
             </div>
   
-            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2 m-0 p-2 text-center border border-1">
+            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2 m-0 p-2 text-center border border-1 card-home">
                 <i class="fa-regular fa-circle-check text-success fs-3 lh-1"></i>
                 <h1 class="fs-3 pt-3">{{$reports['finishedTotals']['totals']['questionsExecuted']}}</h1>
                 <p class="fs--1 mb-0">Questões Respondidas</p>
 
                 <div class="progress mt-1" style="height:5px">
-                    <div class="progress-bar bg-primary" role="progressbar" style="width: 70%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div 
+                        role="progressbar" 
+                        aria-valuenow="25" 
+                        aria-valuemin="0" 
+                        aria-valuemax="100"
+                        style="width: {{$reports['finishedTotals']['percentages']['percentQuestionsExecuted']}}%"
+                        class="progress-bar bg-{{$reports['finishedTotals']['percentages']['percentQuestionsExecuted']}} < 70 ? 'danger' : 'success'}}" >
+                    </div>
                 </div>
                 {{$reports['finishedTotals']['percentages']['percentQuestionsExecuted']}}%
             </div>
   
-            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2 m-0 p-2 text-center border border-1">
+            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2 m-0 p-2 text-center border border-1 card-home">
               <i class="fa-solid fa-triangle-exclamation text-danger fs-3 lh-1"></i>
               <h1 class="fs-3 pt-3">{{$reports['finishedTotals']['totals']['questionsLost']}}</h1>
               <p class="fs--1 mb-0">Questões não Respondidas</p>
 
               <div class="progress mt-1" style="height:5px">
-                <div class="progress-bar bg-primary" role="progressbar" style="width: 70%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                <div role="progressbar" 
+                     aria-valuenow="25" 
+                     aria-valuemin="0" 
+                     aria-valuemax="100"
+                     class="progress-bar bg-primary"
+                     style="width: {{$reports['finishedTotals']['percentages']['percentQuestionsLost']}}%" >
+                </div>
             </div>
             {{$reports['finishedTotals']['percentages']['percentQuestionsLost']}}%
             </div>
   
-            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2 m-0 p-2 text-center border border-1">
+            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2 m-0 p-2 text-center border border-1 card-home">
                 <i class="far fa-thumbs-down text-warning fs-3 lh-1"></i>
                 <h1 class="fs-3 pt-3">{{$reports['finishedTotals']['totals']['questionsNegatives']}}</h1>
                 <p class="fs--1 mb-0">Questões Não/Ruim</p>
 
                 <div class="progress mt-1" style="height:5px">
-                    <div class="progress-bar bg-primary" role="progressbar" style="width: 70%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div role="progressbar" 
+                         aria-valuenow="25" 
+                         aria-valuemin="0" 
+                         aria-valuemax="100"
+                         style="width: {{$reports['finishedTotals']['percentages']['percentQuestionsNegatives']}}%" 
+                         class="progress-bar bg-primary">
+                    </div>
                 </div>
                 {{$reports['finishedTotals']['percentages']['percentQuestionsNegatives']}}%
             </div>
 
-            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2 m-0 p-2 text-center border border-1">
+            <div class="col-sm-6 col-md-6 col-lg-4 col-xl-2 m-0 p-2 text-center border border-1 card-home">
                 <i class="far fa-thumbs-up text-success fs-3 lh-1"></i>
                 <h1 class="fs-3 pt-3">{{$reports['finishedTotals']['totals']['questionsAfirmatives']}}</h1>
                 <p class="fs--1 mb-0">Questões Sim/Bom/Excel.</p>
 
                 <div class="progress mt-1" style="height:5px">
-                    <div class="progress-bar bg-primary" role="progressbar" style="width: 70%" aria-valuenow="25" aria-valuemin="0" aria-valuemax="100"></div>
+                    <div aria-valuenow="25" 
+                         aria-valuemin="0" 
+                         aria-valuemax="100"
+                         role="progressbar" 
+                         class="progress-bar bg-primary" 
+                         style="width: {{$reports['finishedTotals']['percentages']['percentQuestionsAfirmatives']}}%" >
+                    </div>
                 </div>
                 {{$reports['finishedTotals']['percentages']['percentQuestionsAfirmatives']}}%
             </div>
