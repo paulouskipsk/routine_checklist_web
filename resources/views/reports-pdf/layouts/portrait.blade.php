@@ -235,6 +235,7 @@
         .my-3 { margin-left : 30px !important; margin-right: 30px !important; }
         .my-4 { margin-left : 40px !important; margin-right: 40px !important; }
         .my-5 { margin-left : 50px !important; margin-right: 50px !important; }
+        .p-0 { padding: 0px !important;}
         .py-0 { padding-top : 0px !important; padding-bottom: 0px !important; }
         .py-1 { padding-top : 5px !important; padding-bottom: 5px !important; }
         .py-2 { padding-top : 10px !important; padding-bottom: 10px !important; }
@@ -266,6 +267,15 @@
         .text-warning { color: rgb(41, 193, 231) !important; }
         .text-info { color: green !important; }
         .img-200 { width: 200px !important; height: 200px !important; }
+        .img-150 { width: 150px !important; height: 150px !important; }
+
+        .table-sm td, .table-sm th{
+            padding: 0px !important;
+            margin: 0px !important;
+        }
+        .table-sm {
+            line-height: 1.1rem !important;
+        }
     </style>
     
 </head>

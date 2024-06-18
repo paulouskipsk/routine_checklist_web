@@ -62,20 +62,7 @@
 @section('postscript')
     <script type="text/javascript">
         $(document).ready(() => {
-            $('#classification-list').DataTable({
-                lengthMenu: [
-                    [30, 50, 100, -1],
-                    [30, 50, 100, 'All']
-                ],
-                buttons: [
-                    'copy', 'excel', 'pdf'
-                ],
-
-                language: {
-                    url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/pt-BR.json',
-                },
-
-            });
+            initializeDatatables('classification-list');
         });
     </script>
 @endsection

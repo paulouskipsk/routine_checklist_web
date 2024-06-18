@@ -6,10 +6,10 @@
 
 
 <div class="bold fs-13 mb-0 text-primary">GERAL</div>
-<hr class="mt-0"/>
-<table>
+{{-- <hr class="mt-0"/> --}}
+<table class="table table-sm">
     <tbody>
-      <tr><td>
+      <tr class="m-0 p-0"><td>
           <span class="bold fs-12">Tarefa: </span>
           <span class="mr-1 italic fs-12">{{"$checklistMov->id - $checklistMov->description"}}</span>
       </td></tr>
@@ -69,13 +69,13 @@
         <span class="mr-1 italic fs-12">{{$report['totals']['scoreRun']}}</span>
 
         <span class="bold fs-12">Percentual Atingido: </span>
-        <span class="mr-1 italic fs-12">{{$report['percentages']['percentScoreRun'].'%'}}</span>
+        <span class="mr-1 italic fs-12">{{round($report['percentages']['percentScoreRun'], 3).'%'}}</span>
       </td></tr>
 
       <tr> 
         <td>
 
-          <table>
+          <table class="table table-sm">
             <thead">
               <tr>
                 <th class="bold fs-12 text-primary text-left w-15 ">
@@ -91,19 +91,19 @@
                 <td></td>
                 <td>
                   <span class="bold fs-12">Sim:</span>
-                  <span class="mr-1 italic fs-12">{{$report['totals']['questionsY']}}</span>
+                  <span class="mr-1 italic fs-12">{{round($report['totals']['questionsY'], 3)}}</span>
                   <br/>
                   <span class="bold fs-12">Não:</span>
-                  <span class="mr-1 italic fs-12">{{$report['totals']['questionsN']}}</span>
+                  <span class="mr-1 italic fs-12">{{round($report['totals']['questionsN'], 3)}}</span>
                   <br/>
                   <span class="bold fs-12">Ruim:</span>
-                  <span class="mr-1 italic fs-12">{{$report['totals']['questionsB']}}</span>
+                  <span class="mr-1 italic fs-12">{{round($report['totals']['questionsB'], 3)}}</span>
                   <br/>
                   <span class="bold fs-12">Bom:</span>
-                  <span class="mr-1 italic fs-12">{{$report['totals']['questionsG']}}</span>
+                  <span class="mr-1 italic fs-12">{{round($report['totals']['questionsG'], 3)}}</span>
                   <br/>
                   <span class="bold fs-12">Excelente:</span>
-                  <span class="mr-1 italic fs-12">{{$report['totals']['questionsE']}}</span>
+                  <span class="mr-1 italic fs-12">{{round($report['totals']['questionsE'], 3)}}</span>
             </div>
 
                 </td>
@@ -137,16 +137,14 @@
   </table>
 
 
-    <div class="bold fs-13 mt-3 text-primary">POR ÁREA</div>
+    <div class="bold fs-13 mt-1 text-primary">POR ÁREA</div>
     {{-- RESULTADO POR SETOR --}}
-    <table class="table table-striped table-condensed">
+    <table class="table table-sm table-striped table-condensed">
         <thead>
             <tr class="py-0 fs-10 text-dark bold">
                 <th>Descrição do Setor</th>
                 <th>Tot. <br/> Questões</th>
-                <th>Tot. Quest.<br/>Afirmativa(s)</th>
                 <th>% Resp.<br/>Afirmativa(s)</th>
-                <th>Tot. Quest.<br/>Negativa(s)</th>
                 <th>% Resp.<br/>Negativa(s)</th>
                 <th>Tot. Pontos <br/> Gerado</th>
                 <th>Tot. Pontos <br/> Executado</th>
@@ -159,9 +157,7 @@
             <tr>
                 <td class="py-1"> {{$report['sectors'][$sectorId]->description}}</td>
                 <td class="py-1"> {{$totalSector['questionsTotals']}} </td>
-                <td class="py-1"> {{$totalSector['questionsAfirmatives']}} </td>
                 <td class="py-1">{{$report['percentagesSectors'][$sectorId]['percentQuestionsAfirmatives']}}%</td>
-                <td class="py-1"> {{$totalSector['questionsNegatives']}} </td>
                 <td class="py-1">{{$report['percentagesSectors'][$sectorId]['percentQuestionsNegatives']}}%</td>
                 <td class="py-1">{{$totalSector['scoreTotal']}}</td>
                 <td class="py-1">{{$totalSector['scoreRun']}}</td>
@@ -169,17 +165,17 @@
             </tr>
             @endforeach
         </tbody>
-        <tfoot>
+        <tfoot class="text-primary">
             <tr class="bold fs-10">
                 <td> TOTAIS </td>
                 <td> {{$report['totals']['questionsTotals']}} </td>
-                <td> {{$report['totals']['questionsAfirmatives']}} </td>
-                <td> {{$report['percentages']['percentQuestionsAfirmatives']}}% </td>
-                <td> {{$report['totals']['questionsNegatives']}} </td>
-                <td> {{$report['percentages']['percentQuestionsNegatives']}}% </td>
+                {{-- <td> {{$report['totals']['questionsAfirmatives']}} </td> --}}
+                <td> {{round($report['percentages']['percentQuestionsAfirmatives'], 2)}}% </td>
+                {{-- <td> {{$report['totals']['questionsNegatives']}} </td> --}}
+                <td> {{round($report['percentages']['percentQuestionsNegatives'], 2)}}% </td>
                 <td> {{$report['totals']['scoreTotal']}} </td>
                 <td> {{$report['totals']['scoreRun']}} </td>
-                <td> {{$report['percentages']['percentScoreRun']}}% </td>
+                <td> {{round($report['percentages']['percentScoreRun'], 2)}}% </td>
             </tr>
         </tfoot>
     </table>
@@ -194,11 +190,10 @@
     <div class="border-1 mt-2">
         <table class="table table-condensed">
             <tbody class="fs-10">
-                <tr colspan="2" class="alert alert-secondary bold text-uppercase">
-                    <td class="py-0">
+                <tr class="alert alert-secondary bold text-uppercase">
+                    <td colspan="2" class="py-0">
                         <span class="mr-1 italic">{{$checklistItemMov->id .' - '.$checklistItemMov->description}}</span>
                     </td>
-                    <td class="py-0"></td>
                 </tr>
                 <tr>
                     <td class="py-0">
@@ -243,30 +238,29 @@
                     </td>
                 </tr>
 
-                <tr colspan="2">
-                    <td class="py-0">
+                <tr>
+                    <td colspan="2" class="py-0">
                         <span class="bold">Observações:</span>
                         <span class="mr-1 italic">{{$checklistItemMov->observation ?? 'Não Informado'}}</span>
                     </td>
-                    <td class="py-0"></td>
-                </tr>
-                <tr colspan="2">
-                    <td class="py-0">
-                        <span class="bold">Fotos:</span>
-
-                        @if ($checklistItemMov->photos)
-                        <div class="text-left m-1 pt-1">                                                           
-                        @foreach ($checklistItemMov->photos as $index => $photo)                                                            
-                            <img src="data:image/jpeg;base64,{{$photo}}" class="img-thumbnail pt-1 img-200">
-                        @endforeach
-                        </div>
-                        @else
-                        <span class="mr-1 italic">Não Informado</span>
-                        @endif
-                    </td>
-                    <td class="py-0"></td>
-                </tr>
+                </tr>                
             </tbody>
+
+            <tr>
+                <td colspan="2" class="py-0">
+                    <span class="bold">Fotos:</span>
+
+                    @if ($checklistItemMov->photos)
+                    <div class="text-left mt-3 pl-3">
+                    @foreach ($checklistItemMov->photos as $index => $photo)                                                            
+                        <img src="data:image/jpeg;base64,{{$photo}}" class="img-150">
+                    @endforeach
+                    </div>
+                    @else
+                    <span class="mr-1 italic">Não Informado</span>
+                    @endif
+                </td>
+            </tr>
         </table>
     </div>
     @endforeach

@@ -6,8 +6,13 @@
     <div class="accordion">
         <div class="accordion-item border border-300 rounded-2 px-4 py-2">
             <h2 class="accordion-header">
-                <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#panelsStayOpen-collapseOne" aria-expanded="true" aria-controls="panelsStayOpen-collapseOne">
-                Filtros
+                <button class="accordion-button" 
+                        type="button" 
+                        data-bs-toggle="collapse" 
+                        data-bs-target="#panelsStayOpen-collapseOne"
+                        aria-expanded="true" 
+                        aria-controls="panelsStayOpen-collapseOne">
+                    Filtros
                 </button>
             </h2>
 
@@ -17,6 +22,7 @@
                     <form action="{{route('manage_tasks')}}" method="GET" role="form">
                         @csrf
                         @method('GET')
+
                         <div class="row">
                             <div class="col-sm-6 col-md-2 mx-0 px-1">
                                 <label class="form-label" for="datepicker">Data Inicial</label>
@@ -42,45 +48,36 @@
                                     data-options='{"disableMobile":true,"dateFormat":"d/m/Y"}' />
                             </div>
 
-                            <div class="col-sm-8 col-md-8 col-lg-5 col-xl-6 mx-0 px-1">
-                                <label class="form-label">Unidades</label>
-                                <select class="form-select" name="units[]" data-placeholder="Selecione as Unidades" multiple id="units">
-                                    @foreach ($units as $unity)
-                                        <option value="{{$unity->id}}" id="optionUnity{{$unity->id}}">
-                                            {{str_pad($unity->id , 3 , '0' , STR_PAD_LEFT)}}
-                                        </option>
-                                    @endforeach
-                                </select>
+                            <div class="col-8">
+                                <label class="form-label" for="datepicker">Unidades Selecionadas</label>
+                                <div class="input-group mb-3">
+                                    <button class="btn btn-outline-secondary" 
+                                            type="button"
+                                            onclick="getSelectUnitsModal(this)"
+                                            data-checklist-units="{{ $units->pluck('id') }}"
+                                            data-bs-toggle="modal" 
+                                            data-bs-target="#select-units-modal"
+                                            type="button"
+                                            id="select-units">
+                                            Selecionar
+                                    </button>
+                                    <input type="text" 
+                                           name="units" 
+                                           value="{{Functions::formatIdsUnits($unitsSelecteds)}}" 
+                                           id="units-selecteds-input" 
+                                           class="form-control" 
+                                           placeholder="Não há unidades Selecionadas">
+                                  </div>
                             </div>
-
-                            <div class="col-sm-4 col-md-4 col-lg-3 col-xl-2 mt-2 mx-0 px-0 pt-3">
-                                <button type="button"
-                                        id="clear"
-                                        class="btn btn-danger px-3"
-                                        data-toggle="tooltip" 
-                                        data-placement="top" 
-                                        title="Limpar seleção de unidades">
-                                        <i class="fa-solid fa-broom"></i>
-                                </button>
-
-                                <button type="button"
-                                        id="select_all" 
-                                        class="btn btn-info px-3" 
-                                        data-toggle="tooltip" 
-                                        data-placement="top" 
-                                        title="Selecionar Todas as unidades">
-                                        <i class="fa-solid fa-check-double"></i>
-                                </button>
-
-                                <button type="submit" 
-                                        class="btn btn-success px-3" 
-                                        data-toggle="tooltip" 
-                                        data-placement="top" 
-                                        title="Aplicar Filtros">
-                                        <i class="fa-solid fa-magnifying-glass"></i>
-                                </button>
+                        </div>
+                            
+                        <div class="row justify-content-end">
+                            <div class="col-12 mb-0 text-end">
+                                <button class="btn btn-outline-success " type="submit">
+                                    <i class="fa-solid fa-check-double"></i>
+                                    Aplicar Filtro
+                                </button> 
                             </div>
-
                         </div>
                     </form>
                 </div>
@@ -175,28 +172,28 @@
     </div>
 
   <!-- Modal -->
-    <div class="modal modal-lg fade" id="units-generate-task-modal" tabindex="-1" aria-hidden="true">
-        <div class="modal-dialog">
-            <div class="modal-content">
-                <div class="modal-header">
-                    <h1 class="modal-title">Selecionar Unidades para Geração de Tarefa Manual</h1>
-                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-                </div>
-                <div class="modal-body">
-                    <input type="hidden" value="" id="checklist-id-modal">
+  <div class="modal modal-lg fade" id="select-units-modal" tabindex="-1" aria-hidden="true">
+    <div class="modal-dialog">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h1 class="modal-title">Selecionar Unidades para o filtro</h1>
+                <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+            </div>
+            <div class="modal-body">
+                <input type="hidden" value="" id="units-selecteds">
 
-                    <div class="row d-flex justify-content-center mt-5">
-                        <div class="col-12" id="select-unity-for-task"></div>
-                    </div>
+                <div class="row d-flex justify-content-center mt-5">
+                    <div class="col-12" id="select-unity-for-filter"></div>
                 </div>
-                <div class="modal-footer">
-                    <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
-                    <button type="button" class="btn btn-secondary" id="btn-generate-tasks">Gerar Tarefas</button>
-                </div>
+            </div>
+            <div class="modal-footer">
+                <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Cancelar</button>
+                <button type="button" class="btn btn-secondary" data-bs-dismiss="modal" id="btn-confirm">Confirmar</button>
             </div>
         </div>
     </div>
-  <!-- /Modal -->
+</div>
+<!-- /Modal -->
 @endsection
 
 @section('postscript')
@@ -204,40 +201,44 @@
         let units = <?= json_encode($units->pluck('id')) ?>;
         let unitsSelecteds = <?= json_encode($unitsSelecteds) ?>;
         let dataSource = [];
+    
 
-        function selectAll() {
-            $("#units > option").prop("selected", true).trigger("change");
+        function getSelectUnitsModal(){
+            event.preventDefault();
+            let select = '';
+            let allUnits = <?= $units ?>; 
+            let unitsSelecteds = ($("#units-selecteds-input").val()).split(',');
+
+            let selectUnityForFilter = '<select multiple="multiple" name="unitsSelecteds[]" id="units-selecteds"> \n';
+                allUnits.forEach(unity => {
+                let selected = unitsSelecteds.includes(("000" + unity.id).slice(-3)) ? 'selected' : '';
+                selectUnityForFilter +=`<option value="${unity.id}" ${selected}> ${unity.id} - ${unity.fantasy_name} </option>\n`;
+            });
+            selectUnityForFilter += '</select>';
+
+            $("#select-unity-for-filter").empty();
+            $("#select-unity-for-filter").append(selectUnityForFilter);
+            initializeDualListBox('#select-unity-for-filter', 'Unidades Ativas', 'Unidades Selecionadas');
         }
 
-        function deselectAll() {
-            $("#units > option").prop("selected", false).trigger("change");
+        function confirmSelectUnits(){
+            let unitsSelecteds = [];            
+            $("#select-unity-for-filter").find("option:selected").each(function() {
+                unitsSelecteds.push(("000" + $(this).val()).slice(-3));
+            });
+            $("#units-selecteds-input").val(unitsSelecteds);
         }
-        
-        function generateSelect2Units(){
-            $('#units').select2( {
-                theme: "bootstrap-5",
-                width: $(this).data('width') ? $(this).data('width' ) : $(this).hasClass('w-100' ) ? '100%' : 'style',
-                placeholder: 'Selecione as unidades',
-                closeOnSelect: false,
-                tags: true,
-                
+
+        $(document).ready(function() {
+            initializeDatatables('checklist-list');
+
+            $("#select-units").click(function(){ 
+                getSelectUnitsModal();
             });
 
-            $('#units').val(unitsSelecteds).trigger("change");
-        }
-
-        $("#clear").on("click", function(event) {
-            event.preventDefault();
-            deselectAll();
+            $("#btn-confirm").click(function(){ 
+                confirmSelectUnits();
+            });
         });
-
-        $("#select_all").on( "click", function() {
-            selectAll();
-        });
-        
-        $(document).ready(function() {
-            generateSelect2Units();            
-        });
-
     </script>
 @endsection

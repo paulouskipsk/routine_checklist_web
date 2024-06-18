@@ -113,7 +113,7 @@
                                                 </div>
                                                 <div class="col-4 fs-0">
                                                     <span class="fw-bold mr-2">Percentual Atingido: </span> 
-                                                    <span class="fst-italic">{{$report['percentages']['percentScoreRun']}} %</span>
+                                                    <span class="fst-italic">{{round($report['percentages']['percentScoreRun'], 3)}} %</span>
                                                 </div>  
                                             </div>
 
@@ -152,19 +152,19 @@
                                                 <div class="col-auto fs-0">
                                                     <p class="my-1">
                                                         <span class="fw-bold">Sim:</span>
-                                                        <span class="fst-italic">{{$report['percentages']['percentQuestionsY']}}%</span>
+                                                        <span class="fst-italic">{{round($report['percentages']['percentQuestionsY'], 2)}}%</span>
                                                     <p class="my-1">
                                                         <span class="fw-bold">Não:</span>
-                                                        <span class="fst-italic">{{$report['percentages']['percentQuestionsN']}}%</span>
+                                                        <span class="fst-italic">{{round($report['percentages']['percentQuestionsN'], 2)}}%</span>
                                                     <p class="my-1">
                                                         <span class="fw-bold">Ruim:</span>
-                                                        <span class="fst-italic">{{$report['percentages']['percentQuestionsB']}}%</span>
+                                                        <span class="fst-italic">{{round($report['percentages']['percentQuestionsB'], 2)}}%</span>
                                                     <p class="my-1">
                                                         <span class="fw-bold">Bom:</span>
-                                                        <span class="fst-italic">{{$report['percentages']['percentQuestionsG']}}%</span>
+                                                        <span class="fst-italic">{{round($report['percentages']['percentQuestionsG'], 2)}}%</span>
                                                     <p class="my-1">
                                                         <span class="fw-bold">Excelente:</span>
-                                                        <span class="fst-italic">{{$report['percentages']['percentQuestionsE']}}%</span>
+                                                        <span class="fst-italic">{{round($report['percentages']['percentQuestionsE'], 2)}}%</span>
                                                 </div>                                                                                         
                                             </div>
                                         </div>
@@ -179,7 +179,7 @@
                                 <div class="col-12 mb-3">
                                     <div class="card border border-300">
                                         <div class="card-body">
-                                            <h4 class="card-title text-primary"> Por Área </h4>
+                                            <h4 class="card-title text-primary"> Por Setor </h4>
                                             <hr class="text-400">
 
                                             <table class="table">
@@ -188,9 +188,7 @@
                                                         <th>Cod.<br/> Setor</th>
                                                         <th>Descrição do Setor</th>
                                                         <th>Tot. <br/> Questões</th>
-                                                        <th>Tot. Quest.<br/>Afirmativa(s)</th>
                                                         <th>% Resp.<br/>Afirmativa(s)</th>
-                                                        <th>Tot. Quest.<br/>Negativa(s)</th>
                                                         <th>% Resp.<br/>Negativa(s)</th>
                                                         <th>Tot. Pontos <br/> Gerado</th>
                                                         <th>Tot. Pontos <br/> Executado</th>
@@ -204,13 +202,11 @@
                                                         <td class="py-1"> {{$sectorId}} </td>
                                                         <td class="py-1"> {{$report['sectors'][$sectorId]->description}}</td>
                                                         <td class="py-1"> {{$totalSector['questionsTotals']}} </td>
-                                                        <td class="py-1"> {{$totalSector['questionsAfirmatives']}} </td>
-                                                        <td class="py-1">{{$report['percentagesSectors'][$sectorId]['percentQuestionsAfirmatives']}}%</td>
-                                                        <td class="py-1"> {{$totalSector['questionsNegatives']}} </td>
-                                                        <td class="py-1">{{$report['percentagesSectors'][$sectorId]['percentQuestionsNegatives']}}%</td>
+                                                        <td class="py-1">{{round($report['percentagesSectors'][$sectorId]['percentQuestionsAfirmatives'], 2)}}%</td>
+                                                        <td class="py-1">{{round($report['percentagesSectors'][$sectorId]['percentQuestionsNegatives'], 2)}}%</td>
                                                         <td class="py-1">{{$totalSector['scoreTotal']}}</td>
                                                         <td class="py-1">{{$totalSector['scoreRun']}}</td>
-                                                        <td class="py-1">{{$report['percentagesSectors'][$sectorId] ['percentScoreRun']}}%</td>
+                                                        <td class="py-1">{{round($report['percentagesSectors'][$sectorId] ['percentScoreRun'], 2)}}%</td>
                                                     </tr>
                                                     @endforeach
                                                 </tbody>
@@ -218,13 +214,11 @@
                                                     <tr class="fw-bold">
                                                         <td colspan="2"> TOTAIS </td>
                                                         <td> {{$report['totals']['questionsTotals']}} </td>
-                                                        <td> {{$report['totals']['questionsAfirmatives']}} </td>
-                                                        <td> {{$report['percentages']['percentQuestionsAfirmatives']}}% </td>
-                                                        <td> {{$report['totals']['questionsNegatives']}} </td>
-                                                        <td> {{$report['percentages']['percentQuestionsNegatives']}}% </td>
+                                                        <td> {{round($report['percentages']['percentQuestionsAfirmatives'], 2)}}% </td>
+                                                        <td> {{round($report['percentages']['percentQuestionsNegatives'], 2)}}% </td>
                                                         <td> {{$report['totals']['scoreTotal']}} </td>
                                                         <td> {{$report['totals']['scoreRun']}} </td>
-                                                        <td> {{$report['percentages']['percentScoreRun']}}% </td>
+                                                        <td> {{round($report['percentages']['percentScoreRun'], 2)}}% </td>
                                                     </tr>
                                                 </tfoot>
                                             </table>
@@ -329,17 +323,24 @@
 
                                                     <div class="row border-bottom border-0 py-1">
                                                         <div class="col-12 fs-0">
-                                                            <span class="fw-bold">Fotos: </span> 
+                                                            <span class="fw-bold">Fotos: 
+                                                                @if (!Functions::nullOrEmpty($checklistItemMov->photos))
+                                                                <button class="btn btn-link" data-checklist-item-mov="{{'checklistItemMovPhoto'.$checklistItemMov->id}}">
+                                                                    Visualizar fotos ampliadas
+                                                                </button>
+                                                                @endif
+                                                                
+                                                            </span>
+
                                                             @if ($checklistItemMov->photos)
                                                             <div class="text-left m-1 pt-1">                                                           
                                                                 @foreach ($checklistItemMov->photos as $index => $photo)                                                            
-                                                                <div class="w-200 float-start px-1 pb-2">
+                                                                <div class="w-200 float-start px-1 pb-2 image-set">
                                                                     <img 
                                                                     src="data:image/jpeg;base64,{{$photo}}" 
-                                                                    class="img-thumbnail rounded border border-300 w-100 pt-1 checklistItemMovPhoto cursor-pointer" 
-                                                                    data-bs-toggle="modal" 
-                                                                    data-bs-target="#photoShowModal"
-                                                                    data-bs-title="{{$checklistItemMov->description . ' ( Foto '.  str_pad($index+1, 2 , '0' , STR_PAD_LEFT) .' )'}}">
+                                                                    class="img-thumbnail rounded border border-300 w-100 pt-1"
+                                                                    data-checklist-item-mov="{{'checklistItemMovPhoto'.$checklistItemMov->id}}" 
+                                                                    data-img-title="{{$checklistItemMov->description . ' ( Foto '.  str_pad($index+1, 2 , '0' , STR_PAD_LEFT) .' )'}}">
                                                                 </div>
                                                                 @endforeach
                                                             </div>
@@ -362,55 +363,48 @@
             </div>
         </div>
     </div>
-
-<!-- Modal -->
-<div class="modal fade" id="photoShowModal" data-bs-backdrop="static" data-bs-keyboard="true" tabindex="-1" aria-labelledby="staticBackdropLabel" aria-hidden="true">
-    <div class="modal-dialog modal-fullscreen">
-      <div class="modal-content ">
-        <div class="modal-header alert alert-soft-primary text-primary py-3 px-5 border border-bottom-400">
-          <h1 class="modal-title fs-1 text-primary fw-bold" id="staticBackdropLabel">
-            <span id="photoModalTitle"></span>
-          </h1>
-          <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
-        </div>
-        <div class="modal-body ">
-
-            <div class="row content-justify-center">
-                <div class="col-12 text-center">
-                    <div id="photoModalDiv">
-                        <img id="imgModal">
-                    </div>
-                </div>
-            </div>
-        </div>
-        <div class="modal-footer">
-            <button type="button" class="btn btn-danger" data-bs-dismiss="modal">Close</button>
-        </div>
-      </div>
-    </div>
-  </div>
-
-
 @endsection
 
 @section('postscript')
     <script type="text/javascript">
-
         $(document).ready(function() {
             (document.getElementById('btn-back')).addEventListener('click', () => { history.back(); });
             (document.getElementById('btn-pdf')).addEventListener('click', () => { 
-                // window.open("{{route('report_task', $checklistMov->id)}}", '_self');
                 window.open("{{route('report_task', $checklistMov->id)}}");
             });
 
-            const photoShowModal = document.getElementById('photoShowModal');
-            photoShowModal.addEventListener('show.bs.modal', event => {
-                const img = event.relatedTarget;
-                const image = img.getAttribute('src');
-                $("#imgModal").attr("src", image);
-                $("#photoModalTitle").text(img.getAttribute('data-bs-title'));
-            });
+            $('button[data-checklist-item-mov]').click(function (event) {                
+                let ImagesClicked = event.target.getAttribute('data-checklist-item-mov');                
+                let images = $('img[data-checklist-item-mov="'+ImagesClicked  + '"]').get().map(function (image) {
+                    return {
+                        src: $(image).attr('src'),
+                        title: $(image).attr('data-img-title')
+                    }
+                });
 
+                let options = {
+                    index: $(this).index(),
+                    resizable: true,
+                    initMaximized: true,
+                    keyboard: true,
+                    
+                    headerToolbar: [
+                        'minimize',
+                        'maximize',
+                        'close'
+                    ],
+                    footerToolbar: [
+                        'prev',
+                        'next',
+                        'zoomIn',
+                        'zoomOut',
+                        'rotateLeft',
+                        'rotateRight',
+                    ],
+                };
+                new PhotoViewer(images, options);
+            });
         });
     </script>
+    <script src="{{ asset('js/photoviewer.min.js') }}"></script>
 @endsection

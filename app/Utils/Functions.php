@@ -7,6 +7,7 @@ use Carbon\Carbon;
 use DateTime;
 use Exception;
 use Illuminate\Database\Eloquent\Collection;
+use Illuminate\Support\Collection as SupportCollection;
 use Illuminate\Support\Facades\Date;
 use PhpParser\Node\Expr\Cast\Array_;
 use PhpParser\Node\Expr\Cast\Double;
@@ -121,5 +122,15 @@ class Functions {
         } catch (\Throwable $th) {
             throw $th;
         }
+    }
+
+    public static function formatIdsUnits(array|SupportCollection $unityIds){
+        if(self::nullOrEmpty($unityIds)) return '';
+        $unitsArr = '';
+        foreach ($unityIds as $unityId) {
+            if(!self::nullOrEmpty($unitsArr)) $unitsArr .= ',';
+            $unitsArr .= self::formatPadLeft($unityId, 3);
+        }
+        return $unitsArr;
     }
 }

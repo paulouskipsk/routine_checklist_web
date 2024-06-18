@@ -3,6 +3,7 @@
 namespace App\Http\Controllers\Web;
 
 use App\Enums\Status;
+use App\Models\Unity;
 use App\Models\User;
 use App\Utils\Functions;
 use Illuminate\Http\Request;
@@ -46,20 +47,25 @@ class UserController extends ControllerWeb {
         $action = "/usuario/atualizar/$request->id";
         $method = 'put';
         $user = User::firstWhere('id',$request->id);
+        $units = Unity::where('status', Status::ACTIVE)->get();
 
         if(Functions::nullOrEmpty($user)){
             Session::flash('flash-error-msg', "Usuário não encontrado na base de dados.");
             return back();
         } 
 
-        return view('registrations.user.edit', compact('breadcrumbs', 'action', 'method', 'user'));
+        return view('registrations.user.edit', compact('breadcrumbs', 'action', 'method', 'user', 'units'));
     }
 
     public function update(Request $request){
         try {
             $user = User::firstWhere('id', $request->id);
             $user->fill($request->all());
+            $user->access_admin = $request->access_admin == 'on' ? 'S' : 'N';
+            $user->access_operator = $request->access_operator == 'on' ? 'S' : 'N';
+            $user->access_mobile = $request->access_mobile == 'on' ? 'S' : 'N';
             $user->save();
+            $user->units()->sync($request->units);
 
             Session::flash('flash-success-msg', "Usuário atualizado com sucesso.");
             return redirect('/usuario/listar');

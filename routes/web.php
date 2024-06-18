@@ -12,12 +12,13 @@ use App\Http\Controllers\Web\UserController;
 use App\Http\Controllers\Web\UsersGroupController;
 use App\Http\Controllers\Web\ManageController;
 
-use Illuminate\Database\Capsule\Manager;
 use Illuminate\Support\Facades\Route;
 
-Route::get('/', [AuthController::class, 'login'])->name('login');
+Route::get('/', [AuthController::class, 'login'])->name('root');
 Route::get('login', [AuthController::class, 'login'])->name('login');
 Route::post('authenticate', [AuthController::class, 'authenticate'])->name('authenticate');
+Route::get('app/download', [AuthController::class, 'appDownload'])->name('app-download');
+
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
@@ -55,7 +56,6 @@ Route::group(['middleware' => ['auth']], function () {
     Route::group(['prefix' => 'checklist-item'], function () {
         Route::get('listar/checklist/{chkl_id}', [ChecklistItemController::class, 'index'])->name('checklist_item_list');
         Route::get('novo/checklist/{chkl_id}', [ChecklistItemController::class, 'create'])->name('checklist_item_create');
-
         Route::post('salvar/', [ChecklistItemController::class, 'store'])->name('checklist_item_store');
         Route::get('editar/{id}', [ChecklistItemController::class, 'edit'])->name('checklist_item_edit');
         Route::put('atualizar/{id}', [ChecklistItemController::class, 'update'])->name('checklist_item_update');
@@ -78,7 +78,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('editar/{id}', [UserController::class, 'edit'])->name('user_edit');
         Route::put('atualizar/{id}', [UserController::class, 'update'])->name('user_update');
         Route::delete('delete/{id}', [UserController::class, 'delete'])->name('user_delete');
-
         Route::get('buscar-por-nome', [UserController::class, 'getUsersByName'])->name('user_search_by_name');
     });
 
@@ -101,11 +100,6 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('reabrir-tarefa/{id}', [ManageController::class, 'reopen'])->name('reopen_task');
         Route::get('visualizar-tarefa/{id}', [ManageController::class, 'view'])->name('view_task');
         Route::get('cancelar-tarefa/{id}', [ManageController::class, 'cancel'])->name('cancel_task');
-
         Route::get('get-report-task/{id}', [ManageController::class, 'getPdf'])->name('report_task');
-    });
-
-
-
-    
+    });    
 });

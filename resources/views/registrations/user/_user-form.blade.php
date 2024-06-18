@@ -55,6 +55,19 @@
         </div>
     </div>
 
+    <div class="row d-flex justify-content-center mt-5">
+        <div class="col-6">
+            <select multiple="multiple" size="{{sizeof($units) < 5 ? 4 : 10}}" name="units[]" id="user-units">
+                @foreach ($units as $unity)
+                    <option value="{{$unity->id}}" 
+                        {{ old('units') != null && in_array(strVal($unity->id), old('units')) ||
+                           @$user->units != null && @$user->units->contains('id', $unity->id) ? 'selected' : '' }}>
+                        {{"$unity->id - $unity->fantasy_name"}}
+                    </option>                            
+                @endforeach
+            </select>
+        </div>                        
+    </div>
 
     <div class="row d-flex justify-content-center mt-3">
         <div class="col-6">
@@ -64,10 +77,10 @@
                 <label class="form-check-label" for="flexSwitchCheckDefault">Usuário Administrador</label>
             </div>
 
-            <div class="form-check form-switch mt-3">
+            {{-- <div class="form-check form-switch mt-3">
                 <input class="form-check-input" type="checkbox" id="access_operator" name="access_operator" {{$user->access_operator == 'S' ? 'checked' : ''}}/>
                 <label class="form-check-label" for="flexSwitchCheckDefault">Usuário Operador</label>
-            </div>
+            </div> --}}
 
             <div class="form-check form-switch mt-3">
                 <input class="form-check-input" type="checkbox" id="access_mobile" name="access_mobile" {{$user->access_mobile == 'S' ? 'checked' : ''}}/>
@@ -83,3 +96,13 @@
         </div>
     </div>
 </form>
+
+
+
+@section('postscript')
+    <script type="text/javascript">
+        $(document).ready(function() {
+            initializeDualListBox('#user-units', 'Unidades Ativas', 'Unidades Selecionadas');
+        });
+    </script>
+@endsection

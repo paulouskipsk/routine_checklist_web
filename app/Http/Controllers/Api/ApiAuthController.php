@@ -20,10 +20,10 @@ class ApiAuthController extends ControllerApi
                 return $this->response(false, 401, "Login ou senha não conferem");
             
             $user = User::where('login', $request->login)->first();
-            $unity = Unity::find($request->unity);
+            if($user->access_mobile =='N') throw new Exception("Este usuário não tem acesso ao aplicativo mobile!");
 
-            if(!$user->units->contains($unity))
-                throw new Exception("Usuário não tem acesso a esta unidade!");
+            $unity = Unity::find($request->unity);
+            if(!$user->units->contains($unity)) throw new Exception("Usuário não tem acesso à unidade selecionada!");
             $user->unity_logged = $unity->id;
             $user->save();
 
@@ -44,9 +44,11 @@ class ApiAuthController extends ControllerApi
                 return $this->response(false, 401, "Login ou senha não conferem");
             
             $user = User::where('login', $request->login)->first();
+            if($user->access_mobile =='N') throw new Exception("Este usuário não tem acesso ao aplicativo mobile!");
+
             return $this->responseOk("Usuário recuperado com sucesso", ['user'=>$user, 'units'=>$user->units]);
         } catch (\Throwable $th) {
-            return $this->responseError("Erro ao efetuar buscar usuário com login e senha. Erro; "+ $th->getMessage());
+            return $this->responseError("Atenção! ". $th->getMessage());
         }
     }
 

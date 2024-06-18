@@ -186,21 +186,9 @@
         }
 
         $(document).ready(function() {
+            initializeDatatables('checklist-list');
             initializeDualListBox('#units-generate-task', 'Unidades Ativas', 'Unidades Selecionadas');
             $("#btn-generate-tasks").click(function(){ generateTasks(); });
-            
-            $('#checklist-list').DataTable({
-                lengthMenu: [
-                    [30, 50, 100, -1],
-                    [30, 50, 100, 'All']
-                ],
-                buttons: [
-                    'copy', 'excel', 'pdf'
-                ],
-                language: {
-                    url: 'http://cdn.datatables.net/plug-ins/1.13.6/i18n/pt-BR.json',
-                },
-            });
         });
     </script>
 @endsection

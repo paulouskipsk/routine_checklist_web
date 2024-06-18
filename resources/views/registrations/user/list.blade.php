@@ -73,21 +73,7 @@
 @section('postscript')
     <script type="text/javascript">
         $(document).ready(() => {
-            $('#user-list').DataTable({
-                lengthMenu: [
-                    [30, 50, 100, -1],
-                    [30, 50, 100, 'All']
-                ],
-                dom: 'Bfrtip',
-                buttons: [
-                    'copy', 'excel', 'pdf'
-                ],
-
-                language: {
-                    url: '//cdn.datatables.net/plug-ins/1.13.6/i18n/pt-BR.json',
-                },
-
-            });
+            initializeDatatables('user-list');
         });
     </script>
 @endsection

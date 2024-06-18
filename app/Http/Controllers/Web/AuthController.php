@@ -7,7 +7,9 @@ use App\Models\User;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Hash;
 use Illuminate\Support\Facades\Redirect;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 
 class AuthController extends ControllerWeb {
 
@@ -21,6 +23,12 @@ class AuthController extends ControllerWeb {
             Session::flash('flash-error-msg', "As credenciais informadas não são válidas");
             return Redirect::back();
         }
+
+        if($user->access_admin != 'S') {
+            Session::flash('flash-error-msg', "Acesso permitido somente a usuários administradores.");
+            return Redirect::back();
+        }
+
         Auth::login($user);
         Session::flash('flash-success-msg', "Bem-vindo ao Routine Checklist, $user->name.");
         return redirect('/home');
@@ -34,5 +42,11 @@ class AuthController extends ControllerWeb {
             Session::flash('flash-error-msg', "Erro Ao executar Logout do Usuário");
         }
         return redirect('/login');
+    }
+
+    public function appDownload(){
+        $routineChecklistApk = Storage::path('download/routine_checklist.apk');
+
+        return Response::download($routineChecklistApk, 'routine_checklist.apk', []);
     }
 }

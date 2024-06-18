@@ -24,7 +24,7 @@ class HomeController extends ControllerWeb {
         $startDate = Functions::nullOrEmpty($request->start_date) ? Carbon::now()->startOfMonth() :  Carbon::createFromFormat('d/m/Y', $request->start_date);
         $endDate = Functions::nullOrEmpty($request->end_date) ? Carbon::now()->endOfMonth() : Carbon::createFromFormat('d/m/Y', $request->end_date);
         $units = Unity::all();
-        $unitsSelecteds = Functions::nullOrEmpty($request->units) ? $units : Unity::find($request->units);
+        $unitsSelecteds = Functions::nullOrEmpty($request->units) ? $units : Unity::find(explode(',', $request->units));
         $unitsSelecteds = $unitsSelecteds->pluck('id');
 
         $reportFinished = ChecklistMov::where('start_date', '>=', $startDate)

@@ -18,10 +18,6 @@
             </div>
             <!--PreLoader-->
                 
-                <!-- Sidebar -->
-                {{-- @includeIf('layouts._sidebar') --}}
-                <!-- /Sidebar -->
-                
                 <!-- Navbar top -->
                 @includeIf('layouts._navbar-report')
                 <!-- /Navbar top -->
@@ -29,15 +25,10 @@
                 <!-- Content -->
                 <div class="content">
 
-                    <!-- Breadcrumbs -->
-                    {{-- @includeIf('layouts._breadcrumbs') --}}
-                    <!-- /Breadcrumbs -->
-                    
                     <div class="pb-5">
                     @yield('content')
                     </div>
                     
-                    {{-- @includeIf('layouts._footer') --}}
                 </div>
                 <!-- /Content -->    
             </div>

@@ -11,7 +11,6 @@ use Carbon\Carbon;
 use Dompdf\Dompdf;
 use Exception;
 use Illuminate\Http\Request;
-use Illuminate\Support\Facades\App;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Session;
 
@@ -30,12 +29,13 @@ class ManageController extends ControllerWeb {
         $endDate = Functions::nullOrEmpty($request->end_date) ? Carbon::now()->endOfMonth() : Carbon::createFromFormat('d/m/Y', $request->end_date);
         $endDate->setHour(23)->setMinute(59)->setSecond(59);
         $units = Unity::all();
-        $unitsSelecteds = Functions::nullOrEmpty($request->units) ? $units : Unity::find($request->units);
+        $unitsSelecteds = Functions::nullOrEmpty($request->units) ? $units : Unity::find(explode(',', $request->units));
         $unitsSelecteds = $unitsSelecteds->pluck('id');
 
         $checklists = ChecklistMov::where('start_date', '>=', $startDate)
                                   ->where('end_date', '<=', $endDate)
                                   ->whereIn('unit_id', $unitsSelecteds)
+                                  ->limit(500)
                                   ->get();
         
         return view('manage.tasks.list', compact(['breadcrumbs', 'checklists', 'startDate', 'endDate', 'units', 'unitsSelecteds']));
@@ -79,7 +79,7 @@ class ManageController extends ControllerWeb {
 
     public function view(Request $request){
         try {
-            $checklistMovService = new ChecklistMovService();//App::make(ChecklistMovService::class);
+            $checklistMovService = new ChecklistMovService();
             $checklistMov = ChecklistMov::find($request->id);
             if(Functions::nullOrEmpty($checklistMov))  throw new Exception("Tarefa $request->id não encontrada");
             $checklistMov->load('checklistItensMovs');
@@ -107,7 +107,6 @@ class ManageController extends ControllerWeb {
 
             $pdf = Pdf::loadView('reports-pdf.view-movement', compact('titleReport', 'unity', 'user', 'checklistMov', 'report'));
             return $pdf->stream();
-            // return $pdf->download("$titleFile.pdf");
         } catch (\Throwable $th) {
             Session::flash('flash-error-msg', " Erro ao Gerar o relatório da Tarefa '$request->id'. " . $th->getMessage());
             return back();

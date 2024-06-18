@@ -125,7 +125,7 @@
         }
 
         function loadUsersTable(users) {
-            let table = $('#user-group-users').DataTable();
+            let table = initializeDatatables('user-group-users');
             idsInTbale = [];
 
             document.querySelectorAll('#user-group-users tbody tr').forEach(line => {

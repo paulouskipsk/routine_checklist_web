@@ -293,3 +293,35 @@ div#preloader {
 .cursor-pointer{
 	cursor: pointer !important;
 }
+
+.photoviewer-maximized .photoviewer-header, .photoviewer-footer {
+    border-radius: 0;
+    background: #d3f0ff;
+    font-weight: 600;
+}
+
+.photoviewer-footer {
+    border-top: 3px solid #fff !important;
+}
+
+.photoviewer-stage {
+	border: none !important;
+	border-top: 3px solid #fff !important;
+}
+
+.label-unity{
+	border: #e4e4e4 1px solid !important;
+	border-radius: 5px !important;
+	padding: 3px 8px !important;
+	font-size: 1em;
+	margin-top: 10px;
+}
+
+
+.btn-outline-secondary{
+	color: #303030 !important;
+	border-color: #cfcfcf !important;
+}
+.btn-outline-secondary:hover, .btn-outline-secondary:active, .btn-outline-secondary:focus{
+	color: #ffffff !important;
+}
