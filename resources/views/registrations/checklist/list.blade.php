@@ -64,11 +64,11 @@
                                     Gerar Tarefa
                                 </a>
                               
-                                <div class="dropdown-divider"></div>
+                                {{-- <div class="dropdown-divider"></div>
                                 <a class="dropdown-item text-danger" href="{{ route('checklist_delete', $checklist->id ) }}">
                                     <i class="far fa-trash-alt"></i>
                                     Remove
-                                </a>
+                                </a> --}}
                             </div>
                         </div>
                     </td>

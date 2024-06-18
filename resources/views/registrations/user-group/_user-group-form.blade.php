@@ -78,7 +78,8 @@
                 usersSelecteds.splice(usersSelecteds.indexOf(userId), 1);
                 $("#users_selecteds").val(usersSelecteds);
 
-                let table = $('#user-group-users').DataTable();
+                $('#user-group-users').DataTable().destroy();
+                let table = $('#user-group-users').DataTable({language: translateDatatables});
                 table
                     .row( $(this).parents('tr') )
                     .remove()
@@ -125,7 +126,8 @@
         }
 
         function loadUsersTable(users) {
-            let table = initializeDatatables('user-group-users');
+            $('#user-group-users').DataTable().destroy();
+            let table = $('#user-group-users').DataTable({language: translateDatatables});
             idsInTbale = [];
 
             document.querySelectorAll('#user-group-users tbody tr').forEach(line => {

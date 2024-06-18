@@ -22,7 +22,6 @@
                         <th class="sort border-top fs-0" data-sort="lastname">Sobrenome</th>
                         <th class="sort border-top fs-0" data-sort="login">Login</th>
                         <th class="sort border-top fs-0" data-sort="access_admin">Admin</th>
-                        <th class="sort border-top fs-0" data-sort="access_operator">Operador</th>
                         <th class="sort border-top fs-0" data-sort="access_mobile">Mobile</th>
                         <th class="sort border-top fs-0" data-sort="status">Status</th>
                         <th class="sort align-middle fs-0 border-top pe-0">Ações</th>
@@ -37,7 +36,6 @@
                         <td class="py--3 align-middle">{{ $user->lastname }}</td>
                         <td class="py--3 align-middle">{{ $user->login }}</td>
                         <td class="py--3 align-middle w-status text-{{$user->access_admin == 'S'? 'success' : 'danger'}}">{{ $user->access_admin == 'S'? 'Sim' : 'Não' }}</td>
-                        <td class="py--3 align-middle w-status text-{{$user->access_operator == 'S'? 'success' : 'danger'}}">{{ $user->access_operator == 'S'? 'Sim' : 'Não' }}</td>
                         <td class="py--3 align-middle w-status text-{{$user->access_mobile == 'S'? 'success' : 'danger'}}">{{ $user->access_mobile == 'S'? 'Sim' : 'Não' }}</td>
                         <td class="py--3 align-middle w-status fw-bold {{$user->status == 'A' ? 'text-success ': 'text-danger'}}">{{ Status::getDescription($user->status) }}</td>
                         <td class="py--3 align-middle white-space-nowrap pe-0 w-action">
@@ -53,12 +51,12 @@
                                         <i class="far fa-edit"></i>
                                         Editar
                                     </a>
-                                    <div class="dropdown-divider"></div>
+                                    {{-- <div class="dropdown-divider"></div> --}}
                                     
-                                    <a class="dropdown-item text-danger" href="{{ route('user_delete', $user->id ) }}">
+                                    {{-- <a class="dropdown-item text-danger" href="{{ route('user_delete', $user->id ) }}">
                                         <i class="far fa-trash-alt"></i>
                                         Remover
-                                    </a>
+                                    </a> --}}
                                 </div>
                             </div>
                         </td>

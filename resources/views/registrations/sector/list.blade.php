@@ -43,11 +43,11 @@
                                         <i class="far fa-edit"></i>
                                         Editar
                                     </a>
-                                    <div class="dropdown-divider"></div>
+                                    {{-- <div class="dropdown-divider"></div>
                                     <a class="dropdown-item text-danger" href="{{ route('sector_delete', $sector->id ) }}">
                                         <i class="far fa-trash-alt"></i>
                                         Remove
-                                    </a>
+                                    </a> --}}
                                 </div>
                             </div>
                         </td>
