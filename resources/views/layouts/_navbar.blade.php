@@ -50,15 +50,21 @@
 
                             <div class="px-3 mt-3">
                                 <a class="btn btn-phoenix-secondary d-flex flex-center w-100" href="app/download">
-                                    <span class="me-2 fa-brands fa-android"> </span>
-                                    Baixar APP Android
+                                    <span class="text-success">
+                                        <i class="me-2 fa-brands fa-android"></i>
+                                        Download do APP Android
+                                    </span>
+                                   
                                 </a>
                             </div>
 
                            
                             <div class="px-3 mt-3">
                                 <a class="btn btn-phoenix-secondary d-flex flex-center w-100" href="/logout">
-                                    <span class="me-2" data-feather="log-out"> </span>Sair do Sistema
+                                    <span class="text-danger"> 
+                                        <i class="me-2 fa-solid fa-right-from-bracket"></i>
+                                        Sair do Sistema
+                                    </span>
                                 </a>
                             </div>
 
