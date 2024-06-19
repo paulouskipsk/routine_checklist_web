@@ -12,7 +12,9 @@ use Dompdf\Dompdf;
 use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Response;
 use Illuminate\Support\Facades\Session;
+use Illuminate\Support\Facades\Storage;
 
 class ManageController extends ControllerWeb {
     private $checklistMovServ;
@@ -113,4 +115,8 @@ class ManageController extends ControllerWeb {
         }
     }
 
+    public function appDownload(){
+        $routineChecklistApk = public_path('downloads/routine_checklist.apk');
+        return Response::download($routineChecklistApk, 'routine_checklist.apk', []);
+    }
 }

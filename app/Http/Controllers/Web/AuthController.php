@@ -43,10 +43,4 @@ class AuthController extends ControllerWeb {
         }
         return redirect('/login');
     }
-
-    public function appDownload(){
-        $routineChecklistApk = Storage::path('download/routine_checklist.apk');
-
-        return Response::download($routineChecklistApk, 'routine_checklist.apk', []);
-    }
 }

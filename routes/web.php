@@ -17,8 +17,7 @@ use Illuminate\Support\Facades\Route;
 Route::get('/', [AuthController::class, 'login'])->name('root');
 Route::get('login', [AuthController::class, 'login'])->name('login');
 Route::post('authenticate', [AuthController::class, 'authenticate'])->name('authenticate');
-Route::get('app/download', [AuthController::class, 'appDownload'])->name('app-download');
-
+Route::get('app/download', [ManageController::class, 'appDownload'])->name('app-download');
 
 Route::group(['middleware' => ['auth']], function () {
     Route::get('logout', [AuthController::class, 'logout'])->name('logout');
