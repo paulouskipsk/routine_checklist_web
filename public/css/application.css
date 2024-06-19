@@ -325,3 +325,8 @@ div#preloader {
 .btn-outline-secondary:hover, .btn-outline-secondary:active, .btn-outline-secondary:focus{
 	color: #ffffff !important;
 }
+
+.sort-none:before,
+.sort-none:after {
+	content: "" !important;
+}

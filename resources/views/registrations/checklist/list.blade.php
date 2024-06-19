@@ -16,25 +16,19 @@
         <table class="table table-striped table-sm fs--1 mb-0" id="checklist-list">
             <thead class="mt-5 bg-secondary text-light">
                 <tr>
-                    <th class="sort border-top fs-0 ps-3 w-id" data-sort="id">Codigo</th>
-                    <th class="sort border-top fs-0" data-sort="description">Descrição</th>
-                    <th class="sort border-top fs-0" data-sort="status">Criado Em</th>
-                    <th class="sort border-top fs-0" data-sort="status">Ultima Alteração</th>
-                    <th class="sort border-top fs-0" data-sort="status">Status</th>
-                    <th class="sort align-middle fs-0 pe-0 border-top">Ações</th>
+                    <th class="sort-none align-middle fs-0 pe-0 border-top">Ações</th>
+                    <th class="sort align-middle border-top fs-0 ps-3 w-id" data-sort="id">Codigo</th>
+                    <th class="sort align-middle border-top fs-0" data-sort="description">Descrição</th>
+                    <th class="sort align-middle border-top fs-0" data-sort="status">Criado Em</th>
+                    <th class="sort align-middle border-top fs-0" data-sort="status">Última <br/> Alteração</th>
+                    <th class="sort align-middle border-top fs-0" data-sort="questions">Quant. <br/>Perguntas</th>
+                    <th class="sort align-middle border-top fs-0" data-dt-order="disable">Status</th>
                 </tr>
             </thead>
             
             <tbody class="list">
                 @foreach ($checklists as $checklist)
                 <tr class="py-1">
-                    <td class="py--3 fw-bold align-middle ps-3 name">{{ $checklist->id }}</td>
-                    <td class="py--3 align-middle">{{ $checklist->description }}</td>
-                    <td class="py--3 align-middle">{{ $checklist->created_at }}</td>
-                    <td class="py--3 align-middle">{{ $checklist->updated_at }}</td>
-                    <td class="py--3 align-middle w-status fw-bold {{$checklist->status == 'A' ? 'text-success ': 'text-danger'}}">
-                        {{ Status::getDescription($checklist->status) }}
-                    </td>
                     <td class="py--3 align-middle white-space-nowrap pe-0 w-action">
                         <div class="font-sans-serif btn-reveal-trigger position-static">
                             <button
@@ -46,7 +40,7 @@
                             <div class="dropdown-menu dropdown-menu-end py-2">
                                 <a class="dropdown-item text-primary" href="{{ route('checklist_edit', $checklist->id ) }}">
                                     <i class="fas fa-edit"></i>
-                                    Editar
+                                    Editar Checklist
                                 </a>
                                 <a class="dropdown-item text-info" href="{{ route('checklist_item_list', $checklist->id ) }}">
                                     <i class="far fa-edit"></i>
@@ -72,6 +66,18 @@
                             </div>
                         </div>
                     </td>
+                    <td class="py--3 fw-bold align-middle ps-3 name">{{ $checklist->id }}</td>
+                    <td class="py--3 align-middle">{{ $checklist->description }}</td>
+                    <td class="py--3 align-middle">{{ $checklist->created_at }}</td>
+                    <td class="py--3 align-middle">{{ $checklist->updated_at }}</td>
+                    <td class="py--3 align-middle {{ $checklist->checklistItens?->count() == 0 ? 'text-danger' : '' }}">
+                        {{ $checklist->checklistItens?->count() }}
+                    </td>
+
+                    <td class="py--3 align-middle w-status fw-bold {{$checklist->status == 'A' ? 'text-success ': 'text-danger'}}">
+                        {{ Status::getDescription($checklist->status) }}
+                    </td>
+                    
                 </tr>
                 @endforeach
             </tbody>

@@ -57,8 +57,8 @@ class Checklist extends Model {
         return $this->belongsTo(User::class, 'changed_by_user', 'id');
     }
 
-    public function checklistsItens(): HasMany {
-        return $this->hasMany(ChecklistItem::class, 'id', 'chit_id');
+    public function checklistItens(): HasMany {
+        return $this->hasMany(ChecklistItem::class, 'chkl_id', 'id');
     }
 
     public function units(){
@@ -70,7 +70,7 @@ class Checklist extends Model {
     }
 
     public function checklistsMovs(): HasMany {
-        return $this->hasMany(ChecklistMov::class, 'id', 'chkl_id');
+        return $this->hasMany(ChecklistMov::class, 'chkl_id', 'id');
     }
 
 }
