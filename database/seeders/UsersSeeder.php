@@ -13,10 +13,10 @@ class UsersSeeder extends Seeder
     {
         User::create([
             'name' => 'Administrador',
-            'lastname' => 'Sistema',
+            'lastname' => 'Geral',
             'email' => '',
             'login' =>'admin',
-            'password' => '123',
+            'password' => 'utfprgp',
             'status' => 'A',
             'access_admin' => 'S',
             'access_operator' => 'S',
@@ -24,15 +24,15 @@ class UsersSeeder extends Seeder
         ]);
 
         User::create([
-            'name' => 'Arnaldo',
-            'lastname' => '',
+            'name' => 'Everton',
+            'lastname' => 'UTFPR',
             'email' => '',
-            'login' =>'arnaldo',
-            'password' => '123',
+            'login' =>'everton',
+            'password' => 'utfprgp',
             'status' => 'A',
-            'access_admin' => 'N',
-            'access_operator' => 'N',
-            'access_mobile' => 'N',
+            'access_admin' => 'S',
+            'access_operator' => 'S',
+            'access_mobile' => 'S',
         ]);
 
         User::create([
@@ -40,7 +40,7 @@ class UsersSeeder extends Seeder
             'lastname' => '',
             'email' => '',
             'login' =>'super',
-            'password' => '123',
+            'password' => 'utfprgp',
             'status' => 'A',
             'access_admin' => 'S',
             'access_operator' => 'S',
@@ -52,7 +52,7 @@ class UsersSeeder extends Seeder
             'lastname' => '',
             'email' => '',
             'login' =>'everton',
-            'password' => '123',
+            'password' => 'utfprgp',
             'status' => 'A',
             'access_admin' => 'N',
             'access_operator' => 'N',
@@ -64,7 +64,7 @@ class UsersSeeder extends Seeder
             'lastname' => '',
             'email' => '',
             'login' =>'everaldo',
-            'password' => '123',
+            'password' => 'utfprgp',
             'status' => 'A',
             'access_admin' => 'N',
             'access_operator' => 'N',
@@ -76,7 +76,7 @@ class UsersSeeder extends Seeder
             'lastname' => '',
             'email' => '',
             'login' =>'everson',
-            'password' => '123',
+            'password' => 'utfprgp',
             'status' => 'A',
             'access_admin' => 'S',
             'access_operator' => 'S',
@@ -88,9 +88,9 @@ class UsersSeeder extends Seeder
             'lastname' => '',
             'email' => '',
             'login' =>'cleverson',
-            'password' => '123',
+            'password' => 'utfprgp',
             'status' => 'A',
-            'access_admin' => 'N',
+            'access_admin' => 'S',
             'access_operator' => 'N',
             'access_mobile' => 'N',
         ]);
@@ -100,11 +100,24 @@ class UsersSeeder extends Seeder
             'lastname' => '',
             'email' => '',
             'login' =>'emerson',
-            'password' => '123',
+            'password' => 'utfprgp',
             'status' => 'A',
             'access_admin' => 'N',
             'access_operator' => 'N',
-            'access_mobile' => 'N',
+            'access_mobile' => 'S',
         ]);
+
+        User::create([
+            'name' => 'Operador',
+            'lastname' => '',
+            'email' => '',
+            'login' =>'operador',
+            'password' => 'utfprgp',
+            'status' => 'A',
+            'access_admin' => 'N',
+            'access_operator' => 'N',
+            'access_mobile' => 'S',
+        ]);
+
     }
 }

@@ -5,29 +5,31 @@ namespace Database\Seeders;
 use App\Models\ChklClassification;
 use Illuminate\Database\Seeder;
 
-class ChklClassificationSeeder extends Seeder
-{
-
-    public function run(): void
-    {
+class ChklClassificationSeeder extends Seeder {
+    public function run(): void {
         ChklClassification::create([
-            'description' => 'Checklist ADM',
+            'description' => 'Maquinário',
             'status' => 'A'
         ]);
 
         ChklClassification::create([
-            'description' => 'Checklist Operacional',
+            'description' => 'Operação',
             'status' => 'A'
         ]);
 
         ChklClassification::create([
-            'description' => 'Checklist Maquinas',
+            'description' => 'Limpeza',
             'status' => 'A'
         ]);
 
         ChklClassification::create([
-            'description' => 'Checklist Sesmt',
+            'description' => 'Segurança do Trabalho',
             'status' => 'A'
+        ]);
+
+        ChklClassification::create([
+            'description' => 'Inativo',
+            'status' => 'I'
         ]);
     }
 }

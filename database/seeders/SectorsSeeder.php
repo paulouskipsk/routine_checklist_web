@@ -33,6 +33,16 @@ class SectorsSeeder extends Seeder
 
         Sector::create([
             'description' => 'Fr. Caixa',
+            'status' => 'A'
+        ]);
+
+        Sector::create([
+            'description' => 'Depósito',
+            'status' => 'A'
+        ]);
+
+        Sector::create([
+            'description' => 'Inativo',
             'status' => 'I'
         ]);
     }
