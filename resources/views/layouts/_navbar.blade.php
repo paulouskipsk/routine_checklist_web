@@ -49,7 +49,7 @@
                         <div class="card-footer p-0 border-top mb-2">
 
                             <div class="px-3 mt-3">
-                                <a class="btn btn-phoenix-secondary d-flex flex-center w-100" href="app/download">
+                                <a class="btn btn-phoenix-secondary d-flex flex-center w-100" href="{{route('app-download')}}">
                                     <span class="text-success">
                                         <i class="me-2 fa-brands fa-android"></i>
                                         Download do APP Android
