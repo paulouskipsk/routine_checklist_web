@@ -25,8 +25,9 @@ return new class extends Migration {
             $table->integer('changed_by_user')->nullable(false);
             
             $table->timestamps();
+            $table->softDeletes();
 
-            $table->foreign('chkl_id')->references('id')->on('checklists');
+            $table->foreign('chkl_id')->references('id')->on('checklists')->cascadeOnDelete();
             $table->foreign('sect_id')->references('id')->on('sectors');
             $table->foreign('changed_by_user')->references('id')->on('users');
             $table->unique(['chkl_id', 'sequence']);

@@ -85,7 +85,7 @@
         </div>
     </div>
     
-    <div class="table-responsive mt-4">
+    <div class="table-responsive-md mt-4">
         <table class="table table-striped table-sm fs--1 mb-0" id="checklist-list">
             <thead class="mt-5 bg-secondary text-light">
                 <tr>
@@ -104,48 +104,56 @@
                 @foreach ($checklists as $checklist)
                 <tr class="py-1">
                     <td class="py--3 align-middle white-space-nowrap pe-0 w-action">
-                        <div class="font-sans-serif btn-reveal-trigger position-static  dropend">
+                        <div class="btn-group">
                             <button
-                                class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2"
+                                class="btn btn-sm text-primary fw-bold dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2"
                                 type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" 
                                 aria-expanded="false" data-bs-reference="parent">
                                 <i class="fa-solid fa-bars fs--2"></i>
                             </button>
-                            <div class="dropdown-menu dropdown-menu-end py-2">
-                                <button type="button" class="dropdown-item text-dark" {{$checklist->status != Status::ACTIVE->value ? 'disabled': '' }}>
-                                    <a class="text-decoration-none {{$checklist->status != Status::ACTIVE->value ? 'text-gray': '' }}" 
-                                        href="{{ route('close_task', $checklist->id ) }}">
-                                        <i class="fa-solid fa-lock"></i>
-                                        <span class="mx-2">Fechar Tarefa</span>
-                                    </a>
-                                </button>
-
-                                <button type="button" class="dropdown-item text-dark" 
+                            
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <button type="button" class="dropdown-item text-dark">
+                                        <a class="text-decoration-none" href="{{ route('view_task', $checklist->id ) }}">
+                                            <i class="fa-regular fa-eye"></i>
+                                            <span class="mx-2">Visualizar Tarefa</span>
+                                        </a>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button type="button" class="dropdown-item text-dark" 
                                         {{$checklist->status != Status::CLOSED_BY_SYSTEM->value && $checklist->status != Status::CANCELED->value ? 'disabled': '' }}>
-                                    <a class="text-decoration-none {{$checklist->status != Status::CLOSED_BY_SYSTEM->value && $checklist->status != Status::CANCELED->value ? 'text-gray': '' }}" 
-                                        href="{{ route('reopen_task', $checklist->id ) }}">
-                                        <i class="fa-solid fa-lock-open"></i>
-                                        <span class="mx-2">Reabrir Tarefa</span>
-                                    </a>
-                                </button>
-
-                                <button type="button" class="dropdown-item text-dark">
-                                    <a class="text-decoration-none" href="{{ route('view_task', $checklist->id ) }}">
-                                        <i class="fa-regular fa-eye"></i>
-                                        <span class="mx-2">Visualizar Tarefa</span>
-                                    </a>
-                                </button>
-
-                                <div class="dropdown-divider"></div>
-                                <button type="button" 
+                                        <a class="text-decoration-none {{$checklist->status != Status::CLOSED_BY_SYSTEM->value && $checklist->status != Status::CANCELED->value ? 'text-gray': '' }}" 
+                                            href="{{ route('reopen_task', $checklist->id ) }}">
+                                            <i class="fa-solid fa-lock-open"></i>
+                                            <span class="mx-2">Reabrir Tarefa</span>
+                                        </a>
+                                    </button>
+                                </li>
+                                <li>
+                                    <button type="button" class="dropdown-item text-dark" {{$checklist->status != Status::ACTIVE->value ? 'disabled': '' }}>
+                                        <a class="text-decoration-none {{$checklist->status != Status::ACTIVE->value ? 'text-gray': '' }}" 
+                                            href="{{ route('close_task', $checklist->id ) }}">
+                                            <i class="fa-solid fa-lock"></i>
+                                            <span class="mx-2">Fechar Tarefa</span>
+                                        </a>
+                                    </button>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li>
+                                    <button type="button" 
                                         class="dropdown-item" {{$checklist->status == Status::ACTIVE->value || $checklist->status == Status::CLOSED_BY_SYSTEM->value ? '': 'disabled' }}>
-                                    <a class="text-decoration-none {{$checklist->status == Status::ACTIVE->value || $checklist->status == Status::CLOSED_BY_SYSTEM->value ? 'text-danger' : 'text-gray'}}" 
-                                        href="{{ route('cancel_task', $checklist->id ) }}">
-                                        <i class="far fa-trash-alt"></i>
-                                        <span class="mx-2">Cancelar Tarefa</span>
-                                    </a>
-                                </button>
-                            </div>
+                                        <a class="text-decoration-none {{$checklist->status == Status::ACTIVE->value || $checklist->status == Status::CLOSED_BY_SYSTEM->value ? 'text-danger' : 'text-gray'}}" 
+                                            href="{{ route('cancel_task', $checklist->id ) }}">
+                                            <i class="far fa-trash-alt"></i>
+                                            <span class="mx-2">Cancelar Tarefa</span>
+                                        </a>
+                                    </button>
+                                </li>
+                            </ul>
                         </div>
                     </td>
                     <td class="py--3 align-middle w-id">{{str_pad($checklist->unity->id , 3 , '0' , STR_PAD_LEFT)}}</td>

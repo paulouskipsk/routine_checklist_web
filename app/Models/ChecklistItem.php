@@ -5,8 +5,10 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Model;
 use Illuminate\Database\Eloquent\Relations\BelongsTo;
 use Illuminate\Database\Eloquent\Relations\HasMany;
+use Illuminate\Database\Eloquent\SoftDeletes;
 
 class ChecklistItem extends Model {
+    use SoftDeletes;
 
     protected $table = 'checklists_itens';
     public $timestamps = true;
@@ -59,8 +61,8 @@ class ChecklistItem extends Model {
         return $this->belongsToMany(Unity::class, 'pivot_chit_unit_noapplicable', 'chit_id', 'unit_id');
     }
 
-    public function checklistItemMov(): HasMany {
-        return $this->ChecklistItemMov(ChecklistItemMov::class, 'id', 'chit_id');
+    public function checklistItensMovs(): HasMany {
+        return $this->hasMany(ChecklistItemMov::class, 'chit_id', 'id');
     }
 
 }

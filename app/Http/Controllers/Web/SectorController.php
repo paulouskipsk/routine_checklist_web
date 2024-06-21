@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Web;
 use App\Http\Requests\WebSectorRequest;
 use App\Models\Sector;
 use App\Utils\Functions;
+use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
@@ -66,6 +67,22 @@ class SectorController extends ControllerWeb {
         }
 
         return Redirect::back()->with($request->all());
+    }
+
+    public function delete(Request $request){
+        try {
+            $sector = Sector::find($request->id);
+            $exists = $sector->checklistsItens()->exists() || $sector->checklistItemMov()->exists();
+            if($exists)
+                Session::flash('flash-error-msg', "Setor possui Questões de checklists ou Tarefas associadas. Por isso não pode ser excluído.");
+            else {
+                $sector->delete();
+                Session::flash('flash-success-msg', "Classificação '$request->id' Deletada com sucesso.");
+            }
+        } catch (Exception $th) {
+            Session::flash('flash-error-msg', "Erro ao deletar a Setor '$request->id'. ". $th->getMessage());
+        }
+        return redirect(route('sector_list'));
     }
 
 }

@@ -64,11 +64,11 @@ class User extends Authenticatable
     }
 
     public function checklists(): HasMany {
-        return $this->hasMany(Checklist::class, 'id', 'changed_by_user');
+        return $this->hasMany(Checklist::class, 'changed_by_user', 'id');
     }
 
     public function checklistsItens(): HasMany {
-        return $this->hasMany(ChecklistItem::class, 'id', 'changed_by_user');
+        return $this->hasMany(ChecklistItem::class, 'changed_by_user', 'id');
     }
 
     public function units(){
@@ -84,10 +84,10 @@ class User extends Authenticatable
     }
 
     public function checklistsMovs(): HasMany {
-        return $this->hasMany(ChecklistMov::class, 'id', 'use_id');
+        return $this->hasMany(ChecklistMov::class, 'use_id', 'id');
     }
 
     public function checklistItemMov(): HasMany {
-        return $this->hasMany(ChecklistItemMov::class, 'id', 'use_id');
+        return $this->hasMany(ChecklistItemMov::class, 'use_id', 'id' );
     }
 }

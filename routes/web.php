@@ -29,7 +29,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('salvar', [SectorController::class, 'store'])->name('sector_store');
         Route::get('editar/{id}', [SectorController::class, 'edit'])->name('sector_edit');
         Route::put('atualizar/{id}', [SectorController::class, 'update'])->name('sector_update');
-        Route::delete('delete/{id}', [SectorController::class, 'delete'])->name('sector_delete');
+        Route::get('delete/{id}', [SectorController::class, 'delete'])->name('sector_delete');
     });
 
     Route::group(['prefix' => 'classificacao'], function () {
@@ -38,7 +38,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('salvar', [ClassificationController::class, 'store'])->name('classification_store');
         Route::get('editar/{id}', [ClassificationController::class, 'edit'])->name('classification_edit');
         Route::put('atualizar/{id}', [ClassificationController::class, 'update'])->name('classification_update');
-        Route::delete('delete/{id}', [ClassificationController::class, 'delete'])->name('classification_delete');
+        Route::get('delete/{id}', [ClassificationController::class, 'delete'])->name('classification_delete');
     });
 
     Route::group(['prefix' => 'checklist'], function () {
@@ -48,7 +48,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::get('editar/{id}', [ChecklistController::class, 'edit'])->name('checklist_edit');
         Route::put('atualizar/{id}', [ChecklistController::class, 'update'])->name('checklist_update');
         Route::post('gerar-tarefa', [ChecklistController::class, 'generateTasks'])->name('checklist_generate');
-        Route::get('delete/{id}', [ChecklistController::class, 'edit'])->name('checklist_delete');
+        Route::get('delete/{id}', [ChecklistController::class, 'delete'])->name('checklist_delete');
 
     });
 
@@ -58,7 +58,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('salvar/', [ChecklistItemController::class, 'store'])->name('checklist_item_store');
         Route::get('editar/{id}', [ChecklistItemController::class, 'edit'])->name('checklist_item_edit');
         Route::put('atualizar/{id}', [ChecklistItemController::class, 'update'])->name('checklist_item_update');
-        Route::delete('delete/{id}', [ChecklistItemController::class, 'delete'])->name('checklist_item_delete');
+        Route::get('delete/{id}', [ChecklistItemController::class, 'delete'])->name('checklist_item_delete');
     });
 
     Route::group(['prefix' => 'grupo-usuarios'], function () {
@@ -67,7 +67,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('salvar', [UsersGroupController::class, 'store'])->name('users_group_store');
         Route::get('editar/{id}', [UsersGroupController::class, 'edit'])->name('users_group_edit');
         Route::put('atualizar/{id}', [UsersGroupController::class, 'update'])->name('users_group_update');
-        Route::delete('delete/{id}', [UsersGroupController::class, 'delete'])->name('users_group_delete');
+        Route::get('delete/{id}', [UsersGroupController::class, 'delete'])->name('users_group_delete');
     });
 
     Route::group(['prefix' => 'usuario'], function () {
@@ -76,7 +76,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('salvar', [UserController::class, 'store'])->name('user_store');
         Route::get('editar/{id}', [UserController::class, 'edit'])->name('user_edit');
         Route::put('atualizar/{id}', [UserController::class, 'update'])->name('user_update');
-        Route::delete('delete/{id}', [UserController::class, 'delete'])->name('user_delete');
+        Route::get('delete/{id}', [UserController::class, 'delete'])->name('user_delete');
         Route::get('buscar-por-nome', [UserController::class, 'getUsersByName'])->name('user_search_by_name');
     });
 
@@ -90,7 +90,7 @@ Route::group(['middleware' => ['auth']], function () {
         Route::post('salvar', [UnityController::class, 'store'])->name('unity_store');
         Route::get('editar/{id}', [UnityController::class, 'edit'])->name('unity_edit');
         Route::put('atualizar/{id}', [UnityController::class, 'update'])->name('unity_update');
-        Route::delete('delete/{id}', [UnityController::class, 'delete'])->name('unity_delete');
+        Route::get('delete/{id}', [UnityController::class, 'delete'])->name('unity_delete');
     });
 
     Route::group(['prefix' => 'gerenciar'], function () {

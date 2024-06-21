@@ -114,7 +114,7 @@
                         <div class="dropdown-indicator-icon">
                             <span class="fas fa-caret-right icon-menu"></span>
                         </div>
-                        <span class="nav-link-icon">
+                        <span class="nav-link-icon px-0 mx-0">
                             <i class="fas fa-cogs icon-menu"></i>
                         </span>
                         <span class="nav-link-text">Gerenciar</span>

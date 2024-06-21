@@ -26,10 +26,10 @@ class ChklClassification extends Model {
     ];
 
     public function checklists(): HasMany {
-        return $this->hasMany(Checklist::class, 'id', 'chkl_id');
+        return $this->hasMany(Checklist::class, 'chcl_id', 'id');
     }
 
     public function checklistsMovs(): HasMany {
-        return $this->hasMany(ChecklistMov::class, 'id', 'chim_id');
+        return $this->hasMany(ChecklistMov::class,'chim_id', 'id');
     }
 }

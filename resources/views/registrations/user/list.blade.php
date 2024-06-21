@@ -13,7 +13,7 @@
     </div>
 
     <div>
-        <div class="table-responsive mh-300">
+        <div class="table-responsive-md">
             <table class="table table-striped table-sm fs--1 mb-0" id="user-list">
                 <thead class="mt-5 bg-secondary text-light">
                     <tr>
@@ -32,25 +32,31 @@
                     @foreach ($users as $user)
                     <tr class="py-1">
                         <td class="py--3 align-middle white-space-nowrap pe-0 w-action">
-                            <div class="font-sans-serif btn-reveal-trigger position-static">
+                            <div class="btn-group">
                                 <button
-                                    class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2"
+                                    class="btn btn-sm text-primary fw-bold dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2"
                                     type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" 
                                     aria-expanded="false" data-bs-reference="parent">
                                     <i class="fa-solid fa-bars fs--2"></i>
                                 </button>
-                                <div class="dropdown-menu dropdown-menu-end py-2">
-                                    <a class="dropdown-item text-primary" href="{{ route('user_edit', $user->id ) }}">
-                                        <i class="far fa-edit"></i>
-                                        Editar
-                                    </a>
-                                    {{-- <div class="dropdown-divider"></div> --}}
-                                    
-                                    {{-- <a class="dropdown-item text-danger" href="{{ route('user_delete', $user->id ) }}">
-                                        <i class="far fa-trash-alt"></i>
-                                        Remover
-                                    </a> --}}
-                                </div>
+                                
+                                <ul class="dropdown-menu">
+                                    <li>
+                                        <a class="dropdown-item text-primary" href="{{ route('user_edit', $user->id ) }}">
+                                            <i class="far fa-edit"></i>
+                                            Editar
+                                        </a>
+                                    </li>
+                                    {{-- <li>
+                                        <hr class="dropdown-divider">
+                                    </li> --}}
+                                    {{-- <li>
+                                        <a class="dropdown-item text-danger" href="{{ route('user_delete', $user->id ) }}">
+                                            <i class="far fa-trash-alt"></i>
+                                            Remover
+                                        </a>
+                                    </li> --}}
+                                </ul>
                             </div>
                         </td>
                         <td class="py--3 fw-bold align-middle ps-3 name">{{ $user->id }}</td>

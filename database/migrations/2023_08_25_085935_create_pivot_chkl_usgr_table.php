@@ -13,8 +13,8 @@ return new class extends Migration {
             $table->integer('usgr_id')->nullable(false);
             $table->timestamps();
 
-            $table->foreign('usgr_id')->references('id')->on('users_groups');
-            $table->foreign('chkl_id')->references('id')->on('checklists');
+            $table->foreign('usgr_id')->references('id')->on('users_groups')->cascadeOnDelete();
+            $table->foreign('chkl_id')->references('id')->on('checklists')->cascadeOnDelete();
             $table->unique(['usgr_id', 'chkl_id']);
         });
     }

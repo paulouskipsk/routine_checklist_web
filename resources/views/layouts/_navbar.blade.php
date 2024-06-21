@@ -63,7 +63,7 @@
                                 <a class="btn btn-phoenix-secondary d-flex flex-center w-100" href="/logout">
                                     <span class="text-danger"> 
                                         <i class="me-2 fa-solid fa-right-from-bracket"></i>
-                                        Sair do Sistema
+                                        Sair
                                     </span>
                                 </a>
                             </div>

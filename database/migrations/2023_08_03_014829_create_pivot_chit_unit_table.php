@@ -12,8 +12,8 @@ return new class extends Migration {
             $table->integer('unit_id')->nullable(false);
             $table->timestamps();
 
-            $table->foreign('unit_id')->references('id')->on('units');
-            $table->foreign('chit_id')->references('id')->on('checklists_itens');
+            $table->foreign('unit_id')->references('id')->on('units')->cascadeOnDelete();
+            $table->foreign('chit_id')->references('id')->on('checklists_itens')->cascadeOnDelete();
             $table->unique(['unit_id', 'chit_id']);
         });
     }

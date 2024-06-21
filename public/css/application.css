@@ -141,19 +141,6 @@ table.dataTable tbody th, table.dataTable tbody td {
 	right:0px !important;	
 	margin: 0px calc(50% - 15.875rem) !important;
 	height: 80% !important;
-
-
-	/*
-	
-	bottom: 0px !important; 
-	height: var(--img-height) !important;
-	float: none;
-
-	display: flex;
-
-	align-items: self-end	;
-	*/
-
 }
 
 #img-home{

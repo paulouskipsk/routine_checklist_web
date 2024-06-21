@@ -20,16 +20,16 @@ return new class extends Migration {
             $table->timestamp('start_date')->nullable(false);
             $table->timestamp('end_date')->nullable(false);
             $table->integer('user_id')->nullable(true);
-            $table->integer('chkl_id')->nullable(false);
+            $table->integer('chkl_id')->nullable(true);
             $table->integer('chcl_id')->nullable(true);
             $table->integer('unit_id')->nullable(false);
 
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users');
+            $table->foreign('user_id')->references('id')->on('users')->nullOnDelete();
             $table->foreign('chcl_id')->references('id')->on('chkl_classifications');
-            $table->foreign('unit_id')->references('id')->on('units');
-            $table->foreign('chkl_id')->references('id')->on('checklists');
+            $table->foreign('unit_id')->references('id')->on('units')->cascadeOnDelete();
+            $table->foreign('chkl_id')->references('id')->on('checklists')->nullOnDelete();
         });
     }
 

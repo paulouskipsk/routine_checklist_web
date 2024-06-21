@@ -362,7 +362,7 @@ class ChecklistItemSeeder extends Seeder {
             'description' => 'A serra fita possui, no mínimo, um botão de parada de emergência?',
             'sequence' => 3,
             'score' => 20,
-            'status' => 'S',
+            'status' => 'A',
             'type' => 'S',
             'hour_min' => '00:00',
             'hour_max' => '23:59',

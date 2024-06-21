@@ -20,6 +20,7 @@ return new class extends Migration {
             $table->string('chkl_type', 1)->nullable(false);
 
             $table->timestamps();
+            $table->softDeletes();
 
             $table->foreign('changed_by_user')->references('id')->on('users');
             $table->foreign('chcl_id')->references('id')->on('chkl_classifications');

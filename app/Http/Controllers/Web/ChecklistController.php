@@ -96,6 +96,24 @@ class ChecklistController extends ControllerWeb {
         return Redirect::back()->with($request->all());
     }
 
+    public function delete(Request $request){
+        try {
+            $checklist = Checklist::firstWhere('id', $request->id);
+            $checklistItens = $checklist->checklistItens;
+
+            $checklistItens->each(function($checklistItem) {
+                $checklistItem->checklistItensMovs()->exists() ? $checklistItem->delete() : $checklistItem->forceDelete();
+            });
+            $checklist->checklistsMovs()->exists() ? $checklist->delete() : $checklist->forceDelete();
+            
+            Session::flash('flash-success-msg', "Checklist deletado com sucesso.");
+                return redirect('/checklist/listar');
+        } catch (\Throwable $th) {
+            Session::flash('flash-error-msg', "Erro ao deletado o Checklist $request->id. ".$th->getMessage());
+        }
+        return Redirect::back()->with($request->all());
+    }
+
     public function generateTasks(Request $request){
         try {
             DB::beginTransaction();

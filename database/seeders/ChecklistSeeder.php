@@ -5,6 +5,7 @@ namespace Database\Seeders;
 use App\Models\Checklist;
 use App\Models\ChklClassification;
 use App\Models\Unity;
+use App\Models\UsersGroup;
 use Illuminate\Database\Seeder;
 
 class ChecklistSeeder extends Seeder {
@@ -94,5 +95,12 @@ class ChecklistSeeder extends Seeder {
         $cklAbertura->units()->sync(Unity::all());
         $cklPEO->units()->sync(Unity::all());
         $cklSazonal->units()->sync(Unity::all());
+
+        $cklEmpilhadeira->usersGroups()->sync(UsersGroup::get());
+        $cklLimpeza->usersGroups()->sync(UsersGroup::get());
+        $cklSesmt->usersGroups()->sync(UsersGroup::get());
+        $cklAbertura->usersGroups()->sync(UsersGroup::get());
+        $cklPEO->usersGroups()->sync(UsersGroup::get());
+        $cklSazonal->usersGroups()->sync(UsersGroup::get());
     }
 }

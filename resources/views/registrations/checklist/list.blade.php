@@ -12,7 +12,7 @@
         </div>
     </div>
 
-    <div class="table-responsive mh-300">
+    <div class="table-responsive-md">
         <table class="table table-striped table-sm fs--1 mb-0" id="checklist-list">
             <thead class="mt-5 bg-secondary text-light">
                 <tr>
@@ -30,40 +30,50 @@
                 @foreach ($checklists as $checklist)
                 <tr class="py-1">
                     <td class="py--3 align-middle white-space-nowrap pe-0 w-action">
-                        <div class="font-sans-serif btn-reveal-trigger position-static">
+                        <div class="btn-group">
                             <button
-                                class="btn btn-sm dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2"
+                                class="btn btn-sm text-primary fw-bold dropdown-toggle dropdown-caret-none transition-none btn-reveal fs--2"
                                 type="button" data-bs-toggle="dropdown" data-boundary="window" aria-haspopup="true" 
                                 aria-expanded="false" data-bs-reference="parent">
                                 <i class="fa-solid fa-bars fs--2"></i>
                             </button>
-                            <div class="dropdown-menu dropdown-menu-end py-2">
-                                <a class="dropdown-item text-primary" href="{{ route('checklist_edit', $checklist->id ) }}">
-                                    <i class="fas fa-edit"></i>
-                                    Editar Checklist
-                                </a>
-                                <a class="dropdown-item text-info" href="{{ route('checklist_item_list', $checklist->id ) }}">
-                                    <i class="far fa-edit"></i>
-                                    Editar Perguntas
-                                </a>
-                               
-                                <a class="dropdown-item text-secondary"  
-                                    onclick="getSelectUnitsModal(this)"
-                                    data-checklist-id="{{ $checklist->id }}"
-                                    data-checklist-units="{{ $checklist->units->pluck('id') }}"
-                                    data-bs-toggle="modal" 
-                                    data-bs-target="#units-generate-task-modal"
-                                >
-                                    <i class="fas fa-cog"></i>
-                                    Gerar Tarefa
-                                </a>
-                              
-                                {{-- <div class="dropdown-divider"></div>
-                                <a class="dropdown-item text-danger" href="{{ route('checklist_delete', $checklist->id ) }}">
-                                    <i class="far fa-trash-alt"></i>
-                                    Remove
-                                </a> --}}
-                            </div>
+                            
+                            <ul class="dropdown-menu">
+                                <li>
+                                    <a class="dropdown-item text-primary" href="{{ route('checklist_edit', $checklist->id ) }}">
+                                        <i class="fas fa-edit"></i>
+                                        Editar Checklist
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item text-info" href="{{ route('checklist_item_list', $checklist->id ) }}">
+                                        <i class="far fa-edit"></i>
+                                        Editar Perguntas
+                                    </a>
+                                </li>
+                                <li>
+                                    <a class="dropdown-item text-secondary"  
+                                        onclick="getSelectUnitsModal(this)"
+                                        data-checklist-id="{{ $checklist->id }}"
+                                        data-checklist-units="{{ $checklist->units->pluck('id') }}"
+                                        data-bs-toggle="modal" 
+                                        data-bs-target="#units-generate-task-modal">
+                                        <i class="fas fa-cog"></i>
+                                        Gerar Tarefa
+                                    </a>
+                                </li>
+                                <li>
+                                    <hr class="dropdown-divider">
+                                </li>
+                                <li>
+                                    <button class="dropdown-item text-danger delete-checklist" 
+                                            data-delete-route="{{ route('checklist_delete', $checklist->id ) }}"
+                                            data-checklist-id="{{ $checklist->id }}">
+                                        <i class="far fa-trash-alt"></i>
+                                        Remover
+                                    </button>
+                                </li>
+                            </ul>
                         </div>
                     </td>
                     <td class="py--3 fw-bold align-middle ps-3 name">{{ $checklist->id }}</td>
@@ -111,6 +121,35 @@
 
 @section('postscript')
     <script type="text/javascript">
+
+        function deleteChecklist(element) {            
+            event.preventDefault();
+            var deleteRoute = element.getAttribute('data-delete-route');
+            var checklistId = element.getAttribute('data-checklist-id');
+
+            Swal.fire({
+                title: "Confirmação",
+                text: `Tem certeza que deseja deletar o Ckecklist ${checklistId} e suas Perguntas?!`,
+                icon: "warning",
+                position: "top",
+                showCancelButton: true,
+                cancelButtonColor: "#ed2000",
+                confirmButtonColor: "#25b003",
+                confirmButtonText: "Confirmar"
+            }).then((result) => {
+                if (result.isConfirmed) {
+                    window.location.href = deleteRoute;
+                }else{
+                    Swal.fire({
+                        position: "top",
+                        title: "Cancelado!",
+                        text: `A exclusão do Checklist ${checklistId} não foi realizada!`,
+                        icon: "info",
+                        confirmButtonColor: "#25b003",
+                    });
+                }
+            });
+        }
 
         function getSelectUnitsModal(btnGenerateTask){
             event.preventDefault();
@@ -195,6 +234,8 @@
             initializeDatatables('checklist-list');
             initializeDualListBox('#units-generate-task', 'Unidades Ativas', 'Unidades Selecionadas');
             $("#btn-generate-tasks").click(function(){ generateTasks(); });
+            $(".delete-checklist").click(function(event){ deleteChecklist(this); });
+            
         });
     </script>
 @endsection

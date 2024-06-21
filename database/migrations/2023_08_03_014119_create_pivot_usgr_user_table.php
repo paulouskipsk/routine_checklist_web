@@ -13,8 +13,8 @@ return new class extends Migration {
             $table->integer('user_id')->nullable(false);
             $table->timestamps();
 
-            $table->foreign('user_id')->references('id')->on('users');
-            $table->foreign('usgr_id')->references('id')->on('users_groups');
+            $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
+            $table->foreign('usgr_id')->references('id')->on('users_groups')->cascadeOnDelete();
             $table->unique(['user_id', 'usgr_id']);
         });
     }
