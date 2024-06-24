@@ -33,6 +33,7 @@ class UserController extends ControllerWeb {
         $all = $request->all();
         try {
             $user = User::create($request->all());
+            $user->units()->sync($request->units);
             Session::flash('flash-success-msg', "Usuário cadastrado com sucesso.");
             return redirect('/usuario/novo');
         } catch (\Throwable $th) {

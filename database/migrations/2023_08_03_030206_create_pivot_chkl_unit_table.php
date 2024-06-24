@@ -10,7 +10,6 @@ return new class extends Migration {
             $table->id();
             $table->integer('chkl_id')->nullable(false);
             $table->integer('unit_id')->nullable(false);
-            $table->timestamps();
 
             $table->foreign('unit_id')->references('id')->on('units')->cascadeOnDelete();
             $table->foreign('chkl_id')->references('id')->on('checklists')->cascadeOnDelete();

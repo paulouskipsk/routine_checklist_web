@@ -11,7 +11,6 @@ return new class extends Migration {
             $table->id();
             $table->integer('usgr_id')->nullable(false);
             $table->integer('user_id')->nullable(false);
-            $table->timestamps();
 
             $table->foreign('user_id')->references('id')->on('users')->cascadeOnDelete();
             $table->foreign('usgr_id')->references('id')->on('users_groups')->cascadeOnDelete();

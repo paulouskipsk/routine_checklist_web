@@ -7,6 +7,7 @@ use App\Models\Unity;
 use App\Models\User;
 use App\Utils\Functions;
 use Exception;
+use Illuminate\Foundation\Testing\RefreshDatabase;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Validator;
@@ -15,7 +16,7 @@ use Throwable;
 class ApiAuthController extends ControllerApi
 {
     public function authenticate(Request $request) {
-        try {
+        try {            
             if(!Auth::attempt($request->only(['login', 'password'])))
                 return $this->response(false, 401, "Login ou senha não conferem");
             
@@ -25,9 +26,10 @@ class ApiAuthController extends ControllerApi
             $unity = Unity::find($request->unity);
             if(!$user->units->contains($unity)) throw new Exception("Usuário não tem acesso à unidade selecionada!");
             $user->unity_logged = $unity->id;
+            $plainTextToken = $user->createToken("API TOKEN")->plainTextToken;
             $user->save();
 
-            return $this->responseOk("Seja bem vindo, $user->name.", ['token'=>$user->createToken("API TOKEN")->plainTextToken, 'unity'=>$unity, 'user'=>$user]);
+            return $this->responseOk("Seja bem vindo, $user->name.", ['token'=>$plainTextToken, 'unity'=>$unity, 'user'=>$user]);
         } catch (Throwable $th) {
             return $this->responseError("Erro ao efetuar login: ". $th->getMessage(), [
                 'message'=>$th->getMessage(),
@@ -61,9 +63,11 @@ class ApiAuthController extends ControllerApi
         }
     }
 
-    public function logout(Request $request){
+    public function logout(){
         try {
-            Auth::logout();
+            $user = Auth::user();
+            $user->tokens()->delete();
+            // $request->user()->currentAccessToken()->delete();
             return $this->responseOk("Usuário deslogado com sucesso.");
         } catch (\Throwable $th) {
             return $this->responseError("Erro ao deslogar usuário autenticado");

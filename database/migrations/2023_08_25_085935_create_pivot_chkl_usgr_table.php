@@ -11,7 +11,6 @@ return new class extends Migration {
             $table->id();
             $table->integer('chkl_id')->nullable(false);
             $table->integer('usgr_id')->nullable(false);
-            $table->timestamps();
 
             $table->foreign('usgr_id')->references('id')->on('users_groups')->cascadeOnDelete();
             $table->foreign('chkl_id')->references('id')->on('checklists')->cascadeOnDelete();

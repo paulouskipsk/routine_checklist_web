@@ -2,6 +2,7 @@
 
 namespace Database\Seeders;
 
+use App\Models\Unity;
 use App\Models\User;
 use Illuminate\Database\Console\Seeds\WithoutModelEvents;
 use Illuminate\Database\Seeder;
@@ -11,7 +12,7 @@ class UsersSeeder extends Seeder
 
     public function run(): void
     {
-        User::create([
+        $user1 = User::create([
             'name' => 'Administrador',
             'lastname' => 'Geral',
             'email' => '',
@@ -23,7 +24,7 @@ class UsersSeeder extends Seeder
             'access_mobile' => 'S',
         ]);
 
-        User::create([
+        $user2 = User::create([
             'name' => 'Everton',
             'lastname' => 'UTFPR',
             'email' => '',
@@ -35,7 +36,7 @@ class UsersSeeder extends Seeder
             'access_mobile' => 'S',
         ]);
 
-        User::create([
+        $user3 = User::create([
             'name' => 'super',
             'lastname' => '',
             'email' => '',
@@ -47,7 +48,7 @@ class UsersSeeder extends Seeder
             'access_mobile' => 'S',
         ]);
 
-        User::create([
+        $user4 = User::create([
             'name' => 'everton',
             'lastname' => '',
             'email' => '',
@@ -59,7 +60,7 @@ class UsersSeeder extends Seeder
             'access_mobile' => 'N',
         ]);
 
-        User::create([
+        $user5 = User::create([
             'name' => 'everaldo',
             'lastname' => '',
             'email' => '',
@@ -71,7 +72,7 @@ class UsersSeeder extends Seeder
             'access_mobile' => 'N',
         ]);
 
-        User::create([
+        $user6 = User::create([
             'name' => 'everson',
             'lastname' => '',
             'email' => '',
@@ -83,7 +84,7 @@ class UsersSeeder extends Seeder
             'access_mobile' => 'S',
         ]);
 
-        User::create([
+        $user7 = User::create([
             'name' => 'cleverson',
             'lastname' => '',
             'email' => '',
@@ -95,7 +96,7 @@ class UsersSeeder extends Seeder
             'access_mobile' => 'N',
         ]);
 
-        User::create([
+        $user8 = User::create([
             'name' => 'emerson',
             'lastname' => '',
             'email' => '',
@@ -107,7 +108,7 @@ class UsersSeeder extends Seeder
             'access_mobile' => 'S',
         ]);
 
-        User::create([
+        $user9 = User::create([
             'name' => 'Operador',
             'lastname' => '',
             'email' => '',
@@ -119,5 +120,16 @@ class UsersSeeder extends Seeder
             'access_mobile' => 'S',
         ]);
 
+        $unitsIds = Unity::all()->pluck('id');
+
+        $user1->units()->sync($unitsIds);
+        $user2->units()->sync($unitsIds);
+        $user3->units()->sync($unitsIds);
+        $user4->units()->sync($unitsIds);
+        $user5->units()->sync($unitsIds);
+        $user6->units()->sync($unitsIds);
+        $user7->units()->sync($unitsIds);
+        $user8->units()->sync($unitsIds);
+        $user9->units()->sync($unitsIds);
     }
 }

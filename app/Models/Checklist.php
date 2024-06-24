@@ -64,11 +64,11 @@ class Checklist extends Model {
     }
 
     public function units(){
-        return $this->belongsToMany(Unity::class, 'pivot_chkl_unit', 'chkl_id', 'unit_id')->withTimestamps();
+        return $this->belongsToMany(Unity::class, 'pivot_chkl_unit', 'chkl_id', 'unit_id');
     }
 
     public function usersGroups(){
-        return $this->belongsToMany(UsersGroup::class, 'pivot_chkl_usgr', 'chkl_id', 'usgr_id')->withTimestamps();
+        return $this->belongsToMany(UsersGroup::class, 'pivot_chkl_usgr', 'chkl_id', 'usgr_id');
     }
 
     public function checklistsMovs(): HasMany {

@@ -8,11 +8,11 @@ use App\Http\Controllers\Api\ChecklistMovControllerApi;
 //  ---------------------------- API Routes ----------------------------
 
 Route::group(['prefix' => 'auth'], function () {
-    Route::post('user-data-by-credentials', [ApiAuthController::class, 'getUserDataByCredentials'])->name('getUserDataByCredentials');
+    Route::post('user-data-by-credentials', [ApiAuthController::class, 'getUserDataByCredentials'])->name('get_user_data_by_credentials');
     Route::post('authenticate', [ApiAuthController::class, 'authenticate'])->name('authenticate');
 
     Route::group(['middleware' => 'auth:sanctum'], function () {
-        Route::get('logout/{user_id}', [ApiAuthController::class, 'logout'])->name('logout');
+        Route::get('logout', [ApiAuthController::class, 'logout'])->name('logout');
         Route::get('user', [ApiAuthController::class, 'user'])->name('user-authenticated');
     });
 });
