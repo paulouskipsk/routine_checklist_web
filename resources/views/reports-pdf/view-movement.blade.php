@@ -91,41 +91,41 @@
                 <td></td>
                 <td>
                   <span class="bold fs-12">Sim:</span>
-                  <span class="mr-1 italic fs-12">{{round($report['totals']['questionsY'], 3)}}</span>
+                  <span class="mr-1 italic fs-12">{{$report['totals']['questionsY']}}</span>
                   <br/>
                   <span class="bold fs-12">Não:</span>
-                  <span class="mr-1 italic fs-12">{{round($report['totals']['questionsN'], 3)}}</span>
+                  <span class="mr-1 italic fs-12">{{$report['totals']['questionsN']}}</span>
                   <br/>
                   <span class="bold fs-12">Ruim:</span>
-                  <span class="mr-1 italic fs-12">{{round($report['totals']['questionsB'], 3)}}</span>
+                  <span class="mr-1 italic fs-12">{{$report['totals']['questionsB']}}</span>
                   <br/>
                   <span class="bold fs-12">Bom:</span>
-                  <span class="mr-1 italic fs-12">{{round($report['totals']['questionsG'], 3)}}</span>
+                  <span class="mr-1 italic fs-12">{{$report['totals']['questionsG']}}</span>
                   <br/>
                   <span class="bold fs-12">Excelente:</span>
-                  <span class="mr-1 italic fs-12">{{round($report['totals']['questionsE'], 3)}}</span>
+                  <span class="mr-1 italic fs-12">{{$report['totals']['questionsE']}}</span>
             </div>
 
                 </td>
                 <td>
                   <span class="bold fs-12">Sim: </span>
-                  <span class="mr-1 italic fs-12">{{$report['percentages']['percentQuestionsY']}}'%'</span>
+                  <span class="mr-1 italic fs-12">{{round($report['percentages']['percentQuestionsY'], 2)}}%</span>
                   <br/>
 
                   <span class="bold fs-12">Não: </span>
-                  <span class="mr-1 italic fs-12">{{$report['percentages']['percentQuestionsN']}}'%'</span>
+                  <span class="mr-1 italic fs-12">{{round($report['percentages']['percentQuestionsN'], 2)}}%</span>
                   <br/>
 
                   <span class="bold fs-12">Ruim: </span>
-                  <span class="mr-1 italic fs-12">{{$report['percentages']['percentQuestionsB']}}'%'</span>
+                  <span class="mr-1 italic fs-12">{{round($report['percentages']['percentQuestionsB'], 2)}}%</span>
                   <br/>
 
                   <span class="bold fs-12">Bom: </span>
-                  <span class="mr-1 italic fs-12">{{$report['percentages']['percentQuestionsG']}}'%'</span>
+                  <span class="mr-1 italic fs-12">{{round($report['percentages']['percentQuestionsG'], 2)}}%</span>
                   <br/>
 
                   <span class="bold fs-12">Excelente: </span>
-                  <span class="mr-1 italic fs-12">{{$report['percentages']['percentQuestionsE']}}'%'</span>
+                  <span class="mr-1 italic fs-12">{{round($report['percentages']['percentQuestionsE'], 2)}}%</span>
                   <br/>
                 </td>
               </tr>
@@ -137,7 +137,7 @@
   </table>
 
 
-    <div class="bold fs-13 mt-1 text-primary">POR ÁREA</div>
+    <div class="bold fs-13 mt-1 text-primary">POR SETOR</div>
     {{-- RESULTADO POR SETOR --}}
     <table class="table table-sm table-striped table-condensed">
         <thead>
@@ -157,11 +157,11 @@
             <tr>
                 <td class="py-1"> {{$report['sectors'][$sectorId]->description}}</td>
                 <td class="py-1"> {{$totalSector['questionsTotals']}} </td>
-                <td class="py-1">{{$report['percentagesSectors'][$sectorId]['percentQuestionsAfirmatives']}}%</td>
-                <td class="py-1">{{$report['percentagesSectors'][$sectorId]['percentQuestionsNegatives']}}%</td>
+                <td class="py-1">{{round($report['percentagesSectors'][$sectorId]['percentQuestionsAfirmatives'], 2)}}%</td>
+                <td class="py-1">{{round($report['percentagesSectors'][$sectorId]['percentQuestionsNegatives'], 2)}}%</td>
                 <td class="py-1">{{$totalSector['scoreTotal']}}</td>
                 <td class="py-1">{{$totalSector['scoreRun']}}</td>
-                <td class="py-1">{{$report['percentagesSectors'][$sectorId] ['percentScoreRun']}}%</td>
+                <td class="py-1">{{round($report['percentagesSectors'][$sectorId] ['percentScoreRun'], 2)}}%</td>
             </tr>
             @endforeach
         </tbody>
@@ -251,9 +251,9 @@
                     <span class="bold">Fotos:</span>
 
                     @if ($checklistItemMov->photos)
-                    <div class="text-left mt-3 pl-3">
+                    <div class="text-left mt-1 pl-3">
                     @foreach ($checklistItemMov->photos as $index => $photo)                                                            
-                        <img src="data:image/jpeg;base64,{{$photo}}" class="img-150">
+                        <img src="data:image/jpeg;base64,{{$photo}}" class="img-thumb">
                     @endforeach
                     </div>
                     @else

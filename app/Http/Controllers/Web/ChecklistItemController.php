@@ -74,13 +74,12 @@ class ChecklistItemController extends ControllerWeb {
             $checklistItem = ChecklistItem::firstWhere('id', $request->id);
             $checklistItem->fill($request->all());
             $checklistItem->changed_by_user = Auth::user()->id;
-            $checklistItem->processed_in = now();
             $checklistItem->save();
 
             Session::flash('flash-success-msg', "Pergunta atualizada com sucesso.");
             return redirect("/checklist-item/listar/checklist/$request->chkl_id");
         } catch (\Throwable $th) {
-            Session::flash('flash-error-msg', "Erro ao atualizar o Pergunta $request->id.");
+            Session::flash('flash-error-msg', "Erro ao atualizar o Pergunta $request->id. Erro: ".$th->getMessage());
         }
 
         return Redirect::back()->with($request->all());

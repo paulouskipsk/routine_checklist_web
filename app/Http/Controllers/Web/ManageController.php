@@ -99,7 +99,7 @@ class ManageController extends ControllerWeb {
             if(Functions::nullOrEmpty($checklistMov))  throw new Exception("Tarefa $request->id não encontrada");
 
             $titleFile = "Relatório de Movimento Tarefa $checklistMov->id";
-            $titleReport = "Relatório de Movimento de Checklist";
+            $titleReport = "Relatório de Execução de Tarefa";
             $unity = $checklistMov->unity;
             $user = Auth::user();
             $checklistMovService = new ChecklistMovService();

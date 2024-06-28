@@ -36,6 +36,7 @@ class ChecklistItemMovService {
         $checklistItemMov->photos = $request->photos;
         $checklistItemMov->user_id = $user->id;
         $checklistItemMov->processed = 'S';
+        $checklistItemMov->processed_in = Carbon::now();
         $checklistItemMov->save();
 
         return $checklistItemMov;

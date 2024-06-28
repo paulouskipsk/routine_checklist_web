@@ -10,7 +10,7 @@ return new class extends Migration {
         Schema::create('checklists_itens_movs', function (Blueprint $table) {
             $table->id();
             $table->string('description', 200)->nullable(false);
-            $table->smallInteger('sequence')->nullable(false);
+            $table->smallInteger('sequence')->nullable(true);
             $table->smallInteger('score')->nullable(false);
             $table->time('hour_min', 8)->nullable(true);
             $table->time('hour_max', 8)->nullable(true);

@@ -48,12 +48,10 @@
                         <div class="col-3">
                             <label for="chkl_type">Tipo de Checklist<span class="text-danger">*</span></label>
                             <select id="chkl_type" class="form-select @error('chkl_type') is-invalid @enderror" name="chkl_type" required>
-                                <option value="N"
-                                {{ old('chkl_type') == 'N' || @$checklist->chkl_type == 'N' ? 'selected' : '' }}>Padrão
-                                </option>
-                                <option value="A"
+                                <option value="N" selected>Padrão</option>
+                                {{-- <option value="A"
                                     {{ old('chkl_type') == 'A' || @$checklist->chkl_type == 'A' ? 'selected' : '' }}>Aleatório
-                                </option>
+                                </option> --}}
                             </select>
                             @error('chkl_type')
                                 <div class="invalid-feedback">{{ $message }}</div>

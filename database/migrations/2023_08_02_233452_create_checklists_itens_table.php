@@ -10,7 +10,7 @@ return new class extends Migration {
         Schema::create('checklists_itens', function (Blueprint $table) {
             $table->bigIncrements('id');
             $table->string('description', 200)->nullable(false);
-            $table->smallInteger('sequence')->nullable(false);
+            $table->smallInteger('sequence')->nullable(true);
             $table->smallInteger('score')->default(1)->nullable(false);
             $table->string('status', 1)->nullable(false);
             $table->string('type', 1)->nullable(false);
@@ -30,7 +30,7 @@ return new class extends Migration {
             $table->foreign('chkl_id')->references('id')->on('checklists')->cascadeOnDelete();
             $table->foreign('sect_id')->references('id')->on('sectors');
             $table->foreign('changed_by_user')->references('id')->on('users');
-            $table->unique(['chkl_id', 'sequence']);
+            // $table->unique(['chkl_id', 'sequence']);
         });
     }
 

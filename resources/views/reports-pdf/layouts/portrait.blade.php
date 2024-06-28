@@ -97,8 +97,8 @@
         }
 
         #logo {
-            width: 140px;
-            height: 50px;
+            width: 135px;
+            height: 45px;
             float: left;
             margin-top: 0.5cm;
             margin-left: 0px;
@@ -268,6 +268,7 @@
         .text-info { color: green !important; }
         .img-200 { width: 200px !important; height: 200px !important; }
         .img-150 { width: 150px !important; height: 150px !important; }
+        .img-thumb { width: 120px !important; height: 110px !important; }
 
         .table-sm td, .table-sm th{
             padding: 0px !important;
