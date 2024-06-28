@@ -14,7 +14,7 @@ return new class extends Migration {
             $table->string('cnpj', 20)->nullable(true)->unique();
             $table->string('state_registration', 20)->nullable(true)->unique();
             $table->string('phone_fixed', 16)->nullable(true);
-            $table->string('status', 1)->nullable(false);;
+            $table->string('status', 1)->nullable(false);
             $table->integer('addr_id')->nullable(false);
             $table->timestamps();
 

@@ -101,7 +101,6 @@ class UnitySeeder extends Seeder {
 
 //===============================================================
         Unity::create([
-            'id' => 1,
             'fantasy_name' => 'Unidade 001',
             'corporate_name' => 'Supermercado Fictício SA',
             'cnpj' => '43.341.216/0001-01',
@@ -112,7 +111,6 @@ class UnitySeeder extends Seeder {
         ]);
 
         Unity::create([
-            'id' => 2,
             'fantasy_name' => 'Unidade 002',
             'corporate_name' => 'Supermercado Fictício SA',
             'cnpj' => '43.341.216/0001-02',
@@ -123,7 +121,6 @@ class UnitySeeder extends Seeder {
         ]);
 
         Unity::create([
-            'id' => 3,
             'fantasy_name' => 'Unidade 003',
             'corporate_name' => 'Supermercado Fictício SA',
             'cnpj' => '43.341.216/0001-03',
@@ -134,7 +131,6 @@ class UnitySeeder extends Seeder {
         ]);
 
         Unity::create([
-            'id' => 4,
             'fantasy_name' => 'Unidade 004',
             'corporate_name' => 'Supermercado Fictício SA',
             'cnpj' => '43.341.216/0001-04',
@@ -145,7 +141,6 @@ class UnitySeeder extends Seeder {
         ]);
 
         Unity::create([
-            'id' => 5,
             'fantasy_name' => 'Unidade 005',
             'corporate_name' => 'Supermercado Fictício SA',
             'cnpj' => '43.341.216/0001-05',
@@ -156,7 +151,6 @@ class UnitySeeder extends Seeder {
         ]);
 
         Unity::create([
-            'id' => 6,
             'fantasy_name' => 'Unidade 006',
             'corporate_name' => 'Supermercado Fictício SA',
             'cnpj' => '43.341.216/0001-06',
@@ -167,7 +161,6 @@ class UnitySeeder extends Seeder {
         ]);
 
         Unity::create([
-            'id' => 7,
             'fantasy_name' => 'Unidade 007',
             'corporate_name' => 'Supermercado Fictício SA',
             'cnpj' => '43.341.217/0001-07',
@@ -178,7 +171,6 @@ class UnitySeeder extends Seeder {
         ]);
 
         Unity::create([
-            'id' => 8,
             'fantasy_name' => 'Unidade 008',
             'corporate_name' => 'Supermercado Fictício SA',
             'cnpj' => '43.341.218/0001-08',
@@ -189,7 +181,6 @@ class UnitySeeder extends Seeder {
         ]);
 
         Unity::create([
-            'id' => 9,
             'fantasy_name' => 'Unidade 009',
             'corporate_name' => 'Supermercado Fictício SA',
             'cnpj' => '43.341.219/0001-09',
@@ -200,7 +191,6 @@ class UnitySeeder extends Seeder {
         ]);
 
         Unity::create([
-            'id' => 10,
             'fantasy_name' => 'Unidade 010',
             'corporate_name' => 'Supermercado Fictício SA',
             'cnpj' => '43.341.219/0001-10',

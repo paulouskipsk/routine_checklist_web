@@ -8,6 +8,7 @@ use App\Models\ChecklistMov;
 use Carbon\Carbon;
 use Exception;
 use Illuminate\Support\Collection;
+use Illuminate\Support\Facades\DB;
 use Illuminate\Support\Facades\Log;
 use stdClass;
 
@@ -71,6 +72,7 @@ class ChecklistMovService {
 
     public function generateChecklistMov(Checklist $checklist, Collection $units){
         try {
+            DB::beginTransaction();
             $checklistService = new ChecklistService();
             $checklistItemService = new ChecklistItemService();
             foreach ($units as $unity) {
@@ -79,8 +81,10 @@ class ChecklistMovService {
                     $checklistMov->save();
                     $checklistItemService->initializeChecklistItensMovs($checklistMov);
                 }
-            }            
+            }   
+            DB::commit();         
         } catch (\Throwable $th) {
+            DB::rollBack();
             throw $th;
         }
     }

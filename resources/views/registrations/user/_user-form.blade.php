@@ -32,7 +32,6 @@
         <div class="col-sm-12 col-md-6 mt-3">
             <label for="status">Status<span class="text-danger">*</span></label> 
             <select id="status" class="form-select @error('status') is-invalid @enderror" name="status" required>
-                <option selected disabled>Selecione...</option>
                 <option value="A" {{ old('status') == 'A' || @$user->status == 'A' ? 'selected': '' }}>Ativo</option>
                 <option value="I" {{ old('status') == 'I' || @$user->status == 'I' ? 'selected': '' }}>Inativo</option>
 
@@ -69,12 +68,12 @@
         <div class="col-12">
 
             <div class="form-check form-switch mt-3">
-                <input class="form-check-input" type="checkbox" id="access_admin" name="access_admin" {{$user->access_admin == 'S' ? 'checked' : ''}}/>
+                <input class="form-check-input" type="checkbox" id="access_admin" name="access_admin" {{@$user->access_admin == 'S' ? 'checked' : ''}}/>
                 <label class="form-check-label" for="flexSwitchCheckDefault">Usuário Administrador</label>
             </div>
 
             <div class="form-check form-switch mt-3">
-                <input class="form-check-input" type="checkbox" id="access_mobile" name="access_mobile" {{$user->access_mobile == 'S' ? 'checked' : ''}}/>
+                <input class="form-check-input" type="checkbox" id="access_mobile" name="access_mobile" {{@$user->access_mobile == 'S' ? 'checked' : ''}}/>
                 <label class="form-check-label" for="flexSwitchCheckDefault">Usuário Mobile (APP)</label>
             </div>
         </div>

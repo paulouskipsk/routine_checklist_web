@@ -19,7 +19,7 @@ class ChecklistItemService {
                                        ->get();
 
         if(Functions::nullOrEmpty($checklistItens)) 
-            throw new Exception("Não existem Perguntas cadastradas para o checklist $checklistMov->chkl_id");
+            throw new Exception("Não existem perguntas cadastradas para o checklist $checklistMov->chkl_id");
 
         foreach ($checklistItens as $checklistItem) {
             if(isset($checklistItem->unitsNoApplicable) && $checklistItem->unitsNoApplicable->contains('id',$checklistMov->unit_id)) continue;

@@ -26,7 +26,8 @@ class UserController extends ControllerWeb {
         $breadcrumbs = $this->breadcrumbs;
         $action = '/usuario/salvar';
         $method = 'post';
-        return view('registrations.user.new', compact('breadcrumbs', 'action', 'method'));
+        $units = Unity::all();
+        return view('registrations.user.new', compact('units','breadcrumbs', 'action', 'method'));
     }
 
     public function store(Request $request){

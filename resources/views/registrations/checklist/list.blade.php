@@ -213,7 +213,7 @@
                         Swal.fire({
                             position: "top",
                             title: "Erro!",
-                            text: data.message,
+                            text: data.responseJSON.message,
                             icon: "error"
                         });
                     }  

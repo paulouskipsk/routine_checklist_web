@@ -16,7 +16,6 @@
         <div class="col-6">
             <label for="status">Status<span class="text-danger">*</span></label> 
             <select id="status" class="form-select @error('status') is-invalid @enderror" name="status" required>
-                <option selected disabled>Selecione...</option>
                 <option value="A" {{ old('status') == 'A' || @$sector->status == 'A' ? 'selected': '' }}>Ativo</option>
                 <option value="I" {{ old('status') == 'I' || @$sector->status == 'I' ? 'selected': '' }}>Inativo</option>
 

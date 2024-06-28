@@ -2,8 +2,6 @@
     @csrf
     @method("$method")
 
-    <input type="hidden" name="unity[id]" value="{{ @$unity->id }}">
-
     <div class="row d-flex justify-content-center mt-5">
         <div class="col-4">
             <label for="fantasy_name">Nome Fantasia<span class="text-danger">*</span></label>
@@ -97,7 +95,7 @@
         <div class="col-2">
             <label for="number">Número<span class="text-danger">*</span></label>
             <div class="input-group is-invalid">
-                <input type="text" id="number" class="form-control @error('number') is-invalid @enderror"
+                <input type="number" id="number" class="form-control @error('number') is-invalid @enderror"
                     name="address[number]" value="{{ old('number') ?? @$unity->address->number }}" required>
             </div>
             @error('number')

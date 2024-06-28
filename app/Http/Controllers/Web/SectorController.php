@@ -27,7 +27,7 @@ class SectorController extends ControllerWeb {
         return view('registrations.sector.new', compact('breadcrumbs', 'action', 'method'));
     }
 
-    public function store(WebSectorRequest $request){
+    public function store(Request $request){
         try {
             $sector = Sector::create($request->all());
             Session::flash('flash-success-msg', "Setor cadastrado com sucesso.");
