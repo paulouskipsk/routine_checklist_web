@@ -6,11 +6,11 @@ use App\Models\User;
 use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
-class ApiAuthControllerTest extends TestCase {
+class AuthApiControllerTest extends TestCase {
     // use RefreshDatabase;
 
     public function testGetForUserUnitsNotAuthenticatedSuccess(): void {
-        $params = ['login' => 'admin', 'password' =>'utfprgp', 'unity' => 0];
+        $params = ['login' => 'admin', 'password' =>'utfprgp@tsi', 'unity' => 0];
         $headers = [ 'Accept', 'application/json'];
         $response = $this->post('/api/auth/user-data-by-credentials',  $params, $headers);
 
@@ -36,7 +36,7 @@ class ApiAuthControllerTest extends TestCase {
     }
 
     public function testApiAutenticationUserSuccess(): void {
-        $params = ['login' => 'admin', 'password' =>'utfprgp', 'unity' => 1];
+        $params = ['login' => 'admin', 'password' =>'utfprgp@tsi', 'unity' => 1];
         $headers = [ 'Accept', 'application/json'];
         $response = $this->post('/api/auth/authenticate',  $params, $headers);
 
@@ -61,7 +61,7 @@ class ApiAuthControllerTest extends TestCase {
     }
 
     public function testGetUserAuthenticatedSuccess(): void {
-        $response = $this->get('/api/auth/user', $this->getHeader());
+        $response = $this->get('/api/auth/user', $this->getHeaderAPI());
         $response->assertStatus(200);
         $response->assertJsonIsObject();
         $this->assertTrue(str_contains($response['message'], 'Usuário autenticado recuperado com sucesso.'));
@@ -78,7 +78,7 @@ class ApiAuthControllerTest extends TestCase {
 
     public function testLogoutWithUserSuccess(): void {
         $user = User::where('login', 'admin')->first();
-        $response = $this->get('/api/auth/logout', $this->getHeader());
+        $response = $this->get('/api/auth/logout', $this->getHeaderAPI());
         $response->assertStatus(200);
         $this->assertTrue(str_contains($response['message'], 'Usuário deslogado com sucesso.'));
         $response->assertStatus(200);

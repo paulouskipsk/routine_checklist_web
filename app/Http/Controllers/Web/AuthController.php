@@ -19,7 +19,7 @@ class AuthController extends ControllerWeb {
         $user = User::firstWhere('login', $request->login);
         if (!$user || !Hash::check($request->password, $user->password)) {
             Session::flash('flash-error-msg', "As credenciais informadas não são válidas");
-            return Redirect::back();
+            return redirect('/login');
         }
 
         if($user->access_admin != 'S') {

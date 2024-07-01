@@ -6,7 +6,6 @@ use App\Enums\Status;
 use App\Models\Unity;
 use App\Models\User;
 use App\Utils\Functions;
-use Exception;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Redirect;
 use Illuminate\Support\Facades\Session;
@@ -31,7 +30,6 @@ class UserController extends ControllerWeb {
     }
 
     public function store(Request $request){
-        $all = $request->all();
         try {
             $user = User::create($request->all());
             $user->units()->sync($request->units);
@@ -78,9 +76,9 @@ class UserController extends ControllerWeb {
 
         return Redirect::back()->with($request->all());
     }
-    public function delete(Request $request){
-        //implementar
-    }
+    // public function delete(Request $request){
+    //     //implementar
+    // }
     public function getUsersByName(Request $request) {
         $users = User::where('name', 'ilike', "%$request->name%")->whereStatus(Status::ACTIVE)->get();
         if(Functions::nullOrEmpty($users)) return [];

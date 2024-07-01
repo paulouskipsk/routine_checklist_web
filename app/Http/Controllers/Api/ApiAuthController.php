@@ -63,11 +63,9 @@ class ApiAuthController extends ControllerApi
         }
     }
 
-    public function logout(){
+    public function logout(Request $request){
         try {
-            $user = Auth::user();
-            $user->tokens()->delete();
-            // $request->user()->currentAccessToken()->delete();
+            Auth::user()->tokens()->delete();
             return $this->responseOk("Usuário deslogado com sucesso.");
         } catch (\Throwable $th) {
             return $this->responseError("Erro ao deslogar usuário autenticado");
