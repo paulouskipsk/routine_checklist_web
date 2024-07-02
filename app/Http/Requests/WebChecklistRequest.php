@@ -20,7 +20,7 @@ class WebChecklistRequest extends FormRequest {
             'frequency' => 'required|string|min:1|max:1',
             'chkl_type' => 'required|string|min:1|max:1',
             'frequency_composition' =>[
-                Rule::requiredIf(in_array($this->frequency, [Frequency::WEEKLY, Frequency::MONTHLY])), 
+                Rule::requiredIf(in_array($this->frequency, [Frequency::WEEKLY->value, Frequency::MONTHLY->value])), 
                 'array'
             ],
         ];

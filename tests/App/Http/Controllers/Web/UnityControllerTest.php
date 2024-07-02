@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\App\Http\Controllers\Api;
+namespace Tests\App\Http\Controllers\Web;
 
 use App\Models\Address;
 use App\Models\Unity;
@@ -19,9 +19,7 @@ class UnityControllerTest extends TestCase {
     }
 
     public function testIndexFailNotLogged(): void {
-        $response = $this->get('/unidade/listar');
-        $response->assertStatus(302);
-        $response->assertRedirectContains('/');
+        $this->testUrlFailNotLogged('/unidade/listar');
     }
 
     public function testNewSuccessLogged(): void {
@@ -33,16 +31,12 @@ class UnityControllerTest extends TestCase {
     }
 
     public function testNewFailNotLogged(): void {
-        $response = $this->get('/unidade/novo');
-        $response->assertStatus(302);
-        $response->assertRedirectContains('/');
+        $this->testUrlFailNotLogged('/unidade/novo');
     }
 
     public function testStoreFailNotLogged(): void {
         $params = $this->getUnity(true);
-        $response = $this->post('unidade/salvar', $params);
-        $response->assertStatus(302);
-        $response->assertRedirectContains('/');
+        $this->testUrlFailNotLogged('/unidade/salvar', 'post', $params);
     }
 
     public function testStoreSuccess(): void {
@@ -62,17 +56,13 @@ class UnityControllerTest extends TestCase {
     }
     public function testEditFailNotLogged(): void {
         $unity = Unity::first();
-        $response = $this->get('/unidade/editar/'.$unity->id);
-        $response->assertStatus(302);
-        $response->assertRedirectContains('/');
+        $this->testUrlFailNotLogged('/unidade/editar/'.$unity->id);
     }
 
     public function testUpdateFailNotLogged(): void {
-        $unity = Unity::first()->toArray();
-        $unity['description'] = 'Unidade '.uniqid();
-        $response = $this->put('/unidade/atualizar/'.$unity['id'], $unity);
-        $response->assertStatus(302);
-        $response->assertRedirectContains('/');
+        $params = Unity::first()->toArray();
+        $params['description'] = 'Unidade '.uniqid();
+        $this->testUrlFailNotLogged('/unidade/atualizar/'.$params['id'], 'put', $params);
     }
     public function testUpdateSuccess(): void {
         $params = $this->getUnity(false);

@@ -3,17 +3,15 @@
 namespace Tests\App\Http\Controllers\Api;
 
 use App\Models\ChecklistMov;
-use App\Models\User;
-use Illuminate\Foundation\Testing\RefreshDatabase;
 use Tests\TestCase;
 
 class ChecklistMovControllerApiTest extends TestCase {
 
     // public function testGetChecklistMovByIdWithItensSuccess(): void {
-    //     $params = ['login' => 'admin', 'password' =>'utfprgp', 'unity' => 0];
+    //     $params = ['login' => 'admin', 'password' =>'utfprgp@tsi', 'unity' => 0];
 
     //     $movId = ChecklistMov::first()->id;
-    //     $response = $this->post('/api/checklistmov/with-itens/'.$movId, $this->getHeader());
+    //     $response = $this->post('/api/checklistmov/with-itens/'.$movId, $this->getHeaderAPI());
 
     //     $response->assertStatus(200);
     //     $response->assertJsonIsObject();

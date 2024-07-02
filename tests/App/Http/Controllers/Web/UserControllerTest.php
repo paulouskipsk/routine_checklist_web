@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\App\Http\Controllers\Api;
+namespace Tests\App\Http\Controllers\Web;
 
 use App\Models\Sector;
 use App\Models\User;
@@ -19,9 +19,7 @@ class UserControllerTest extends TestCase {
     }
 
     public function testIndexFailNotLogged(): void {
-        $response = $this->get('/usuario/listar');
-        $response->assertStatus(302);
-        $response->assertRedirectContains('/');
+        $this->testUrlFailNotLogged('/usuario/listar');
     }
 
     public function testNewSuccessLogged(): void {
@@ -33,19 +31,12 @@ class UserControllerTest extends TestCase {
     }
 
     public function testNewFailNotLogged(): void {
-        $response = $this->get('/usuario/novo');
-        $response->assertStatus(302);
-        $response->assertRedirectContains('/');
+        $this->testUrlFailNotLogged('/usuario/novo');
     }
 
     public function testStoreFailNotLogged(): void {
-        $params = [
-            'description' => 'Usuário '.uniqid(),
-            'status' => 'A'
-        ];
-        $response = $this->post('/usuario/salvar/', $params);
-        $response->assertStatus(302);
-        $response->assertRedirectContains('/');
+        $params = $this->getUserParams(true);
+        $this->testUrlFailNotLogged('/usuario/salvar', 'post', $params);
     }
 
     public function testStoreSuccess(): void {
@@ -64,18 +55,13 @@ class UserControllerTest extends TestCase {
         $response->assertSeeText('Salvar');
     }
     public function testEditFailNotLogged(): void {
-        $user = Sector::first();
-        $response = $this->get('/usuario/editar/'.$user->id);
-        $response->assertStatus(302);
-        $response->assertRedirectContains('/');
+        $params = $this->getUserParams(false);
+        $this->testUrlFailNotLogged('/usuario/editar/'.$params['id']);
     }
 
     public function testUpdateFailNotLogged(): void {
         $params = $this->getUserParams(false);
-        $params['name'] = 'Usuário '.uniqid();
-        $response = $this->put('/usuario/atualizar/'.$params['id'], $params);
-        $response->assertStatus(302);
-        $response->assertRedirectContains('/');
+        $this->testUrlFailNotLogged('/usuario/atualizar/'.$params['id'], 'put', $params);
     }
     public function testUpdateSuccess(): void {
         $user = Sector::first()->toArray();

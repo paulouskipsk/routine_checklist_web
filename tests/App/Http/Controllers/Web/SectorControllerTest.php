@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\App\Http\Controllers\Api;
+namespace Tests\App\Http\Controllers\Web;
 
 use App\Models\Sector;
 use Carbon\Carbon;
@@ -18,9 +18,7 @@ class SectorControllerTest extends TestCase {
     }
 
     public function testIndexFailNotLogged(): void {
-        $response = $this->get('/setor/listar');
-        $response->assertStatus(302);
-        $response->assertRedirectContains('/');
+        $this->testUrlFailNotLogged('/setor/listar');
     }
 
     public function testNewSuccessLogged(): void {
@@ -32,19 +30,12 @@ class SectorControllerTest extends TestCase {
     }
 
     public function testNewFailNotLogged(): void {
-        $response = $this->get('/setor/novo');
-        $response->assertStatus(302);
-        $response->assertRedirectContains('/');
+        $this->testUrlFailNotLogged('/setor/novo');
     }
 
     public function testStoreFailNotLogged(): void {
-        $params = [
-            'description' => 'Setor '.uniqid(),
-            'status' => 'A'
-        ];
-        $response = $this->post('/setor/salvar/', $params);
-        $response->assertStatus(302);
-        $response->assertRedirectContains('/');
+        $params = ['description' => 'Setor '.uniqid(), 'status' => 'A'];
+        $this->testUrlFailNotLogged('/setor/salvar', 'post', $params);
     }
 
     public function testStoreSuccess(): void {
@@ -67,17 +58,13 @@ class SectorControllerTest extends TestCase {
     }
     public function testEditFailNotLogged(): void {
         $sector = Sector::first();
-        $response = $this->get('/setor/editar/'.$sector->id);
-        $response->assertStatus(302);
-        $response->assertRedirectContains('/');
+        $this->testUrlFailNotLogged('/setor/editar/'.$sector->id);
     }
 
     public function testUpdateFailNotLogged(): void {
-        $sector = Sector::first()->toArray();
-        $sector['description'] = 'Setor '.uniqid();
-        $response = $this->put('/setor/atualizar/'.$sector['id'], $sector);
-        $response->assertStatus(302);
-        $response->assertRedirectContains('/');
+        $params = Sector::first()->toArray();
+        $params['description'] = 'Setor '.uniqid();
+        $this->testUrlFailNotLogged('/setor/atualizar/'.$params['id'],'put', $params);
     }
     public function testUpdateSuccess(): void {
         $sector = Sector::first()->toArray();
@@ -97,8 +84,6 @@ class SectorControllerTest extends TestCase {
     }
     public function testDeleteFailNotLogged(): void {
         $sector = Sector::first();
-        $response = $this->get('/setor/delete/'.$sector->id);
-        $response->assertStatus(302);
-        $response->assertRedirectContains('/login');
+        $this->testUrlFailNotLogged('/setor/delete/'.$sector->id);
     }
 }   

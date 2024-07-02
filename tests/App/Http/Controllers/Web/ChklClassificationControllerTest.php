@@ -1,6 +1,6 @@
 <?php
 
-namespace Tests\App\Http\Controllers\Api;
+namespace Tests\App\Http\Controllers\Web;
 
 use App\Models\ChklClassification;
 use Carbon\Carbon;
@@ -18,9 +18,7 @@ class ChklClassificationControllerTest extends TestCase {
     }
 
     public function testIndexFailNotLogged(): void {
-        $response = $this->get('/classificacao/listar');
-        $response->assertStatus(302);
-        $response->assertRedirectContains('/');
+        $this->testUrlFailNotLogged('/classificacao/listar');
     }
 
     public function testNewSuccessLogged(): void {
@@ -32,9 +30,7 @@ class ChklClassificationControllerTest extends TestCase {
     }
 
     public function testNewFailNotLogged(): void {
-        $response = $this->get('/classificacao/novo');
-        $response->assertStatus(302);
-        $response->assertRedirectContains('/');
+        $this->testUrlFailNotLogged('/classificacao/novo');
     }
 
     public function testStoreFailNotLogged(): void {
@@ -42,9 +38,7 @@ class ChklClassificationControllerTest extends TestCase {
             'description' => 'Classificação '.uniqid(),
             'status' => 'A'
         ];
-        $response = $this->post('/classificacao/salvar/', $params);
-        $response->assertStatus(302);
-        $response->assertRedirectContains('/');
+        $this->testUrlFailNotLogged('/classificacao/salvar', 'post', $params);
     }
 
     public function testStoreSuccess(): void {
@@ -67,17 +61,13 @@ class ChklClassificationControllerTest extends TestCase {
     }
     public function testEditFailNotLogged(): void {
         $classification = ChklClassification::first();
-        $response = $this->get('/classificacao/editar/'.$classification->id);
-        $response->assertStatus(302);
-        $response->assertRedirectContains('/');
+        $this->testUrlFailNotLogged('/classificacao/editar/'.$classification->id);
     }
 
     public function testUpdateFailNotLogged(): void {
-        $classification = ChklClassification::first()->toArray();
-        $classification['description'] = 'Classificação '.uniqid();
-        $response = $this->put('/classificacao/atualizar/'.$classification['id'], $classification);
-        $response->assertStatus(302);
-        $response->assertRedirectContains('/');
+        $params = ChklClassification::first()->toArray();
+        $params['description'] = 'Classificação '.uniqid();
+        $this->testUrlFailNotLogged('/classificacao/atualizar/'.$params['id'], 'put', $params);
     }
     public function testUpdateSuccess(): void {
         $classification = ChklClassification::first()->toArray();
@@ -97,8 +87,6 @@ class ChklClassificationControllerTest extends TestCase {
     }
     public function testDeleteFailNotLogged(): void {
         $classification = ChklClassification::first();
-        $response = $this->get('/classificacao/delete/'.$classification->id);
-        $response->assertStatus(302);
-        $response->assertRedirectContains('/login');
+        $this->testUrlFailNotLogged('/classificacao/delete/'.$classification->id);
     }
 }   

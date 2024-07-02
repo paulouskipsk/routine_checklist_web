@@ -46,11 +46,13 @@ class ChecklistMovService {
 
     public function reopenChecklistMov(ChecklistMov $checklistMov){
         try {
-            if($checklistMov->status != Status::CLOSED_BY_SYSTEM->value && $checklistMov->status != Status::CANCELED->value) throw new Exception("Tarefa $checklistMov->id não está Fechada pelo Sistema ou cancelada para ser reaberta");
+            if(!($checklistMov->status == Status::CLOSED_BY_SYSTEM->value || $checklistMov->status == Status::CANCELED->value)) 
+                throw new Exception("Tarefa $checklistMov->id não está Fechada pelo sistema ou cancelada para ser reaberta");
 
             $checklistMov->processed = 'N';
             $checklistMov->processed_in = null;
             $checklistMov->status = Status::ACTIVE;
+            $checklistMov->end_date = Carbon::now()->addMinutes($checklistMov->shelflife);
             $checklistMov->save();
         } catch (\Throwable $th) {
             throw $th;
@@ -59,7 +61,8 @@ class ChecklistMovService {
 
     public function cancelChecklistMov(ChecklistMov $checklistMov){
         try {
-            if(!($checklistMov->status == Status::CLOSED_BY_SYSTEM->value || $checklistMov->status == Status::ACTIVE->value)) throw new Exception("Tarefa $checklistMov->id não está Fechada pelo Sistema ou ativa para ser cancelada");
+            if(!($checklistMov->status == Status::CLOSED_BY_SYSTEM->value || $checklistMov->status == Status::ACTIVE->value)) 
+                throw new Exception("Tarefa $checklistMov->id não está Fechada pelo Sistema ou ativa para ser cancelada");
 
             $checklistMov->processed = 'S';
             $checklistMov->processed_in = now();

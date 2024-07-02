@@ -12,7 +12,7 @@ class UsersGroupController extends ControllerWeb {
     private $breadcrumbs = [['url'=> '/grupo-usuarios/listar','label' => 'Listar Gr. Usuários','active'=>true]];
 
     public function index(){
-        $breadcrumbs = [['url'=> '/grupo-usuarios/listar','label' => 'Listar Grupos de Usuários','active'=>false]];
+        $breadcrumbs = [['url'=> '/grupo-usuarios/listar','label' => 'Listar Gr. Usuários','active'=>false]];
         $usersGroups = UsersGroup::all();
         return view('registrations.user-group.list', compact(['breadcrumbs', 'usersGroups']));
     }
@@ -70,7 +70,7 @@ class UsersGroupController extends ControllerWeb {
             Session::flash('flash-success-msg', "Grupo de Usuários atualizado com sucesso.");
             return redirect('/grupo-usuarios/listar');
         } catch (\Throwable $th) {
-            Session::flash('flash-error-msg', "Erro ao atualizar o Grupo de Usuários $request->id.");
+            Session::flash('flash-error-msg', "Erro ao atualizar o Grupo de Usuários $request->id.". $th->getMessage());
         }
 
         return Redirect::back()->with($request->all());

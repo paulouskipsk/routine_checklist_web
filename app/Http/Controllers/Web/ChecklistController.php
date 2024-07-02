@@ -116,19 +116,19 @@ class ChecklistController extends ControllerWeb {
 
     public function generateTasks(Request $request){
         try {
-            DB::beginTransaction();
+            DB::beginTransaction();$t = $request->all();
             $units = Unity::find($request->units);
             $checklist = Checklist::find($request->checklistId);
 
             $serv = new ChecklistMovService();
-            if(!$checklist) throw new Exception("Checklist '$request->chkl_id' Não encontrado");
+            if(!$checklist) throw new Exception("Checklist '$request->checklistId' Não encontrado");
             $serv->generateChecklistMov($checklist, $units);
             DB::commit();
 
             return $this->responseOk("Tarefas para o checklist $checklist->id, geradas com sucesso.");
         } catch (\Throwable $th) {
             DB::rollBack();
-            return $this->responseError("Não foi possível gerar as tarefas para o checklist $request->chkl_id.". $th->getMessage());
+            return $this->responseError("Não foi possível gerar as tarefas para o checklist $request->checklistId.". $th->getMessage());
         }      
     }
 
