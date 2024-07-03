@@ -25,8 +25,11 @@ class ChecklistItemMovService {
 
         if($checklistItemMov->type_obs == 'R' && empty($request->observation)) $errors[] = "Campo 'observation' não informado.";
         if(empty($request->response)) $errors[] = "Campo 'response' não informado.";
-        if($checklistItemMov->required_photo == 'S' && empty($request->photos)) $errors[] = "Campo 'photos' não informado.";
-        if($checklistItemMov->required_photo == 'S' && sizeof($request->photos) < $checklistItemMov->quant_photo) $errors[] = "Quantidade de 'photos' Menor que o exigido na pergunta.";
+        
+        if($checklistItemMov->required_photo == 'S' && empty($request->photos)) 
+            $errors[] = "Campo 'photos' não informado.";
+        else if($checklistItemMov->required_photo == 'S' && sizeof($request->photos) < $checklistItemMov->quant_photo) 
+            $errors[] = "Quantidade de 'photos' Menor que o exigido na pergunta.";
 
         if($errors->isNotEmpty()) throw new Exception($errors);
 

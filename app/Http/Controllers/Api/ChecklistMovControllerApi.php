@@ -9,7 +9,6 @@ use App\Services\ChecklistMovService;
 use App\Utils\Functions;
 use Carbon\Carbon;
 use Exception;
-use Illuminate\Database\Eloquent\Builder;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -59,7 +58,7 @@ class ChecklistMovControllerApi extends ControllerApi {
 
             return $this->responseOk("Tarefas de Checklist Pesquisados com sucesso.", ['freeChecklistsMovs'=> $freeChecklistsMovs, 'userChecklistsMovs'=>$userChecklistsMovs]);
         } catch (\Throwable $th) {
-            return $this->responseError("Erro ao Buscar Tarefas de Checklist". $th->getMessage());
+            return $this->responseError("Erro ao Buscar Tarefas de Checklist. Erro: ". $th->getMessage());
         }
     }
 
