@@ -117,6 +117,10 @@ class ManageController extends ControllerWeb {
 
     public function appDownload(){
         $routineChecklistApk = public_path('downloads/routine_checklist.apk');
-        return Response::download($routineChecklistApk, 'routine_checklist.apk', []);
+        $headers = [
+            'Content-Type'=>'application/apk',
+            'Content-Disposition'=> 'attachment; filename="routine_checklist.apk"'
+        ];
+        return Response::download($routineChecklistApk, 'routine_checklist.apk', $headers);
     }
 }
