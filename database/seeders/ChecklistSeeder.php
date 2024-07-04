@@ -77,30 +77,16 @@ class ChecklistSeeder extends Seeder {
             'chcl_id' => $classOpe
         ]);
 
-        $cklSazonal = Checklist::create([
-            'description' => 'Checklist Sazonal - Festa Junina',
-            'generate_time' => '08:00:00',
-            'shelflife' => 720,
-            'frequency' => 'S',
-            'frequency_composition' => [2],
-            'status' => 'A',
-            'chkl_type' => 'N',
-            'changed_by_user' => 1,
-            'chcl_id' => $classOpe
-        ]);
-
         $cklEmpilhadeira->units()->sync(Unity::all());
         $cklLimpeza->units()->sync(Unity::all());
         $cklSesmt->units()->sync(Unity::all());
         $cklAbertura->units()->sync(Unity::all());
         $cklPEO->units()->sync(Unity::all());
-        $cklSazonal->units()->sync(Unity::all());
 
         $cklEmpilhadeira->usersGroups()->sync(UsersGroup::get());
         $cklLimpeza->usersGroups()->sync(UsersGroup::get());
         $cklSesmt->usersGroups()->sync(UsersGroup::get());
         $cklAbertura->usersGroups()->sync(UsersGroup::get());
         $cklPEO->usersGroups()->sync(UsersGroup::get());
-        $cklSazonal->usersGroups()->sync(UsersGroup::get());
     }
 }
